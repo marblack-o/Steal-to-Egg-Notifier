@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>Egg Cleaner</title>
+  <title>Steal to Egg Notifier</title>
   
   <!-- PWA -->
   <link rel="manifest" href="manifest.json" />
@@ -11,7 +11,7 @@
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <meta name="apple-mobile-web-app-title" content="Egg Cleaner" />
+  <meta name="apple-mobile-web-app-title" content="Egg Notifier" />
   <link rel="apple-touch-icon" href="icon-180.png" />
   <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png" />
   <link rel="icon" type="image/png" sizes="512x512" href="icon-512.png" />
@@ -286,13 +286,174 @@
       opacity: 1;
       transform: translateX(-50%) translateY(0);
     }
+
+    /* ===== Huevos en esta partida ===== */
+    .session-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .session-header label {
+      margin-bottom: 0;
+    }
+
+    .btn-clear-session {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 0.78rem;
+      padding: 6px 10px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .egg-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .egg-item {
+      background: #121218;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .egg-item-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 14px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .egg-item-header:active {
+      background: #1a1a24;
+    }
+
+    .egg-rank {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--muted);
+      min-width: 22px;
+    }
+
+    .egg-thumb {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      object-fit: contain;
+      background: #1a1a22;
+      border: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .egg-main {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .egg-name {
+      font-weight: 600;
+      font-size: 0.95rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .egg-money {
+      font-size: 0.82rem;
+      color: #4ade80;
+      margin-top: 2px;
+    }
+
+    .egg-arrow {
+      font-size: 0.9rem;
+      color: var(--muted);
+      transition: transform 0.2s;
+    }
+
+    .egg-item.open .egg-arrow {
+      transform: rotate(90deg);
+    }
+
+    .egg-details {
+      display: none;
+      padding: 0 14px 14px;
+      border-top: 1px solid var(--border);
+      font-size: 0.88rem;
+      line-height: 1.6;
+      color: var(--muted);
+    }
+
+    .egg-item.open .egg-details {
+      display: block;
+      padding-top: 12px;
+    }
+
+    .egg-details a {
+      color: #7c5cff;
+      word-break: break-all;
+    }
+
+    .egg-empty {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.9rem;
+      padding: 20px 10px;
+      font-style: italic;
+    }
+
+    /* ===== Ciclo Día / Noche ===== */
+    .cycle-card {
+      text-align: center;
+      padding: 18px 16px;
+    }
+
+    .cycle-phase {
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .cycle-phase.day { color: #fbbf24; }
+    .cycle-phase.night { color: #818cf8; }
+
+    .cycle-timer {
+      font-size: 2.4rem;
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+    }
+
+    .cycle-timer.day { color: #fbbf24; }
+    .cycle-timer.night { color: #a5b4fc; }
+
+    .cycle-sub {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-top: 6px;
+    }
+
+    .cycle-waiting {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
   </style>
 </head>
 <body>
   <div class="container">
     <header>
-      <h1>🥚 Egg Cleaner</h1>
-      <p>Pega el mensaje de Discord → listo para WhatsApp</p>
+      <h1>🥚 Steal to Egg Notifier</h1>
+      <p>Notificaciones de huevos OP · Secret en adelante</p>
     </header>
 
     <div class="card">
@@ -315,6 +476,27 @@
       <div class="status" id="status"></div>
     </div>
 
+    <!-- Ciclo Día / Noche -->
+    <div class="card cycle-card" id="cycleCard">
+      <div class="cycle-waiting" id="cycleWaiting">Esperando huevos OP...</div>
+      <div id="cycleActive" style="display:none">
+        <div class="cycle-phase" id="cyclePhase">☀️ Día</div>
+        <div class="cycle-timer" id="cycleTimer">5:00</div>
+        <div class="cycle-sub" id="cycleSub">Próximo: Noche (10s)</div>
+      </div>
+    </div>
+
+    <!-- Nueva sección: Huevos en esta partida -->
+    <div class="card">
+      <div class="session-header">
+        <label>Huevos En Esta Partida</label>
+        <button class="btn-clear-session" id="btnClearSession">Borrar lista</button>
+      </div>
+      <div class="egg-list" id="eggList">
+        <div class="egg-empty">Esperando huevos OP...</div>
+      </div>
+    </div>
+
     <footer>
       Solo se procesa en tu dispositivo · Sin conexión a servidores
     </footer>
@@ -329,14 +511,214 @@
     const btnCopy = document.getElementById('btnCopy');
     const btnUrl = document.getElementById('btnUrl');
     const btnDownload = document.getElementById('btnDownload');
+    const btnClearSession = document.getElementById('btnClearSession');
     const status = document.getElementById('status');
     const toast = document.getElementById('toast');
     const eggImageWrap = document.getElementById('eggImageWrap');
     const eggImage = document.getElementById('eggImage');
+    const eggList = document.getElementById('eggList');
 
     let lastEggName = 'Egg';
     let lastEmojiId = null;
     let lastImageUrl = '';
+    let lastEggData = null; // datos parseados del último huevo
+
+    // ===== Sesión de huevos (localStorage) =====
+    const SESSION_KEY = 'egg_session_v1';
+
+    function loadSession() {
+      try {
+        return JSON.parse(localStorage.getItem(SESSION_KEY) || '[]');
+      } catch {
+        return [];
+      }
+    }
+
+    function saveSession(list) {
+      localStorage.setItem(SESSION_KEY, JSON.stringify(list));
+    }
+
+    // Parsea valores tipo "$225m/s", "20.5M", "1.2b", "500k"
+    function parseMoney(str) {
+      if (!str) return 0;
+      const cleaned = str.replace(/[~$\s,/s]/gi, '').toLowerCase();
+      const match = cleaned.match(/^([\d.]+)([kmb])?$/i);
+      if (!match) return 0;
+      let num = parseFloat(match[1]);
+      const unit = (match[2] || '').toLowerCase();
+      if (unit === 'k') num *= 1e3;
+      if (unit === 'm') num *= 1e6;
+      if (unit === 'b') num *= 1e9;
+      return num;
+    }
+
+    function formatMoney(n) {
+      if (n >= 1e9) return (n / 1e9).toFixed(1).replace(/\.0$/, '') + 'B';
+      if (n >= 1e6) return (n / 1e6).toFixed(1).replace(/\.0$/, '') + 'M';
+      if (n >= 1e3) return (n / 1e3).toFixed(1).replace(/\.0$/, '') + 'K';
+      return String(n);
+    }
+
+    function addEggToSession(egg) {
+      let list = loadSession();
+      const wasEmpty = list.length === 0;
+
+      // Evitar duplicados por nombre (actualiza si ya existe)
+      const idx = list.findIndex(e => e.name.toLowerCase() === egg.name.toLowerCase());
+      if (idx >= 0) {
+        list[idx] = egg;
+      } else {
+        list.push(egg);
+      }
+      // Ordenar de mayor a menor dinero
+      list.sort((a, b) => b.moneyValue - a.moneyValue);
+      saveSession(list);
+      renderSession();
+
+      // Iniciar el ciclo con el primer huevo
+      if (wasEmpty) {
+        startCycle();
+      }
+    }
+
+    function renderSession() {
+      const list = loadSession();
+      if (list.length === 0) {
+        eggList.innerHTML = '<div class="egg-empty">Esperando huevos OP...</div>';
+        return;
+      }
+
+      eggList.innerHTML = list.map((egg, i) => `
+        <div class="egg-item" data-idx="${i}">
+          <div class="egg-item-header">
+            <span class="egg-rank">#${i + 1}</span>
+            ${egg.imageUrl ? `<img class="egg-thumb" src="${egg.imageUrl}" alt="${egg.name}" loading="lazy" onerror="this.style.display='none'">` : ''}
+            <div class="egg-main">
+              <div class="egg-name">${egg.name}</div>
+              <div class="egg-money">💰 ${egg.moneyText || formatMoney(egg.moneyValue) + '/s'}</div>
+            </div>
+            <span class="egg-arrow">▶</span>
+          </div>
+          <div class="egg-details">
+            ${egg.location ? `<div>😈 <b>Location:</b> ${egg.location}</div>` : ''}
+            ${egg.spawned ? `<div>⏱ <b>Spawned:</b> ${egg.spawned}</div>` : ''}
+            ${egg.speed ? `<div>⚡ <b>Speed:</b> ${egg.speed}</div>` : ''}
+            ${egg.wiki ? `<div>🔍 <b>Wiki:</b> <a href="${egg.wiki}" target="_blank" rel="noopener">${egg.wiki}</a></div>` : ''}
+            ${egg.join ? `<div>🎮 <b>Join:</b> <a href="${egg.join}" target="_blank" rel="noopener">Click aquí</a></div>` : ''}
+            <div style="margin-top:8px">
+              <button class="btn-secondary" style="padding:8px 12px;font-size:0.8rem" onclick="copyEggText(${i})">Copiar texto</button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+
+      // Toggle expand
+      eggList.querySelectorAll('.egg-item-header').forEach(header => {
+        header.addEventListener('click', () => {
+          header.parentElement.classList.toggle('open');
+        });
+      });
+    }
+
+    function copyEggText(idx) {
+      const list = loadSession();
+      const egg = list[idx];
+      if (!egg || !egg.fullText) return;
+      navigator.clipboard.writeText(egg.fullText).then(() => showToast('Texto copiado'));
+    }
+
+    btnClearSession.addEventListener('click', () => {
+      if (confirm('¿Borrar todos los huevos de esta partida?')) {
+        saveSession([]);
+        renderSession();
+
+        // Reiniciar el ciclo
+        if (cycleInterval) clearInterval(cycleInterval);
+        cycleRunning = false;
+        cyclePhase = 'day';
+        cycleRemaining = DAY_SECONDS;
+        cycleWaiting.style.display = 'block';
+        cycleActive.style.display = 'none';
+
+        showToast('Lista borrada');
+      }
+    });
+
+    // Cargar lista al iniciar
+    renderSession();
+
+    // ===== Ciclo Día (5 min) / Noche (10 s) =====
+    const DAY_SECONDS = 5 * 60;   // 5 minutos
+    const NIGHT_SECONDS = 10;     // 10 segundos
+
+    let cycleRunning = false;
+    let cyclePhase = 'day';      // 'day' | 'night'
+    let cycleRemaining = DAY_SECONDS;
+    let cycleInterval = null;
+
+    const cycleWaiting = document.getElementById('cycleWaiting');
+    const cycleActive = document.getElementById('cycleActive');
+    const cyclePhaseEl = document.getElementById('cyclePhase');
+    const cycleTimerEl = document.getElementById('cycleTimer');
+    const cycleSubEl = document.getElementById('cycleSub');
+
+    function formatTime(sec) {
+      const m = Math.floor(sec / 60);
+      const s = sec % 60;
+      return `${m}:${String(s).padStart(2, '0')}`;
+    }
+
+    function updateCycleUI() {
+      if (cyclePhase === 'day') {
+        cyclePhaseEl.textContent = '☀️ Día';
+        cyclePhaseEl.className = 'cycle-phase day';
+        cycleTimerEl.className = 'cycle-timer day';
+        cycleSubEl.textContent = 'Próximo: Noche (10s)';
+      } else {
+        cyclePhaseEl.textContent = '🌙 Noche';
+        cyclePhaseEl.className = 'cycle-phase night';
+        cycleTimerEl.className = 'cycle-timer night';
+        cycleSubEl.textContent = 'Próximo: Día (5:00)';
+      }
+      cycleTimerEl.textContent = formatTime(cycleRemaining);
+    }
+
+    function tickCycle() {
+      cycleRemaining--;
+      if (cycleRemaining < 0) {
+        // Cambiar de fase
+        if (cyclePhase === 'day') {
+          // Terminó el día → limpiar lista de huevos y pasar a noche
+          cyclePhase = 'night';
+          cycleRemaining = NIGHT_SECONDS;
+          saveSession([]);
+          renderSession();
+        } else {
+          // Terminó la noche → nuevo día
+          cyclePhase = 'day';
+          cycleRemaining = DAY_SECONDS;
+        }
+      }
+      updateCycleUI();
+    }
+
+    function startCycle() {
+      if (cycleRunning) return;
+      cycleRunning = true;
+      cyclePhase = 'day';
+      cycleRemaining = DAY_SECONDS;
+
+      cycleWaiting.style.display = 'none';
+      cycleActive.style.display = 'block';
+      updateCycleUI();
+
+      cycleInterval = setInterval(tickCycle, 1000);
+    }
+
+    // Si ya hay huevos guardados de antes, iniciar el ciclo
+    if (loadSession().length > 0) {
+      startCycle();
+    }
 
     // Auto-transform on paste
     input.addEventListener('paste', () => {
@@ -384,215 +766,4 @@
           btnCopy.textContent = 'Copiar para WhatsApp + Wiki';
           btnCopy.classList.remove('copied');
         }, 2000);
-      } catch (err) {
-        // Fallback for older browsers
-        const range = document.createRange();
-        range.selectNodeContents(preview);
-        const sel = window.getSelection();
-        sel.removeAllRanges();
-        sel.addRange(range);
-        document.execCommand('copy');
-        sel.removeAllRanges();
-        showToast('¡Copiado!');
-      }
-    });
-
-    // Copy only the Discord image URL
-    btnUrl.addEventListener('click', async () => {
-      if (!lastImageUrl) return;
-
-      try {
-        await navigator.clipboard.writeText(lastImageUrl);
-        showToast('URL Discord copiada');
-        btnUrl.textContent = '✓ URL copiada';
-        status.textContent = 'Pégala en WhatsApp (a veces no preview)';
-        status.classList.add('success');
-
-        setTimeout(() => {
-          btnUrl.textContent = 'Copiar URL Discord';
-        }, 2000);
-      } catch (err) {
-        const temp = document.createElement('textarea');
-        temp.value = lastImageUrl;
-        document.body.appendChild(temp);
-        temp.select();
-        document.execCommand('copy');
-        document.body.removeChild(temp);
-        showToast('URL Discord copiada');
-      }
-    });
-
-    // Download both text + image
-    btnDownload.addEventListener('click', async () => {
-      const text = preview.textContent;
-      if (!text || preview.classList.contains('empty')) return;
-
-      const safeName = lastEggName.replace(/[^a-zA-Z0-9_\- ]/g, '').trim() || 'Egg';
-
-      // 1. Download cleaned text as .txt
-      const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
-      const txtUrl = URL.createObjectURL(blob);
-      const aTxt = document.createElement('a');
-      aTxt.href = txtUrl;
-      aTxt.download = `${safeName}.txt`;
-      document.body.appendChild(aTxt);
-      aTxt.click();
-      document.body.removeChild(aTxt);
-      URL.revokeObjectURL(txtUrl);
-
-      // 2. Download egg image (if available)
-      if (lastEmojiId && eggImage.src) {
-        try {
-          // Fetch the image so we can force a download with a nice name
-          const response = await fetch(eggImage.src);
-          const imgBlob = await response.blob();
-          const imgUrl = URL.createObjectURL(imgBlob);
-          const aImg = document.createElement('a');
-          aImg.href = imgUrl;
-          aImg.download = `${safeName}.png`;
-          document.body.appendChild(aImg);
-          // Small delay so both downloads trigger on mobile
-          setTimeout(() => {
-            aImg.click();
-            document.body.removeChild(aImg);
-            URL.revokeObjectURL(imgUrl);
-          }, 300);
-        } catch (e) {
-          // Fallback: open image in new tab if fetch fails (CORS rare on Discord CDN)
-          const aImg = document.createElement('a');
-          aImg.href = eggImage.src;
-          aImg.download = `${safeName}.png`;
-          aImg.target = '_blank';
-          aImg.click();
-        }
-      }
-
-      showToast('Descargando...');
-      status.textContent = 'Archivos descargados · muévelos a la carpeta Pet-Viewer';
-      status.classList.add('success');
-    });
-
-    function showToast(msg) {
-      toast.textContent = msg;
-      toast.classList.add('show');
-      setTimeout(() => toast.classList.remove('show'), 1800);
-    }
-
-    function relativeTime(unix) {
-      const now = Math.floor(Date.now() / 1000);
-      const diff = now - unix;
-
-      if (diff < 10) return 'hace unos segundos';
-      if (diff < 60) return `hace ${diff} segundos`;
-      if (diff < 120) return 'hace 1 minuto';
-      if (diff < 3600) return `hace ${Math.floor(diff / 60)} minutos`;
-      if (diff < 7200) return 'hace 1 hora';
-      if (diff < 86400) return `hace ${Math.floor(diff / 3600)} horas`;
-      return `hace ${Math.floor(diff / 86400)} días`;
-    }
-
-    function transform() {
-      let raw = input.value.trim();
-      if (!raw) {
-        preview.textContent = 'Aquí aparecerá el mensaje listo para copiar...';
-        preview.classList.add('empty');
-        btnCopy.disabled = true;
-        btnUrl.disabled = true;
-        btnDownload.disabled = true;
-        status.textContent = '';
-        eggImageWrap.classList.remove('show');
-        eggImage.src = '';
-        lastEggName = 'Egg';
-        lastEmojiId = null;
-        lastImageUrl = '';
-        return;
-      }
-
-      // Extract egg name (for filenames + wiki link)
-      const nameMatch = raw.match(/\*\*Egg:\*\*\s*([^\n\r]+)/i) || raw.match(/Egg:\s*([^\n\r]+)/i);
-      lastEggName = nameMatch ? nameMatch[1].trim() : 'Egg';
-
-      // Build Fandom wiki URL (spaces → underscores)
-      const wikiName = lastEggName.replace(/\s+/g, '_');
-      const wikiUrl = `https://stealanegg.fandom.com/wiki/${encodeURIComponent(wikiName)}`;
-
-      // Extract first custom Discord emoji (usually the egg one)
-      const emojiMatch = raw.match(/<:([a-zA-Z0-9_]+):(\d+)>/);
-      if (emojiMatch) {
-        lastEmojiId = emojiMatch[2];
-        // Clean URL (no query params) → better chance for WhatsApp preview
-        lastImageUrl = `https://cdn.discordapp.com/emojis/${lastEmojiId}.png`;
-        // For display inside the app we still use a sized version
-        const displayUrl = `https://cdn.discordapp.com/emojis/${lastEmojiId}.png?size=128&quality=lossless`;
-        eggImage.classList.add('loading');
-        eggImage.src = displayUrl;
-        eggImage.onload = () => {
-          eggImage.classList.remove('loading');
-          eggImageWrap.classList.add('show');
-        };
-        eggImage.onerror = () => {
-          // Fallback to webp for display + clean URL
-          lastImageUrl = `https://cdn.discordapp.com/emojis/${lastEmojiId}.webp`;
-          eggImage.src = `https://cdn.discordapp.com/emojis/${lastEmojiId}.webp?size=128`;
-          eggImage.onerror = () => {
-            eggImageWrap.classList.remove('show');
-            lastImageUrl = '';
-          };
-        };
-      } else {
-        lastEmojiId = null;
-        lastImageUrl = '';
-        eggImageWrap.classList.remove('show');
-        eggImage.src = '';
-      }
-
-      // 1. Remove custom Discord emojis <:Name:ID>
-      let text = raw.replace(/<:[a-zA-Z0-9_]+:\d+>/g, '');
-
-      // 2. Convert Discord bold **text** → WhatsApp *text*
-      text = text.replace(/\*\*(.*?)\*\*/g, '*$1*');
-
-      // 3. Convert Discord relative timestamp <t:UNIX:R>
-      text = text.replace(/<t:(\d+):R>/g, (_, ts) => relativeTime(parseInt(ts)));
-
-      // 4. Extract clean Roblox link (remove [Click Here](url))
-      text = text.replace(/\[Click Here\]\((https:\/\/www\.roblox\.com[^)]+)\)/gi, '$1');
-      // Also handle any other markdown links
-      text = text.replace(/\[([^\]]+)\]\((https?:\/\/[^)]+)\)/g, '$2');
-
-      // 5. Clean up extra spaces and empty lines
-      text = text
-        .split('\n')
-        .map(line => line.trim())
-        .filter(line => line.length > 0)
-        .join('\n');
-
-      // 6. Add nice emojis at the start of known lines
-      text = text
-        .replace(/^\*?Egg:\*?\s*/im, '🥚 *Egg:* ')
-        .replace(/^\*?Location:\*?\s*/im, '😈 *Location:* ')
-        .replace(/^\*?Spawned:\*?\s*/im, '⏱ *Spawned:* ')
-        .replace(/^\*?Money:\*?\s*/im, '💰 *Money:* ')
-        .replace(/^\*?Recommended Speed:\*?\s*/im, '⚡ *Recommended Speed:* ')
-        .replace(/^\*?Join Game:\*?\s*/im, '🎮 *Join Game:*\n');
-
-      // Final cleanup of double spaces
-      text = text.replace(/  +/g, ' ').trim();
-
-      // Add Wiki section at the end
-      text += `\n🔍 *Wiki:*\n${wikiUrl}`;
-
-      preview.textContent = text;
-      preview.classList.remove('empty');
-      btnCopy.disabled = false;
-      btnUrl.disabled = !lastImageUrl;
-      btnDownload.disabled = false;
-      status.textContent = 'Listo · toca "Copiar para WhatsApp + Wiki"';
-      status.classList.remove('success');
-    }
-
-    // Focus input on load (mobile friendly)
-    setTimeout(() => input.focus(), 300);
-  </script>
-</body>
-</html>
+      } catch (err)
