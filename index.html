@@ -647,6 +647,39 @@
     // Cargar lista al iniciar
     renderSession();
 
+    // ===== Leer JSON automático desde GitHub =====
+    const JSON_URL = 'https://raw.githubusercontent.com/marblack-o/Steal-to-Egg-Notifier/main/data/latest.json';
+    let lastUpdatedAt = 0;
+
+    async function fetchRemoteEggs() {
+      try {
+        const res = await fetch(JSON_URL + '?t=' + Date.now(), { cache: 'no-store' });
+        if (!res.ok) return;
+        const data = await res.json();
+
+        if (!data || !Array.isArray(data.eggs)) return;
+        if (data.updatedAt && data.updatedAt <= lastUpdatedAt) return;
+
+        lastUpdatedAt = data.updatedAt || Date.now();
+
+        // Reemplazar la lista local con la del JSON
+        saveSession(data.eggs);
+        renderSession();
+
+        if (data.eggs.length > 0) {
+          startCycle();
+        }
+
+        console.log('📦 Lista actualizada desde GitHub:', data.eggs.length, 'huevos');
+      } catch (err) {
+        // Silencioso si no hay internet o el archivo aún no existe
+      }
+    }
+
+    // Primera carga + cada 15 segundos
+    fetchRemoteEggs();
+    setInterval(fetchRemoteEggs, 15000);
+
     // ===== Ciclo Día (5 min) / Noche (10 s) =====
     const DAY_SECONDS = 5 * 60;   // 5 minutos
     const NIGHT_SECONDS = 10;     // 10 segundos
@@ -766,4 +799,241 @@
           btnCopy.textContent = 'Copiar para WhatsApp + Wiki';
           btnCopy.classList.remove('copied');
         }, 2000);
-      } catch (err)
+      } catch (err) {
+        // Fallback for older browsers
+        const range = document.createRange();
+        range.selectNodeContents(preview);
+        const sel = window.getSelection();
+        sel.removeAllRanges();
+        sel.addRange(range);
+        document.execCommand('copy');
+        sel.removeAllRanges();
+        showToast('¡Copiado!');
+      }
+    });
+
+    // Copy only the Discord image URL
+    btnUrl.addEventListener('click', async () => {
+      if (!lastImageUrl) return;
+
+      try {
+        await navigator.clipboard.writeText(lastImageUrl);
+        showToast('URL Discord copiada');
+        btnUrl.textContent = '✓ URL copiada';
+        status.textContent = 'Pégala en WhatsApp (a veces no preview)';
+        status.classList.add('success');
+
+        setTimeout(() => {
+          btnUrl.textContent = 'Copiar URL Discord';
+        }, 2000);
+      } catch (err) {
+        const temp = document.createElement('textarea');
+        temp.value = lastImageUrl;
+        document.body.appendChild(temp);
+        temp.select();
+        document.execCommand('copy');
+        document.body.removeChild(temp);
+        showToast('URL Discord copiada');
+      }
+    });
+
+    // Download both text + image
+    btnDownload.addEventListener('click', async () => {
+      const text = preview.textContent;
+      if (!text || preview.classList.contains('empty')) return;
+
+      const safeName = lastEggName.replace(/[^a-zA-Z0-9_\- ]/g, '').trim() || 'Egg';
+
+      // 1. Download cleaned text as .txt
+      const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+      const txtUrl = URL.createObjectURL(blob);
+      const aTxt = document.createElement('a');
+      aTxt.href = txtUrl;
+      aTxt.download = `${safeName}.txt`;
+      document.body.appendChild(aTxt);
+      aTxt.click();
+      document.body.removeChild(aTxt);
+      URL.revokeObjectURL(txtUrl);
+
+      // 2. Download egg image (if available)
+      if (lastEmojiId && eggImage.src) {
+        try {
+          // Fetch the image so we can force a download with a nice name
+          const response = await fetch(eggImage.src);
+          const imgBlob = await response.blob();
+          const imgUrl = URL.createObjectURL(imgBlob);
+          const aImg = document.createElement('a');
+          aImg.href = imgUrl;
+          aImg.download = `${safeName}.png`;
+          document.body.appendChild(aImg);
+          // Small delay so both downloads trigger on mobile
+          setTimeout(() => {
+            aImg.click();
+            document.body.removeChild(aImg);
+            URL.revokeObjectURL(imgUrl);
+          }, 300);
+        } catch (e) {
+          // Fallback: open image in new tab if fetch fails (CORS rare on Discord CDN)
+          const aImg = document.createElement('a');
+          aImg.href = eggImage.src;
+          aImg.download = `${safeName}.png`;
+          aImg.target = '_blank';
+          aImg.click();
+        }
+      }
+
+      showToast('Descargando...');
+      status.textContent = 'Archivos descargados · muévelos a la carpeta Pet-Viewer';
+      status.classList.add('success');
+    });
+
+    function showToast(msg) {
+      toast.textContent = msg;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 1800);
+    }
+
+    function relativeTime(unix) {
+      const now = Math.floor(Date.now() / 1000);
+      const diff = now - unix;
+
+      if (diff < 10) return 'hace unos segundos';
+      if (diff < 60) return `hace ${diff} segundos`;
+      if (diff < 120) return 'hace 1 minuto';
+      if (diff < 3600) return `hace ${Math.floor(diff / 60)} minutos`;
+      if (diff < 7200) return 'hace 1 hora';
+      if (diff < 86400) return `hace ${Math.floor(diff / 3600)} horas`;
+      return `hace ${Math.floor(diff / 86400)} días`;
+    }
+
+    function transform() {
+      let raw = input.value.trim();
+      if (!raw) {
+        preview.textContent = 'Aquí aparecerá el mensaje listo para copiar...';
+        preview.classList.add('empty');
+        btnCopy.disabled = true;
+        btnUrl.disabled = true;
+        btnDownload.disabled = true;
+        status.textContent = '';
+        eggImageWrap.classList.remove('show');
+        eggImage.src = '';
+        lastEggName = 'Egg';
+        lastEmojiId = null;
+        lastImageUrl = '';
+        return;
+      }
+
+      // Extract egg name (for filenames + wiki link)
+      const nameMatch = raw.match(/\*\*Egg:\*\*\s*([^\n\r]+)/i) || raw.match(/Egg:\s*([^\n\r]+)/i);
+      lastEggName = nameMatch ? nameMatch[1].trim() : 'Egg';
+
+      // Build Fandom wiki URL (spaces → underscores)
+      const wikiName = lastEggName.replace(/\s+/g, '_');
+      const wikiUrl = `https://stealanegg.fandom.com/wiki/${encodeURIComponent(wikiName)}`;
+
+      // Extract first custom Discord emoji (usually the egg one)
+      const emojiMatch = raw.match(/<:([a-zA-Z0-9_]+):(\d+)>/);
+      if (emojiMatch) {
+        lastEmojiId = emojiMatch[2];
+        // Clean URL (no query params) → better chance for WhatsApp preview
+        lastImageUrl = `https://cdn.discordapp.com/emojis/${lastEmojiId}.png`;
+        // For display inside the app we still use a sized version
+        const displayUrl = `https://cdn.discordapp.com/emojis/${lastEmojiId}.png?size=128&quality=lossless`;
+        eggImage.classList.add('loading');
+        eggImage.src = displayUrl;
+        eggImage.onload = () => {
+          eggImage.classList.remove('loading');
+          eggImageWrap.classList.add('show');
+        };
+        eggImage.onerror = () => {
+          // Fallback to webp for display + clean URL
+          lastImageUrl = `https://cdn.discordapp.com/emojis/${lastEmojiId}.webp`;
+          eggImage.src = `https://cdn.discordapp.com/emojis/${lastEmojiId}.webp?size=128`;
+          eggImage.onerror = () => {
+            eggImageWrap.classList.remove('show');
+            lastImageUrl = '';
+          };
+        };
+      } else {
+        lastEmojiId = null;
+        lastImageUrl = '';
+        eggImageWrap.classList.remove('show');
+        eggImage.src = '';
+      }
+
+      // 1. Remove custom Discord emojis <:Name:ID>
+      let text = raw.replace(/<:[a-zA-Z0-9_]+:\d+>/g, '');
+
+      // 2. Convert Discord bold **text** → WhatsApp *text*
+      text = text.replace(/\*\*(.*?)\*\*/g, '*$1*');
+
+      // 3. Convert Discord relative timestamp <t:UNIX:R>
+      text = text.replace(/<t:(\d+):R>/g, (_, ts) => relativeTime(parseInt(ts)));
+
+      // 4. Extract clean Roblox link (remove [Click Here](url))
+      text = text.replace(/\[Click Here\]\((https:\/\/www\.roblox\.com[^)]+)\)/gi, '$1');
+      // Also handle any other markdown links
+      text = text.replace(/\[([^\]]+)\]\((https?:\/\/[^)]+)\)/g, '$2');
+
+      // 5. Clean up extra spaces and empty lines
+      text = text
+        .split('\n')
+        .map(line => line.trim())
+        .filter(line => line.length > 0)
+        .join('\n');
+
+      // 6. Add nice emojis at the start of known lines
+      text = text
+        .replace(/^\*?Egg:\*?\s*/im, '🥚 *Egg:* ')
+        .replace(/^\*?Location:\*?\s*/im, '😈 *Location:* ')
+        .replace(/^\*?Spawned:\*?\s*/im, '⏱ *Spawned:* ')
+        .replace(/^\*?Money:\*?\s*/im, '💰 *Money:* ')
+        .replace(/^\*?Recommended Speed:\*?\s*/im, '⚡ *Recommended Speed:* ')
+        .replace(/^\*?Join Game:\*?\s*/im, '🎮 *Join Game:*\n');
+
+      // Final cleanup of double spaces
+      text = text.replace(/  +/g, ' ').trim();
+
+      // Add Wiki section at the end
+      text += `\n🔍 *Wiki:*\n${wikiUrl}`;
+
+      // ===== Extraer datos para la lista de la partida =====
+      const locationMatch = raw.match(/\*\*Location:\*\*\s*([^\n\r]+)/i) || raw.match(/Location:\s*([^\n\r]+)/i);
+      const moneyMatch = raw.match(/\*\*Money:\*\*\s*([^\n\r]+)/i) || raw.match(/Money:\s*([^\n\r]+)/i);
+      const speedMatch = raw.match(/\*\*Recommended Speed:\*\*\s*([^\n\r]+)/i) || raw.match(/Recommended Speed:\s*([^\n\r]+)/i);
+      const joinMatch = raw.match(/\((https:\/\/www\.roblox\.com[^)]+)\)/i);
+
+      const moneyText = moneyMatch ? moneyMatch[1].trim() : '';
+      const moneyValue = parseMoney(moneyText);
+
+      lastEggData = {
+        name: lastEggName,
+        moneyText: moneyText || formatMoney(moneyValue) + '/s',
+        moneyValue,
+        location: locationMatch ? locationMatch[1].trim() : '',
+        spawned: '',
+        speed: speedMatch ? speedMatch[1].trim() : '',
+        wiki: wikiUrl,
+        join: joinMatch ? joinMatch[1] : '',
+        imageUrl: lastImageUrl || '',
+        fullText: text,
+        timestamp: Date.now()
+      };
+
+      // Guardar en la lista de la partida
+      addEggToSession(lastEggData);
+
+      preview.textContent = text;
+      preview.classList.remove('empty');
+      btnCopy.disabled = false;
+      btnUrl.disabled = !lastImageUrl;
+      btnDownload.disabled = false;
+      status.textContent = 'Listo · toca "Copiar para WhatsApp + Wiki"';
+      status.classList.remove('success');
+    }
+
+    // Focus input on load (mobile friendly)
+    setTimeout(() => input.focus(), 300);
+  </script>
+</body>
+</html>
