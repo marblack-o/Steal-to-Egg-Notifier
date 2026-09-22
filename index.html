@@ -4,8 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>Steal to Egg Notifier</title>
-  
-  <!-- PWA -->
   <link rel="manifest" href="manifest.json" />
   <meta name="theme-color" content="#0f0f13" />
   <meta name="mobile-web-app-capable" content="yes" />
@@ -15,532 +13,434 @@
   <link rel="apple-touch-icon" href="icon-180.png" />
   <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png" />
   <link rel="icon" type="image/png" sizes="512x512" href="icon-512.png" />
- 
   <style>
     :root {
-      --bg: #0f0f13;
-      --card: #1a1a22;
-      --border: #2a2a35;
-      --text: #e8e8ed;
-      --muted: #9a9aad;
-      --accent: #7c5cff;
-      --accent-hover: #9478ff;
-      --success: #22c55e;
-      --danger: #ef4444;
+      --bg: #0f0f13; --card: #1a1a22; --border: #2a2a35;
+      --text: #e8e8ed; --muted: #9a9aad; --green: #22c55e;
     }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      -webkit-tap-highlight-color: transparent;
-    }
-
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      min-height: 100dvh;
-      padding: 16px;
-      line-height: 1.45;
+      background: var(--bg); color: var(--text); min-height: 100dvh; padding: 16px; line-height: 1.45;
     }
-
-    .container {
-      max-width: 520px;
-      margin: 0 auto;
+    .container { max-width: 520px; margin: 0 auto; }
+    .topbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; padding-top: 4px; }
+    .topbar h1 { font-size: 1.2rem; font-weight: 700; }
+    .topbar p { color: var(--muted); font-size: 0.8rem; margin-top: 2px; }
+    .burger {
+      width: 42px; height: 42px; border: 1px solid var(--border); background: var(--card);
+      border-radius: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 5px; cursor: pointer;
     }
-
-    header {
-      text-align: center;
-      margin-bottom: 24px;
-      padding-top: 8px;
+    .burger span { display: block; width: 18px; height: 2px; background: var(--text); border-radius: 2px; transition: 0.2s; }
+    .burger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .burger.open span:nth-child(2) { opacity: 0; }
+    .burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .overlay {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.55); opacity: 0; pointer-events: none;
+      transition: opacity 0.25s; z-index: 90;
     }
-
-    header h1 {
-      font-size: 1.45rem;
-      font-weight: 700;
-      letter-spacing: -0.02em;
+    .overlay.show { opacity: 1; pointer-events: auto; }
+    .drawer {
+      position: fixed; top: 0; right: 0; width: min(340px, 88vw); height: 100%;
+      background: #14141c; border-left: 1px solid var(--border);
+      transform: translateX(100%); transition: transform 0.28s cubic-bezier(0.16,1,0.3,1);
+      z-index: 100; overflow-y: auto; padding: 20px 16px 40px;
     }
-
-    header p {
-      color: var(--muted);
-      font-size: 0.9rem;
-      margin-top: 4px;
+    .drawer.open { transform: translateX(0); }
+    .drawer-title { font-size: 1.05rem; font-weight: 700; margin-bottom: 18px; }
+    .menu-row {
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+      padding: 14px 0; border-bottom: 1px solid var(--border);
     }
-
+    .menu-row label { font-size: 0.92rem; font-weight: 600; }
+    .toggle-pill {
+      min-width: 52px; padding: 6px 12px; border-radius: 999px; border: none;
+      font-weight: 700; font-size: 0.75rem; cursor: pointer; text-transform: uppercase; letter-spacing: 0.04em;
+    }
+    .toggle-pill.off { background: #3f1212; color: #fca5a5; }
+    .toggle-pill.on { background: #14532d; color: #86efac; }
+    .toggle-pill.custom { background: #422006; color: #fde68a; }
+    .filters-title {
+      margin-top: 22px; font-size: 0.78rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted);
+    }
+    .filters-desc { font-size: 0.82rem; color: var(--muted); margin: 8px 0 14px; line-height: 1.4; }
+    .cat {
+      border: 1px solid var(--border); border-radius: 12px; margin-bottom: 10px;
+      overflow: hidden; background: #121218;
+    }
+    .cat-header {
+      display: flex; align-items: center; gap: 10px; padding: 12px;
+      cursor: pointer; user-select: none;
+    }
+    .cat-header:active { background: #1a1a24; }
+    .cat-eggs-preview { font-size: 0.85rem; letter-spacing: -1px; flex-shrink: 0; }
+    .cat-name { flex: 1; font-weight: 600; font-size: 0.92rem; }
+    .cat-arrow { color: var(--muted); font-size: 0.85rem; transition: transform 0.2s; }
+    .cat.open .cat-arrow { transform: rotate(90deg); }
+    .cat-body { display: none; border-top: 1px solid var(--border); padding: 6px 8px 10px; }
+    .cat.open .cat-body { display: block; }
+    .egg-filter {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 8px 6px; border-radius: 8px;
+    }
+    .egg-filter:active { background: #1a1a24; }
+    .egg-filter-name { font-size: 0.86rem; }
+    .egg-filter .toggle-pill { min-width: 44px; padding: 4px 10px; font-size: 0.7rem; }
     .card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 16px;
-      margin-bottom: 16px;
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 16px; padding: 16px; margin-bottom: 14px;
     }
-
-    label {
-      display: block;
-      font-size: 0.8rem;
-      font-weight: 600;
-      color: var(--muted);
-      margin-bottom: 8px;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-    }
-
-    textarea {
-      width: 100%;
-      min-height: 140px;
-      background: #121218;
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      color: var(--text);
-      font-size: 0.95rem;
-      padding: 14px;
-      resize: vertical;
-      outline: none;
-      transition: border-color 0.2s;
-    }
-
-    textarea:focus {
-      border-color: var(--accent);
-    }
-
-    textarea::placeholder {
-      color: #555;
-    }
-
-    .actions {
-      display: flex;
-      gap: 10px;
-      margin-top: 12px;
-    }
-
-    .actions button {
-      flex: 1;
-    }
-
-    button {
-      flex: 1;
-      border: none;
-      border-radius: 12px;
-      padding: 14px 16px;
-      font-size: 0.95rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: background 0.15s, transform 0.1s;
-    }
-
-    button:active {
-      transform: scale(0.97);
-    }
-
-    .btn-primary {
-      background: var(--accent);
-      color: white;
-    }
-
-    .btn-primary:hover {
-      background: var(--accent-hover);
-    }
-
-    .btn-secondary {
-      background: #2a2a35;
-      color: var(--text);
-    }
-
-    .btn-secondary:hover {
-      background: #353545;
-    }
-
-    .btn-copy {
-      background: var(--success);
-      color: #04140a;
-      width: 100%;
-      margin-top: 12px;
-      font-size: 1.05rem;
-      padding: 16px;
-    }
-
-    .btn-copy:hover {
-      filter: brightness(1.08);
-    }
-
-    .btn-copy.copied {
-      background: #16a34a;
-    }
-
-    .btn-url {
-      background: #8b5cf6;
-      color: white;
-      width: 100%;
-      margin-top: 10px;
-      font-size: 1rem;
-      padding: 14px;
-    }
-
-    .btn-url:hover {
-      filter: brightness(1.08);
-    }
-
-    .btn-url:disabled {
-      opacity: 0.45;
-      cursor: not-allowed;
-    }
-
-    .btn-download {
-      background: #3b82f6;
-      color: white;
-      width: 100%;
-      margin-top: 10px;
-      font-size: 1rem;
-      padding: 14px;
-    }
-
-    .btn-download:hover {
-      filter: brightness(1.08);
-    }
-
-    .btn-download:disabled {
-      opacity: 0.45;
-      cursor: not-allowed;
-    }
-
-    .preview {
-      white-space: pre-wrap;
-      word-break: break-word;
-      font-size: 0.98rem;
-      line-height: 1.55;
-      background: #121218;
-      border-radius: 12px;
-      padding: 16px;
-      border: 1px solid var(--border);
-      min-height: 120px;
-    }
-
-    .preview.empty {
-      color: var(--muted);
-      font-style: italic;
-    }
-
-    .egg-image-wrap {
-      text-align: center;
-      margin-bottom: 14px;
-      display: none;
-    }
-
-    .egg-image-wrap.show {
-      display: block;
-    }
-
-    .egg-image {
-      width: 96px;
-      height: 96px;
-      object-fit: contain;
-      border-radius: 12px;
-      background: #1a1a22;
-      border: 1px solid var(--border);
-    }
-
-    .egg-image.loading {
-      opacity: 0.4;
-    }
-
-    .status {
-      text-align: center;
-      font-size: 0.85rem;
-      color: var(--muted);
-      margin-top: 10px;
-      min-height: 20px;
-    }
-
-    .status.success {
-      color: var(--success);
-    }
-
-    footer {
-      text-align: center;
-      margin-top: 28px;
-      font-size: 0.78rem;
-      color: #555;
-    }
-
-    /* Toast */
-    .toast {
-      position: fixed;
-      bottom: 24px;
-      left: 50%;
-      transform: translateX(-50%) translateY(80px);
-      background: #22c55e;
-      color: #04140a;
-      padding: 12px 22px;
-      border-radius: 999px;
-      font-weight: 600;
-      font-size: 0.95rem;
-      opacity: 0;
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-      pointer-events: none;
-      z-index: 100;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.4);
-    }
-
-    .toast.show {
-      opacity: 1;
-      transform: translateX(-50%) translateY(0);
-    }
-
-    /* ===== Huevos en esta partida ===== */
     .session-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 12px;
+      display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;
     }
-
     .session-header label {
-      margin-bottom: 0;
+      font-size: 0.78rem; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.04em; color: var(--muted);
     }
-
     .btn-clear-session {
-      background: transparent;
-      border: 1px solid var(--border);
-      color: var(--muted);
-      font-size: 0.78rem;
-      padding: 6px 10px;
-      border-radius: 8px;
-      cursor: pointer;
+      background: transparent; border: 1px solid var(--border); color: var(--muted);
+      font-size: 0.78rem; padding: 6px 10px; border-radius: 8px; cursor: pointer;
     }
-
-    .egg-list {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
+    .last-seen { font-size: 0.85rem; color: var(--muted); margin-bottom: 12px; min-height: 1.2em; }
+    .egg-list { display: flex; flex-direction: column; gap: 8px; }
     .egg-item {
-      background: #121218;
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      overflow: hidden;
+      background: #121218; border: 1px solid var(--border); border-radius: 12px; overflow: hidden;
     }
-
     .egg-item-header {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 12px 14px;
-      cursor: pointer;
-      user-select: none;
+      display: flex; align-items: center; gap: 10px; padding: 12px 14px;
+      cursor: pointer; user-select: none;
     }
-
-    .egg-item-header:active {
-      background: #1a1a24;
-    }
-
-    .egg-rank {
-      font-size: 0.75rem;
-      font-weight: 700;
-      color: var(--muted);
-      min-width: 22px;
-    }
-
+    .egg-item-header:active { background: #1a1a24; }
+    .egg-rank { font-size: 0.75rem; font-weight: 700; color: var(--muted); min-width: 22px; }
     .egg-thumb {
-      width: 36px;
-      height: 36px;
-      border-radius: 8px;
-      object-fit: contain;
-      background: #1a1a22;
-      border: 1px solid var(--border);
-      flex-shrink: 0;
+      width: 36px; height: 36px; border-radius: 8px; object-fit: contain;
+      background: #1a1a22; border: 1px solid var(--border); flex-shrink: 0;
     }
-
-    .egg-main {
-      flex: 1;
-      min-width: 0;
-    }
-
+    .egg-main { flex: 1; min-width: 0; }
     .egg-name {
-      font-weight: 600;
-      font-size: 0.95rem;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      font-weight: 600; font-size: 0.95rem; white-space: nowrap;
+      overflow: hidden; text-overflow: ellipsis;
     }
-
-    .egg-money {
-      font-size: 0.82rem;
-      color: #4ade80;
-      margin-top: 2px;
-    }
-
-    .egg-arrow {
-      font-size: 0.9rem;
-      color: var(--muted);
-      transition: transform 0.2s;
-    }
-
-    .egg-item.open .egg-arrow {
-      transform: rotate(90deg);
-    }
-
+    .egg-money { font-size: 0.82rem; color: #4ade80; margin-top: 2px; }
+    .egg-ago { font-size: 0.75rem; color: var(--muted); margin-top: 2px; }
+    .egg-arrow { font-size: 0.9rem; color: var(--muted); transition: transform 0.2s; }
+    .egg-item.open .egg-arrow { transform: rotate(90deg); }
     .egg-details {
-      display: none;
-      padding: 0 14px 14px;
-      border-top: 1px solid var(--border);
-      font-size: 0.88rem;
-      line-height: 1.6;
-      color: var(--muted);
+      display: none; padding: 0 14px 14px; border-top: 1px solid var(--border);
+      font-size: 0.88rem; line-height: 1.6; color: var(--muted);
     }
-
-    .egg-item.open .egg-details {
-      display: block;
-      padding-top: 12px;
-    }
-
-    .egg-details a {
-      color: #7c5cff;
-      word-break: break-all;
-    }
-
+    .egg-item.open .egg-details { display: block; padding-top: 12px; }
+    .egg-details a { color: #7c5cff; word-break: break-all; }
     .egg-empty {
-      text-align: center;
-      color: var(--muted);
-      font-size: 0.9rem;
-      padding: 20px 10px;
-      font-style: italic;
+      text-align: center; color: var(--muted); font-size: 0.9rem;
+      padding: 24px 10px; font-style: italic;
     }
-
-    /* ===== Ciclo Día / Noche ===== */
-    .cycle-card {
-      text-align: center;
-      padding: 18px 16px;
+    .btn-secondary {
+      background: #2a2a35; color: var(--text); border: none; border-radius: 8px;
+      padding: 8px 12px; font-size: 0.8rem; cursor: pointer;
     }
-
-    .cycle-phase {
-      font-size: 0.8rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      color: var(--muted);
-      margin-bottom: 6px;
+    footer {
+      text-align: center; color: var(--muted); font-size: 0.75rem;
+      margin-top: 8px; padding-bottom: 20px;
     }
-
-    .cycle-phase.day { color: #fbbf24; }
-    .cycle-phase.night { color: #818cf8; }
-
-    .cycle-timer {
-      font-size: 2.4rem;
-      font-weight: 700;
-      font-variant-numeric: tabular-nums;
-      letter-spacing: -0.02em;
-      line-height: 1.1;
+    .toast {
+      position: fixed; bottom: 24px; left: 50%;
+      transform: translateX(-50%) translateY(80px);
+      background: var(--green); color: #04140a; padding: 12px 22px;
+      border-radius: 999px; font-weight: 600; font-size: 0.95rem;
+      opacity: 0; transition: all 0.3s cubic-bezier(0.16,1,0.3,1);
+      pointer-events: none; z-index: 200; box-shadow: 0 8px 24px rgba(0,0,0,0.4);
     }
-
-    .cycle-timer.day { color: #fbbf24; }
-    .cycle-timer.night { color: #a5b4fc; }
-
-    .cycle-sub {
-      font-size: 0.8rem;
-      color: var(--muted);
-      margin-top: 6px;
-    }
-
-    .cycle-waiting {
-      color: var(--muted);
-      font-size: 0.95rem;
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+    .status-dot {
+      display: inline-block; width: 8px; height: 8px; border-radius: 50%;
+      background: #4ade80; margin-right: 6px; vertical-align: middle;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <header>
-      <h1>🥚 Steal to Egg Notifier</h1>
-      <p>Notificaciones de huevos OP · Secret en adelante</p>
-    </header>
-
-    <div class="card">
-      <label for="input">Mensaje de Discord</label>
-      <textarea id="input" placeholder="Pega aquí el mensaje del bot de huevos..."></textarea>
-      <div class="actions">
-        <button class="btn-secondary" id="btnClear">Limpiar</button>
+    <div class="topbar">
+      <div>
+        <h1>Steal to Egg Notifier</h1>
+        <p><span class="status-dot"></span>Secret · Eternal · Divine</p>
       </div>
+      <button class="burger" id="burger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
     </div>
 
-    <div class="card">
-      <label>Versión limpia (WhatsApp)</label>
-      <div class="egg-image-wrap" id="eggImageWrap">
-        <img class="egg-image" id="eggImage" alt="Egg" />
-      </div>
-      <div class="preview empty" id="preview">Aquí aparecerá el mensaje listo para copiar...</div>
-      <button class="btn-copy" id="btnCopy" disabled>Copiar para WhatsApp + Wiki</button>
-      <button class="btn-url" id="btnUrl" disabled>Copiar URL Discord</button>
-      <button class="btn-download" id="btnDownload" disabled>Descargar texto + imagen</button>
-      <div class="status" id="status"></div>
-    </div>
-
-    <!-- Huevos OP (actualizado por el bot) -->
     <div class="card">
       <div class="session-header">
         <label>Huevos OP</label>
         <button class="btn-clear-session" id="btnClearSession">Borrar lista</button>
       </div>
-      <div id="lastSeen" class="egg-empty" style="padding:8px 0 12px;font-style:normal;font-size:0.85rem"></div>
+      <div class="last-seen" id="lastSeen"></div>
       <div class="egg-list" id="eggList">
         <div class="egg-empty">Esperando huevos OP...</div>
       </div>
     </div>
-
-    <footer>
-      Solo se procesa en tu dispositivo · Sin conexión a servidores
-    </footer>
+    <footer>Actualizacion automatica cada 15s · Datos desde el bot</footer>
   </div>
 
-  <div class="toast" id="toast">¡Copiado!</div>
+  <div class="overlay" id="overlay"></div>
+  <aside class="drawer" id="drawer">
+    <div class="drawer-title">Ajustes</div>
+    <div class="menu-row">
+      <label>Notificaciones en tiempo real</label>
+      <button class="toggle-pill off" id="btnNotif">Off</button>
+    </div>
+    <div class="filters-title">Filtros</div>
+    <p class="filters-desc">Los que esten en <b style="color:#86efac">verde</b> recibiras notificacion. Rojo = off. Amarillo = personalizado.</p>
+    <div id="filterCats"></div>
+  </aside>
+  <div class="toast" id="toast">Listo!</div>
 
   <script>
-    const input = document.getElementById('input');
-    const preview = document.getElementById('preview');
-    const btnClear = document.getElementById('btnClear');
-    const btnCopy = document.getElementById('btnCopy');
-    const btnUrl = document.getElementById('btnUrl');
-    const btnDownload = document.getElementById('btnDownload');
-    const btnClearSession = document.getElementById('btnClearSession');
-    const status = document.getElementById('status');
-    const toast = document.getElementById('toast');
-    const eggImageWrap = document.getElementById('eggImageWrap');
-    const eggImage = document.getElementById('eggImage');
-    const eggList = document.getElementById('eggList');
+    const CATALOG = {
+      secreto: {
+        label: 'Secreto',
+        eggs: [
+          'King Snake','Yeti','Cerberus','Kraken','TRex','T-Rex','Tralaledon',
+          'Cosmic Skeleton Boss','Cosmic Dragon','Stag','Mutant Shark',
+          'Gargoyle','Pure Jellyfish','Centaur','RazorFang','Electric Eel',
+          'Luminous Spike','Luminous Spirit Manta','Luminous Abyss Shark',
+          'Abyss Overlord','Wendigo','Mawbreaker','Shardwing'
+        ]
+      },
+      eterno: {
+        label: 'Eterno',
+        eggs: [
+          'Ice Dragon','Phoenix','Lava Dragon','El Maja','Mosasaurus',
+          'Eternal Lunar Dragon','Oni Tiger','Gorilla King','Pegasus',
+          'Skeleton Horse','Equinox','Terra Snapper',
+          'Luminous Electric Eel','Luminous Terra Snapper',
+          'World Eater','Shattered Drake','Void Serpent'
+        ]
+      },
+      divino: {
+        label: 'Divino',
+        eggs: [
+          'Unicorn','Kitsune','Nightflame','ArchAngel','World Burner',
+          'Aetheron','Cthulhu','Luminous Cthulhu','Shattered Colossus'
+        ]
+      }
+    };
 
-    let lastEggName = 'Egg';
-    let lastEmojiId = null;
-    let lastImageUrl = '';
-    let lastEggData = null; // datos parseados del último huevo
-
-    // ===== Sesión de huevos (localStorage) =====
     const SESSION_KEY = 'egg_session_v1';
+    const SETTINGS_KEY = 'egg_settings_v1';
+    const JSON_URL = 'https://raw.githubusercontent.com/marblack-o/Steal-to-Egg-Notifier/main/data/latest.json';
+
+    const burger = document.getElementById('burger');
+    const drawer = document.getElementById('drawer');
+    const overlay = document.getElementById('overlay');
+    const btnNotif = document.getElementById('btnNotif');
+    const filterCats = document.getElementById('filterCats');
+    const btnClearSession = document.getElementById('btnClearSession');
+    const eggList = document.getElementById('eggList');
+    const lastSeen = document.getElementById('lastSeen');
+    const toast = document.getElementById('toast');
+
+    let lastUpdatedAt = 0;
+    let knownIds = new Set();
+
+    function defaultSettings() {
+      const eggs = {};
+      Object.values(CATALOG).forEach(cat => {
+        cat.eggs.forEach(n => { eggs[n.toLowerCase()] = true; });
+      });
+      return { notifications: false, eggs };
+    }
+
+    function loadSettings() {
+      try {
+        const s = JSON.parse(localStorage.getItem(SETTINGS_KEY));
+        if (s && s.eggs) return s;
+      } catch(e) {}
+      return defaultSettings();
+    }
+
+    function saveSettings(s) {
+      localStorage.setItem(SETTINGS_KEY, JSON.stringify(s));
+    }
+
+    let settings = loadSettings();
+
+    function showToast(msg) {
+      toast.textContent = msg;
+      toast.classList.add('show');
+      setTimeout(function() { toast.classList.remove('show'); }, 1800);
+    }
+
+    function openMenu() {
+      drawer.classList.add('open');
+      overlay.classList.add('show');
+      burger.classList.add('open');
+    }
+    function closeMenu() {
+      drawer.classList.remove('open');
+      overlay.classList.remove('show');
+      burger.classList.remove('open');
+    }
+
+    burger.addEventListener('click', function() {
+      drawer.classList.contains('open') ? closeMenu() : openMenu();
+    });
+    overlay.addEventListener('click', closeMenu);
+
+    function catState(key) {
+      const list = CATALOG[key].eggs;
+      var on = 0, off = 0;
+      list.forEach(function(n) {
+        if (settings.eggs[n.toLowerCase()] !== false) on++;
+        else off++;
+      });
+      if (on === 0) return 'off';
+      if (off === 0) return 'on';
+      return 'custom';
+    }
+
+    function setCatAll(key, enabled) {
+      CATALOG[key].eggs.forEach(function(n) {
+        settings.eggs[n.toLowerCase()] = enabled;
+      });
+      saveSettings(settings);
+      renderFilters();
+    }
+
+    function toggleEgg(name) {
+      var k = name.toLowerCase();
+      settings.eggs[k] = settings.eggs[k] === false ? true : false;
+      saveSettings(settings);
+      renderFilters();
+    }
+
+    function previewEmojis(key) {
+      var n = Math.min(CATALOG[key].eggs.length, 5);
+      return '🥚'.repeat(n);
+    }
+
+    function renderFilters() {
+      if (settings.notifications) {
+        btnNotif.textContent = 'On';
+        btnNotif.className = 'toggle-pill on';
+      } else {
+        btnNotif.textContent = 'Off';
+        btnNotif.className = 'toggle-pill off';
+      }
+
+      filterCats.innerHTML = Object.keys(CATALOG).map(function(key) {
+        var cat = CATALOG[key];
+        var state = catState(key);
+        var stateLabel = state === 'on' ? 'On' : state === 'off' ? 'Off' : 'Custom';
+        var eggsHtml = cat.eggs.map(function(name) {
+          var on = settings.eggs[name.toLowerCase()] !== false;
+          return '<div class="egg-filter"><span class="egg-filter-name">🥚 ' + name +
+            '</span><button class="toggle-pill ' + (on ? 'on' : 'off') +
+            '" data-egg-btn="' + name + '">' + (on ? 'On' : 'Off') + '</button></div>';
+        }).join('');
+
+        return '<div class="cat" data-cat="' + key + '">' +
+          '<div class="cat-header" data-cat-toggle="' + key + '">' +
+          '<span class="cat-eggs-preview">' + previewEmojis(key) + '</span>' +
+          '<span class="cat-name">' + cat.label + '</span>' +
+          '<button class="toggle-pill ' + state + '" data-cat-btn="' + key + '">' + stateLabel + '</button>' +
+          '<span class="cat-arrow">▶</span></div>' +
+          '<div class="cat-body">' + eggsHtml + '</div></div>';
+      }).join('');
+
+      filterCats.querySelectorAll('[data-cat-toggle]').forEach(function(el) {
+        el.addEventListener('click', function(e) {
+          if (e.target.closest('[data-cat-btn]')) return;
+          el.parentElement.classList.toggle('open');
+        });
+      });
+
+      filterCats.querySelectorAll('[data-cat-btn]').forEach(function(btn) {
+        btn.addEventListener('click', function(e) {
+          e.stopPropagation();
+          var key = btn.getAttribute('data-cat-btn');
+          var state = catState(key);
+          setCatAll(key, state === 'off');
+        });
+      });
+
+      filterCats.querySelectorAll('[data-egg-btn]').forEach(function(btn) {
+        btn.addEventListener('click', function(e) {
+          e.stopPropagation();
+          toggleEgg(btn.getAttribute('data-egg-btn'));
+        });
+      });
+    }
+
+    btnNotif.addEventListener('click', async function() {
+      if (!settings.notifications) {
+        if (!('Notification' in window)) {
+          showToast('Este navegador no soporta notificaciones');
+          return;
+        }
+        var perm = Notification.permission;
+        if (perm === 'default') perm = await Notification.requestPermission();
+        if (perm !== 'granted') {
+          showToast('Permiso denegado');
+          return;
+        }
+        settings.notifications = true;
+        saveSettings(settings);
+        showToast('Notificaciones ON');
+      } else {
+        settings.notifications = false;
+        saveSettings(settings);
+        showToast('Notificaciones OFF');
+      }
+      renderFilters();
+    });
+
+    function eggAllowed(name) {
+      if (!name) return false;
+      var k = name.toLowerCase().replace(/\s+/g, ' ').trim();
+      var variants = [k, k.replace(/ egg$/, ''), k.replace(/_/g, ' ')];
+      for (var i = 0; i < variants.length; i++) {
+        var v = variants[i];
+        if (settings.eggs[v] === false) return false;
+        if (settings.eggs[v] === true) return true;
+      }
+      for (var key in settings.eggs) {
+        if (k.indexOf(key) !== -1 || key.indexOf(k) !== -1) {
+          return settings.eggs[key] !== false;
+        }
+      }
+      return true;
+    }
+
+    function notifyEgg(egg) {
+      if (!settings.notifications) return;
+      if (Notification.permission !== 'granted') return;
+      if (!eggAllowed(egg.name)) return;
+      var title = '🥚 ' + (egg.name || 'Huevo OP');
+      var body = [
+        egg.moneyText ? '💰 ' + egg.moneyText : '',
+        egg.location ? '📍 ' + egg.location : ''
+      ].filter(Boolean).join(' · ') || 'Nuevo huevo OP';
+      try {
+        var n = new Notification(title, {
+          body: body,
+          icon: egg.imageUrl || 'icon-192.png',
+          tag: 'egg-' + (egg.name || Date.now()),
+          renotify: true
+        });
+        n.onclick = function() { window.focus(); n.close(); };
+      } catch(e) {}
+    }
 
     function loadSession() {
-      try {
-        return JSON.parse(localStorage.getItem(SESSION_KEY) || '[]');
-      } catch {
-        return [];
-      }
+      try { return JSON.parse(localStorage.getItem(SESSION_KEY) || '[]'); }
+      catch(e) { return []; }
     }
-
     function saveSession(list) {
       localStorage.setItem(SESSION_KEY, JSON.stringify(list));
-    }
-
-    // Parsea valores tipo "$225m/s", "20.5M", "1.2b", "500k"
-    function parseMoney(str) {
-      if (!str) return 0;
-      const cleaned = str.replace(/[~$\s,/s]/gi, '').toLowerCase();
-      const match = cleaned.match(/^([\d.]+)([kmb])?$/i);
-      if (!match) return 0;
-      let num = parseFloat(match[1]);
-      const unit = (match[2] || '').toLowerCase();
-      if (unit === 'k') num *= 1e3;
-      if (unit === 'm') num *= 1e6;
-      if (unit === 'b') num *= 1e9;
-      return num;
     }
 
     function formatMoney(n) {
@@ -550,408 +450,100 @@
       return String(n);
     }
 
-    function addEggToSession(egg) {
-      let list = loadSession();
-      const wasEmpty = list.length === 0;
-
-      // Evitar duplicados por nombre (actualiza si ya existe)
-      const idx = list.findIndex(e => e.name.toLowerCase() === egg.name.toLowerCase());
-      if (idx >= 0) {
-        list[idx] = egg;
-      } else {
-        list.push(egg);
-      }
-      // Ordenar de mayor a menor dinero
-      list.sort((a, b) => b.moneyValue - a.moneyValue);
-      saveSession(list);
-      renderSession();
-    }
-
     function timeAgo(ts) {
       if (!ts) return '';
-      const diff = Math.floor((Date.now() - ts) / 1000);
+      var diff = Math.floor((Date.now() - ts) / 1000);
       if (diff < 10) return 'hace unos segundos';
-      if (diff < 60) return `hace ${diff} segundos`;
+      if (diff < 60) return 'hace ' + diff + ' segundos';
       if (diff < 120) return 'hace 1 minuto';
-      if (diff < 3600) return `hace ${Math.floor(diff / 60)} minutos`;
+      if (diff < 3600) return 'hace ' + Math.floor(diff / 60) + ' minutos';
       if (diff < 7200) return 'hace 1 hora';
-      if (diff < 86400) return `hace ${Math.floor(diff / 3600)} horas`;
-      return `hace ${Math.floor(diff / 86400)} días`;
+      if (diff < 86400) return 'hace ' + Math.floor(diff / 3600) + ' horas';
+      return 'hace ' + Math.floor(diff / 86400) + ' dias';
     }
 
     function renderSession() {
-      const list = loadSession();
-      const lastSeen = document.getElementById('lastSeen');
-
+      var list = loadSession();
       if (list.length === 0) {
         eggList.innerHTML = '<div class="egg-empty">Esperando huevos OP...</div>';
-        if (lastSeen) lastSeen.textContent = '';
+        lastSeen.textContent = '';
         return;
       }
+      var newest = Math.max.apply(null, list.map(function(e) { return e.timestamp || 0; }));
+      lastSeen.textContent = newest ? ('Ultimo huevo: ' + timeAgo(newest)) : '';
 
-      // El más reciente
-      const newest = Math.max(...list.map(e => e.timestamp || 0));
-      if (lastSeen && newest) {
-        lastSeen.textContent = 'Último huevo: ' + timeAgo(newest);
-      }
+      eggList.innerHTML = list.map(function(egg, i) {
+        return '<div class="egg-item"><div class="egg-item-header">' +
+          '<span class="egg-rank">#' + (i + 1) + '</span>' +
+          (egg.imageUrl ? '<img class="egg-thumb" src="' + egg.imageUrl + '" alt="" loading="lazy" onerror="this.style.display=\'none\'">' : '') +
+          '<div class="egg-main"><div class="egg-name">' + (egg.name || 'Egg') + '</div>' +
+          '<div class="egg-money">💰 ' + (egg.moneyText || formatMoney(egg.moneyValue || 0) + '/s') + '</div>' +
+          '<div class="egg-ago">⏱ ' + timeAgo(egg.timestamp) + ' aparecio</div></div>' +
+          '<span class="egg-arrow">▶</span></div><div class="egg-details">' +
+          (egg.location ? '<div>😈 <b>Location:</b> ' + egg.location + '</div>' : '') +
+          (egg.speed ? '<div>⚡ <b>Speed:</b> ' + egg.speed + '</div>' : '') +
+          (egg.wiki ? '<div>🔍 <b>Wiki:</b> <a href="' + egg.wiki + '" target="_blank" rel="noopener">' + egg.wiki + '</a></div>' : '') +
+          (egg.join ? '<div>🎮 <b>Join:</b> <a href="' + egg.join + '" target="_blank" rel="noopener">Click aqui</a></div>' : '') +
+          (egg.fullText ? '<div style="margin-top:8px"><button class="btn-secondary" data-copy="' + i + '">Copiar texto</button></div>' : '') +
+          '</div></div>';
+      }).join('');
 
-      eggList.innerHTML = list.map((egg, i) => `
-        <div class="egg-item" data-idx="${i}">
-          <div class="egg-item-header">
-            <span class="egg-rank">#${i + 1}</span>
-            ${egg.imageUrl ? `<img class="egg-thumb" src="${egg.imageUrl}" alt="${egg.name}" loading="lazy" onerror="this.style.display='none'">` : ''}
-            <div class="egg-main">
-              <div class="egg-name">${egg.name}</div>
-              <div class="egg-money">💰 ${egg.moneyText || formatMoney(egg.moneyValue) + '/s'}</div>
-              <div style="font-size:0.75rem;color:var(--muted);margin-top:2px">⏱ ${timeAgo(egg.timestamp)} apareció</div>
-            </div>
-            <span class="egg-arrow">▶</span>
-          </div>
-          <div class="egg-details">
-            ${egg.location ? `<div>😈 <b>Location:</b> ${egg.location}</div>` : ''}
-            ${egg.speed ? `<div>⚡ <b>Speed:</b> ${egg.speed}</div>` : ''}
-            ${egg.wiki ? `<div>🔍 <b>Wiki:</b> <a href="${egg.wiki}" target="_blank" rel="noopener">${egg.wiki}</a></div>` : ''}
-            ${egg.join ? `<div>🎮 <b>Join:</b> <a href="${egg.join}" target="_blank" rel="noopener">Click aquí</a></div>` : ''}
-            <div style="margin-top:8px">
-              <button class="btn-secondary" style="padding:8px 12px;font-size:0.8rem" onclick="copyEggText(${i})">Copiar texto</button>
-            </div>
-          </div>
-        </div>
-      `).join('');
-
-      eggList.querySelectorAll('.egg-item-header').forEach(header => {
-        header.addEventListener('click', () => {
-          header.parentElement.classList.toggle('open');
+      eggList.querySelectorAll('.egg-item-header').forEach(function(h) {
+        h.addEventListener('click', function() { h.parentElement.classList.toggle('open'); });
+      });
+      eggList.querySelectorAll('[data-copy]').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          var egg = loadSession()[parseInt(btn.getAttribute('data-copy'), 10)];
+          if (egg && egg.fullText) {
+            navigator.clipboard.writeText(egg.fullText).then(function() { showToast('Texto copiado'); });
+          }
         });
       });
     }
 
-    function copyEggText(idx) {
-      const list = loadSession();
-      const egg = list[idx];
-      if (!egg || !egg.fullText) return;
-      navigator.clipboard.writeText(egg.fullText).then(() => showToast('Texto copiado'));
-    }
-
-    btnClearSession.addEventListener('click', () => {
-      if (confirm('¿Borrar todos los huevos?')) {
+    btnClearSession.addEventListener('click', function() {
+      if (confirm('Borrar todos los huevos de la lista?')) {
         saveSession([]);
         renderSession();
         showToast('Lista borrada');
       }
     });
 
-    // Cargar lista al iniciar
-    renderSession();
-
-    // ===== Leer JSON automático desde GitHub =====
-    const JSON_URL = 'https://raw.githubusercontent.com/marblack-o/Steal-to-Egg-Notifier/main/data/latest.json';
-    let lastUpdatedAt = 0;
-
     async function fetchRemoteEggs() {
       try {
-        const res = await fetch(JSON_URL + '?t=' + Date.now(), { cache: 'no-store' });
+        var res = await fetch(JSON_URL + '?t=' + Date.now(), { cache: 'no-store' });
         if (!res.ok) return;
-        const data = await res.json();
-
+        var data = await res.json();
         if (!data || !Array.isArray(data.eggs)) return;
         if (data.updatedAt && data.updatedAt <= lastUpdatedAt) return;
 
+        var prev = lastUpdatedAt;
         lastUpdatedAt = data.updatedAt || Date.now();
+
+        if (prev > 0) {
+          data.eggs.forEach(function(egg) {
+            var id = (egg.name || '') + '-' + (egg.timestamp || '');
+            if (!knownIds.has(id)) {
+              knownIds.add(id);
+              notifyEgg(egg);
+            }
+          });
+        } else {
+          data.eggs.forEach(function(egg) {
+            knownIds.add((egg.name || '') + '-' + (egg.timestamp || ''));
+          });
+        }
+
         saveSession(data.eggs);
         renderSession();
-        console.log('📦 Lista actualizada desde GitHub:', data.eggs.length, 'huevos');
-      } catch (err) {
-        // silencioso
-      }
+      } catch(e) {}
     }
 
-    // Primera carga + cada 15 s + refrescar "hace X"
+    renderFilters();
+    renderSession();
     fetchRemoteEggs();
     setInterval(fetchRemoteEggs, 15000);
-    setInterval(() => renderSession(), 30000);
-
-    // Auto-transform on paste
-    input.addEventListener('paste', () => {
-      setTimeout(() => transform(), 50);
-    });
-
-    // Also transform when user finishes typing (debounced)
-    let debounce;
-    input.addEventListener('input', () => {
-      clearTimeout(debounce);
-      debounce = setTimeout(() => {
-        if (input.value.trim().length > 30) transform();
-      }, 600);
-    });
-
-    btnClear.addEventListener('click', () => {
-      input.value = '';
-      preview.textContent = 'Aquí aparecerá el mensaje listo para copiar...';
-      preview.classList.add('empty');
-      btnCopy.disabled = true;
-      btnUrl.disabled = true;
-      btnDownload.disabled = true;
-      status.textContent = '';
-      eggImageWrap.classList.remove('show');
-      eggImage.src = '';
-      lastEggName = 'Egg';
-      lastEmojiId = null;
-      lastImageUrl = '';
-      input.focus();
-    });
-
-    btnCopy.addEventListener('click', async () => {
-      const text = preview.textContent;
-      if (!text || preview.classList.contains('empty')) return;
-
-      try {
-        await navigator.clipboard.writeText(text);
-        showToast('¡Copiado!');
-        btnCopy.textContent = '✓ Copiado';
-        btnCopy.classList.add('copied');
-        status.textContent = 'Listo, pégalo en WhatsApp';
-        status.classList.add('success');
-
-        setTimeout(() => {
-          btnCopy.textContent = 'Copiar para WhatsApp + Wiki';
-          btnCopy.classList.remove('copied');
-        }, 2000);
-      } catch (err) {
-        // Fallback for older browsers
-        const range = document.createRange();
-        range.selectNodeContents(preview);
-        const sel = window.getSelection();
-        sel.removeAllRanges();
-        sel.addRange(range);
-        document.execCommand('copy');
-        sel.removeAllRanges();
-        showToast('¡Copiado!');
-      }
-    });
-
-    // Copy only the Discord image URL
-    btnUrl.addEventListener('click', async () => {
-      if (!lastImageUrl) return;
-
-      try {
-        await navigator.clipboard.writeText(lastImageUrl);
-        showToast('URL Discord copiada');
-        btnUrl.textContent = '✓ URL copiada';
-        status.textContent = 'Pégala en WhatsApp (a veces no preview)';
-        status.classList.add('success');
-
-        setTimeout(() => {
-          btnUrl.textContent = 'Copiar URL Discord';
-        }, 2000);
-      } catch (err) {
-        const temp = document.createElement('textarea');
-        temp.value = lastImageUrl;
-        document.body.appendChild(temp);
-        temp.select();
-        document.execCommand('copy');
-        document.body.removeChild(temp);
-        showToast('URL Discord copiada');
-      }
-    });
-
-    // Download both text + image
-    btnDownload.addEventListener('click', async () => {
-      const text = preview.textContent;
-      if (!text || preview.classList.contains('empty')) return;
-
-      const safeName = lastEggName.replace(/[^a-zA-Z0-9_\- ]/g, '').trim() || 'Egg';
-
-      // 1. Download cleaned text as .txt
-      const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
-      const txtUrl = URL.createObjectURL(blob);
-      const aTxt = document.createElement('a');
-      aTxt.href = txtUrl;
-      aTxt.download = `${safeName}.txt`;
-      document.body.appendChild(aTxt);
-      aTxt.click();
-      document.body.removeChild(aTxt);
-      URL.revokeObjectURL(txtUrl);
-
-      // 2. Download egg image (if available)
-      if (lastEmojiId && eggImage.src) {
-        try {
-          // Fetch the image so we can force a download with a nice name
-          const response = await fetch(eggImage.src);
-          const imgBlob = await response.blob();
-          const imgUrl = URL.createObjectURL(imgBlob);
-          const aImg = document.createElement('a');
-          aImg.href = imgUrl;
-          aImg.download = `${safeName}.png`;
-          document.body.appendChild(aImg);
-          // Small delay so both downloads trigger on mobile
-          setTimeout(() => {
-            aImg.click();
-            document.body.removeChild(aImg);
-            URL.revokeObjectURL(imgUrl);
-          }, 300);
-        } catch (e) {
-          // Fallback: open image in new tab if fetch fails (CORS rare on Discord CDN)
-          const aImg = document.createElement('a');
-          aImg.href = eggImage.src;
-          aImg.download = `${safeName}.png`;
-          aImg.target = '_blank';
-          aImg.click();
-        }
-      }
-
-      showToast('Descargando...');
-      status.textContent = 'Archivos descargados · muévelos a la carpeta Pet-Viewer';
-      status.classList.add('success');
-    });
-
-    function showToast(msg) {
-      toast.textContent = msg;
-      toast.classList.add('show');
-      setTimeout(() => toast.classList.remove('show'), 1800);
-    }
-
-    function relativeTime(unix) {
-      const now = Math.floor(Date.now() / 1000);
-      const diff = now - unix;
-
-      if (diff < 10) return 'hace unos segundos';
-      if (diff < 60) return `hace ${diff} segundos`;
-      if (diff < 120) return 'hace 1 minuto';
-      if (diff < 3600) return `hace ${Math.floor(diff / 60)} minutos`;
-      if (diff < 7200) return 'hace 1 hora';
-      if (diff < 86400) return `hace ${Math.floor(diff / 3600)} horas`;
-      return `hace ${Math.floor(diff / 86400)} días`;
-    }
-
-    function transform() {
-      let raw = input.value.trim();
-      if (!raw) {
-        preview.textContent = 'Aquí aparecerá el mensaje listo para copiar...';
-        preview.classList.add('empty');
-        btnCopy.disabled = true;
-        btnUrl.disabled = true;
-        btnDownload.disabled = true;
-        status.textContent = '';
-        eggImageWrap.classList.remove('show');
-        eggImage.src = '';
-        lastEggName = 'Egg';
-        lastEmojiId = null;
-        lastImageUrl = '';
-        return;
-      }
-
-      // Extract egg name (for filenames + wiki link)
-      const nameMatch = raw.match(/\*\*Egg:\*\*\s*([^\n\r]+)/i) || raw.match(/Egg:\s*([^\n\r]+)/i);
-      lastEggName = nameMatch ? nameMatch[1].trim() : 'Egg';
-
-      // Build Fandom wiki URL (spaces → underscores)
-      const wikiName = lastEggName.replace(/\s+/g, '_');
-      const wikiUrl = `https://stealanegg.fandom.com/wiki/${encodeURIComponent(wikiName)}`;
-
-      // Extract first custom Discord emoji (usually the egg one)
-      const emojiMatch = raw.match(/<:([a-zA-Z0-9_]+):(\d+)>/);
-      if (emojiMatch) {
-        lastEmojiId = emojiMatch[2];
-        // Clean URL (no query params) → better chance for WhatsApp preview
-        lastImageUrl = `https://cdn.discordapp.com/emojis/${lastEmojiId}.png`;
-        // For display inside the app we still use a sized version
-        const displayUrl = `https://cdn.discordapp.com/emojis/${lastEmojiId}.png?size=128&quality=lossless`;
-        eggImage.classList.add('loading');
-        eggImage.src = displayUrl;
-        eggImage.onload = () => {
-          eggImage.classList.remove('loading');
-          eggImageWrap.classList.add('show');
-        };
-        eggImage.onerror = () => {
-          // Fallback to webp for display + clean URL
-          lastImageUrl = `https://cdn.discordapp.com/emojis/${lastEmojiId}.webp`;
-          eggImage.src = `https://cdn.discordapp.com/emojis/${lastEmojiId}.webp?size=128`;
-          eggImage.onerror = () => {
-            eggImageWrap.classList.remove('show');
-            lastImageUrl = '';
-          };
-        };
-      } else {
-        lastEmojiId = null;
-        lastImageUrl = '';
-        eggImageWrap.classList.remove('show');
-        eggImage.src = '';
-      }
-
-      // 1. Remove custom Discord emojis <:Name:ID>
-      let text = raw.replace(/<:[a-zA-Z0-9_]+:\d+>/g, '');
-
-      // 2. Convert Discord bold **text** → WhatsApp *text*
-      text = text.replace(/\*\*(.*?)\*\*/g, '*$1*');
-
-      // 3. Convert Discord relative timestamp <t:UNIX:R>
-      text = text.replace(/<t:(\d+):R>/g, (_, ts) => relativeTime(parseInt(ts)));
-
-      // 4. Extract clean Roblox link (remove [Click Here](url))
-      text = text.replace(/\[Click Here\]\((https:\/\/www\.roblox\.com[^)]+)\)/gi, '$1');
-      // Also handle any other markdown links
-      text = text.replace(/\[([^\]]+)\]\((https?:\/\/[^)]+)\)/g, '$2');
-
-      // 5. Clean up extra spaces and empty lines
-      text = text
-        .split('\n')
-        .map(line => line.trim())
-        .filter(line => line.length > 0)
-        .join('\n');
-
-      // 6. Add nice emojis at the start of known lines
-      text = text
-        .replace(/^\*?Egg:\*?\s*/im, '🥚 *Egg:* ')
-        .replace(/^\*?Location:\*?\s*/im, '😈 *Location:* ')
-        .replace(/^\*?Spawned:\*?\s*/im, '⏱ *Spawned:* ')
-        .replace(/^\*?Money:\*?\s*/im, '💰 *Money:* ')
-        .replace(/^\*?Recommended Speed:\*?\s*/im, '⚡ *Recommended Speed:* ')
-        .replace(/^\*?Join Game:\*?\s*/im, '🎮 *Join Game:*\n');
-
-      // Final cleanup of double spaces
-      text = text.replace(/  +/g, ' ').trim();
-
-      // Add Wiki section at the end
-      text += `\n🔍 *Wiki:*\n${wikiUrl}`;
-
-      // ===== Extraer datos para la lista de la partida =====
-      const locationMatch = raw.match(/\*\*Location:\*\*\s*([^\n\r]+)/i) || raw.match(/Location:\s*([^\n\r]+)/i);
-      const moneyMatch = raw.match(/\*\*Money:\*\*\s*([^\n\r]+)/i) || raw.match(/Money:\s*([^\n\r]+)/i);
-      const speedMatch = raw.match(/\*\*Recommended Speed:\*\*\s*([^\n\r]+)/i) || raw.match(/Recommended Speed:\s*([^\n\r]+)/i);
-      const joinMatch = raw.match(/\((https:\/\/www\.roblox\.com[^)]+)\)/i);
-
-      const moneyText = moneyMatch ? moneyMatch[1].trim() : '';
-      const moneyValue = parseMoney(moneyText);
-
-      lastEggData = {
-        name: lastEggName,
-        moneyText: moneyText || formatMoney(moneyValue) + '/s',
-        moneyValue,
-        location: locationMatch ? locationMatch[1].trim() : '',
-        spawned: '',
-        speed: speedMatch ? speedMatch[1].trim() : '',
-        wiki: wikiUrl,
-        join: joinMatch ? joinMatch[1] : '',
-        imageUrl: lastImageUrl || '',
-        fullText: text,
-        timestamp: Date.now()
-      };
-
-      // Guardar en la lista de la partida
-      addEggToSession(lastEggData);
-
-      preview.textContent = text;
-      preview.classList.remove('empty');
-      btnCopy.disabled = false;
-      btnUrl.disabled = !lastImageUrl;
-      btnDownload.disabled = false;
-      status.textContent = 'Listo · toca "Copiar para WhatsApp + Wiki"';
-      status.classList.remove('success');
-    }
-
-    // Focus input on load (mobile friendly)
-    setTimeout(() => input.focus(), 300);
+    setInterval(renderSession, 30000);
   </script>
 </body>
 </html>
