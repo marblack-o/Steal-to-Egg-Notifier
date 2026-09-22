@@ -476,22 +476,13 @@
       <div class="status" id="status"></div>
     </div>
 
-    <!-- Ciclo Día / Noche -->
-    <div class="card cycle-card" id="cycleCard">
-      <div class="cycle-waiting" id="cycleWaiting">Esperando huevos OP...</div>
-      <div id="cycleActive" style="display:none">
-        <div class="cycle-phase" id="cyclePhase">☀️ Día</div>
-        <div class="cycle-timer" id="cycleTimer">5:00</div>
-        <div class="cycle-sub" id="cycleSub">Próximo: Noche (10s)</div>
-      </div>
-    </div>
-
-    <!-- Nueva sección: Huevos en esta partida -->
+    <!-- Huevos OP (actualizado por el bot) -->
     <div class="card">
       <div class="session-header">
-        <label>Huevos En Esta Partida</label>
+        <label>Huevos OP</label>
         <button class="btn-clear-session" id="btnClearSession">Borrar lista</button>
       </div>
+      <div id="lastSeen" class="egg-empty" style="padding:8px 0 12px;font-style:normal;font-size:0.85rem"></div>
       <div class="egg-list" id="eggList">
         <div class="egg-empty">Esperando huevos OP...</div>
       </div>
@@ -574,18 +565,34 @@
       list.sort((a, b) => b.moneyValue - a.moneyValue);
       saveSession(list);
       renderSession();
+    }
 
-      // Iniciar el ciclo con el primer huevo
-      if (wasEmpty) {
-        startCycle();
-      }
+    function timeAgo(ts) {
+      if (!ts) return '';
+      const diff = Math.floor((Date.now() - ts) / 1000);
+      if (diff < 10) return 'hace unos segundos';
+      if (diff < 60) return `hace ${diff} segundos`;
+      if (diff < 120) return 'hace 1 minuto';
+      if (diff < 3600) return `hace ${Math.floor(diff / 60)} minutos`;
+      if (diff < 7200) return 'hace 1 hora';
+      if (diff < 86400) return `hace ${Math.floor(diff / 3600)} horas`;
+      return `hace ${Math.floor(diff / 86400)} días`;
     }
 
     function renderSession() {
       const list = loadSession();
+      const lastSeen = document.getElementById('lastSeen');
+
       if (list.length === 0) {
         eggList.innerHTML = '<div class="egg-empty">Esperando huevos OP...</div>';
+        if (lastSeen) lastSeen.textContent = '';
         return;
+      }
+
+      // El más reciente
+      const newest = Math.max(...list.map(e => e.timestamp || 0));
+      if (lastSeen && newest) {
+        lastSeen.textContent = 'Último huevo: ' + timeAgo(newest);
       }
 
       eggList.innerHTML = list.map((egg, i) => `
@@ -596,12 +603,12 @@
             <div class="egg-main">
               <div class="egg-name">${egg.name}</div>
               <div class="egg-money">💰 ${egg.moneyText || formatMoney(egg.moneyValue) + '/s'}</div>
+              <div style="font-size:0.75rem;color:var(--muted);margin-top:2px">⏱ ${timeAgo(egg.timestamp)} apareció</div>
             </div>
             <span class="egg-arrow">▶</span>
           </div>
           <div class="egg-details">
             ${egg.location ? `<div>😈 <b>Location:</b> ${egg.location}</div>` : ''}
-            ${egg.spawned ? `<div>⏱ <b>Spawned:</b> ${egg.spawned}</div>` : ''}
             ${egg.speed ? `<div>⚡ <b>Speed:</b> ${egg.speed}</div>` : ''}
             ${egg.wiki ? `<div>🔍 <b>Wiki:</b> <a href="${egg.wiki}" target="_blank" rel="noopener">${egg.wiki}</a></div>` : ''}
             ${egg.join ? `<div>🎮 <b>Join:</b> <a href="${egg.join}" target="_blank" rel="noopener">Click aquí</a></div>` : ''}
@@ -612,7 +619,6 @@
         </div>
       `).join('');
 
-      // Toggle expand
       eggList.querySelectorAll('.egg-item-header').forEach(header => {
         header.addEventListener('click', () => {
           header.parentElement.classList.toggle('open');
@@ -628,18 +634,9 @@
     }
 
     btnClearSession.addEventListener('click', () => {
-      if (confirm('¿Borrar todos los huevos de esta partida?')) {
+      if (confirm('¿Borrar todos los huevos?')) {
         saveSession([]);
         renderSession();
-
-        // Reiniciar el ciclo
-        if (cycleInterval) clearInterval(cycleInterval);
-        cycleRunning = false;
-        cyclePhase = 'day';
-        cycleRemaining = DAY_SECONDS;
-        cycleWaiting.style.display = 'block';
-        cycleActive.style.display = 'none';
-
         showToast('Lista borrada');
       }
     });
@@ -661,97 +658,18 @@
         if (data.updatedAt && data.updatedAt <= lastUpdatedAt) return;
 
         lastUpdatedAt = data.updatedAt || Date.now();
-
-        // Reemplazar la lista local con la del JSON
         saveSession(data.eggs);
         renderSession();
-
-        if (data.eggs.length > 0) {
-          startCycle();
-        }
-
         console.log('📦 Lista actualizada desde GitHub:', data.eggs.length, 'huevos');
       } catch (err) {
-        // Silencioso si no hay internet o el archivo aún no existe
+        // silencioso
       }
     }
 
-    // Primera carga + cada 15 segundos
+    // Primera carga + cada 15 s + refrescar "hace X"
     fetchRemoteEggs();
     setInterval(fetchRemoteEggs, 15000);
-
-    // ===== Ciclo Día (5 min) / Noche (10 s) =====
-    const DAY_SECONDS = 5 * 60;   // 5 minutos
-    const NIGHT_SECONDS = 10;     // 10 segundos
-
-    let cycleRunning = false;
-    let cyclePhase = 'day';      // 'day' | 'night'
-    let cycleRemaining = DAY_SECONDS;
-    let cycleInterval = null;
-
-    const cycleWaiting = document.getElementById('cycleWaiting');
-    const cycleActive = document.getElementById('cycleActive');
-    const cyclePhaseEl = document.getElementById('cyclePhase');
-    const cycleTimerEl = document.getElementById('cycleTimer');
-    const cycleSubEl = document.getElementById('cycleSub');
-
-    function formatTime(sec) {
-      const m = Math.floor(sec / 60);
-      const s = sec % 60;
-      return `${m}:${String(s).padStart(2, '0')}`;
-    }
-
-    function updateCycleUI() {
-      if (cyclePhase === 'day') {
-        cyclePhaseEl.textContent = '☀️ Día';
-        cyclePhaseEl.className = 'cycle-phase day';
-        cycleTimerEl.className = 'cycle-timer day';
-        cycleSubEl.textContent = 'Próximo: Noche (10s)';
-      } else {
-        cyclePhaseEl.textContent = '🌙 Noche';
-        cyclePhaseEl.className = 'cycle-phase night';
-        cycleTimerEl.className = 'cycle-timer night';
-        cycleSubEl.textContent = 'Próximo: Día (5:00)';
-      }
-      cycleTimerEl.textContent = formatTime(cycleRemaining);
-    }
-
-    function tickCycle() {
-      cycleRemaining--;
-      if (cycleRemaining < 0) {
-        // Cambiar de fase
-        if (cyclePhase === 'day') {
-          // Terminó el día → limpiar lista de huevos y pasar a noche
-          cyclePhase = 'night';
-          cycleRemaining = NIGHT_SECONDS;
-          saveSession([]);
-          renderSession();
-        } else {
-          // Terminó la noche → nuevo día
-          cyclePhase = 'day';
-          cycleRemaining = DAY_SECONDS;
-        }
-      }
-      updateCycleUI();
-    }
-
-    function startCycle() {
-      if (cycleRunning) return;
-      cycleRunning = true;
-      cyclePhase = 'day';
-      cycleRemaining = DAY_SECONDS;
-
-      cycleWaiting.style.display = 'none';
-      cycleActive.style.display = 'block';
-      updateCycleUI();
-
-      cycleInterval = setInterval(tickCycle, 1000);
-    }
-
-    // Si ya hay huevos guardados de antes, iniciar el ciclo
-    if (loadSession().length > 0) {
-      startCycle();
-    }
+    setInterval(() => renderSession(), 30000);
 
     // Auto-transform on paste
     input.addEventListener('paste', () => {
