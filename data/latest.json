@@ -1,5 +1,5 @@
 {
-  "updatedAt": 1790113876929,
+  "updatedAt": 1790114171427,
   "eggs": [
     {
       "name": "Gargoyle",
@@ -36,6 +36,18 @@
       "imageUrl": "https://cdn.discordapp.com/emojis/1544772359083393054.png",
       "fullText": "-# <@&1550979557194993674> Mutant Shark spawned in Titan Temple! <@&1550981080973058170> <@&1550981417838846033>\nSecret Egg Spawned!! - <t:1790113506:t>\n🥚 *Egg:* Mutant Shark\n🏛️*Location:* Titan Temple\n⏱ *Spawned:* hace 1 minutos\n💰 *Money:* ~$215m/s\n⚡ *Recommended Speed:* 8.5B\n🎮 *Join Game:*\nhttps://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f\nSenZ V2 | Steal An Egg Notifier\n🔍 *Wiki:*\nhttps://stealanegg.fandom.com/wiki/Mutant_Shark",
       "timestamp": 1790113577911
+    },
+    {
+      "name": "TRex",
+      "moneyText": "~$25m/s",
+      "moneyValue": 25000000,
+      "location": "Prehistoric",
+      "speed": "20.5M",
+      "join": "https://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f",
+      "wiki": "https://stealanegg.fandom.com/wiki/TRex",
+      "imageUrl": "https://cdn.discordapp.com/emojis/1544772359083393054.png",
+      "fullText": "-# <@&1550979557194993674> TRex spawned in Prehistoric! <@&1550981072974643281> <@&1550981439066087444>\nSecret Egg Spawned!! - <t:1790114106:t>\n🥚 *Egg:* TRex\n🦖*Location:* Prehistoric\n⏱ *Spawned:* hace 1 minutos\n💰 *Money:* ~$25m/s\n⚡ *Recommended Speed:* 20.5M\n🎮 *Join Game:*\nhttps://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f\nSenZ V2 | Steal An Egg Notifier\n🔍 *Wiki:*\nhttps://stealanegg.fandom.com/wiki/TRex",
+      "timestamp": 1790114168725
     }
   ]
 }
