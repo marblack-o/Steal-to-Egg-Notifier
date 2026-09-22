@@ -1,5 +1,5 @@
 {
-  "updatedAt": 1790043413967,
+  "updatedAt": 1790043661138,
   "eggs": [
     {
       "name": "Gargoyle",
@@ -12,6 +12,18 @@
       "imageUrl": "https://cdn.discordapp.com/emojis/1544772359083393054.png",
       "fullText": "-# <@&1550979557194993674> Gargoyle spawned in Demons! <@&1550981080973058170> <@&1550981408783335485>\nSecret Egg Spawned!! - <t:1790043362:t>\n🥚 *Egg:* Gargoyle\n😈*Location:* Demons\n⏱ *Spawned:* hace unos segundos\n💰 *Money:* ~$225m/s\n⚡ *Recommended Speed:* 20B\n🎮 *Join Game:*\nhttps://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f\nSenZ V2 | Steal An Egg Notifier\n🔍 *Wiki:*\nhttps://stealanegg.fandom.com/wiki/Gargoyle",
       "timestamp": 1790043413325
+    },
+    {
+      "name": "Cosmic Skeleton Boss",
+      "moneyText": "~$45m/s",
+      "moneyValue": 45000000,
+      "location": "Cosmic",
+      "speed": "840M",
+      "join": "https://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f",
+      "wiki": "https://stealanegg.fandom.com/wiki/Cosmic_Skeleton_Boss",
+      "imageUrl": "https://cdn.discordapp.com/emojis/1544772359083393054.png",
+      "fullText": "-# <@&1550979557194993674> Cosmic Skeleton Boss spawned in Cosmic! <@&1550981072974643281> <@&1550981430534733845>\nSecret Egg Spawned!! - <t:1790043606:t>\n🥚 *Egg:* Cosmic Skeleton Boss\n🌌*Location:* Cosmic\n⏱ *Spawned:* hace unos segundos\n💰 *Money:* ~$45m/s\n⚡ *Recommended Speed:* 840M\n🎮 *Join Game:*\nhttps://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f\nSenZ V2 | Steal An Egg Notifier\n🔍 *Wiki:*\nhttps://stealanegg.fandom.com/wiki/Cosmic_Skeleton_Boss",
+      "timestamp": 1790043660341
     },
     {
       "name": "TRex",
