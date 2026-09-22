@@ -1,6 +1,18 @@
 {
-  "updatedAt": 1790109738092,
+  "updatedAt": 1790109975928,
   "eggs": [
+    {
+      "name": "World Burner",
+      "moneyText": "~$5b/s",
+      "moneyValue": 5000000000,
+      "location": "Demons",
+      "speed": "20B",
+      "join": "https://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f",
+      "wiki": "https://stealanegg.fandom.com/wiki/World_Burner",
+      "imageUrl": "https://cdn.discordapp.com/emojis/1544772470714671164.png",
+      "fullText": "-# <@&1550979875400056832> World Burner spawned in Demons! <@&1550981089542021173> <@&1550981340478967869>\nDivine Egg Spawned!! - <t:1790109906:t>\n🥚 *Egg:* World Burner\n😈*Location:* Demons\n⏱ *Spawned:* hace 1 minutos\n💰 *Money:* ~$5b/s\n⚡ *Recommended Speed:* 20B\n🎮 *Join Game:*\nhttps://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f\nSenZ V2 | Steal An Egg Notifier\n🔍 *Wiki:*\nhttps://stealanegg.fandom.com/wiki/World_Burner",
+      "timestamp": 1790109974941
+    },
     {
       "name": "Oni Tiger",
       "moneyText": "~$600m/s",
