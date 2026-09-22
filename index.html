@@ -231,7 +231,7 @@
 
     const SESSION_KEY = 'egg_session_v1';
     const SETTINGS_KEY = 'egg_settings_v1';
-    const JSON_URL = 'https://raw.githubusercontent.com/marblack-o/Steal-to-Egg-Notifier/main/data/latest.json';
+    const JSON_URL = 'https://api.jsonbin.io/v3/b/6ab3086cac6210605aeaff1d/latest';
 
     const burger = document.getElementById('burger');
     const drawer = document.getElementById('drawer');
@@ -511,9 +511,14 @@
 
     async function fetchRemoteEggs() {
       try {
-        var res = await fetch(JSON_URL + '?t=' + Date.now(), { cache: 'no-store' });
+        var res = await fetch(JSON_URL + '?t=' + Date.now(), {
+          cache: 'no-store',
+          headers: { 'X-Bin-Meta': 'false' }
+        });
         if (!res.ok) return;
-        var data = await res.json();
+        var json = await res.json();
+        // JSONBin envuelve el contenido en "record"
+        var data = json.record || json;
         if (!data || !Array.isArray(data.eggs)) return;
         if (data.updatedAt && data.updatedAt <= lastUpdatedAt) return;
 
@@ -542,7 +547,7 @@
     renderFilters();
     renderSession();
     fetchRemoteEggs();
-    setInterval(fetchRemoteEggs, 15000);
+    setInterval(fetchRemoteEggs, 5000);
     setInterval(renderSession, 30000);
   </script>
 </body>
