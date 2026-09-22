@@ -1,17 +1,17 @@
 {
-  "updatedAt": 1790080571289,
+  "updatedAt": 1790081161202,
   "eggs": [
     {
-      "name": "Cosmic Dragon",
-      "moneyText": "~$60m/s",
-      "moneyValue": 60000000,
-      "location": "Cosmic",
-      "speed": "840M",
+      "name": "Gargoyle",
+      "moneyText": "~$225m/s",
+      "moneyValue": 225000000,
+      "location": "Demons",
+      "speed": "20B",
       "join": "https://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f",
-      "wiki": "https://stealanegg.fandom.com/wiki/Cosmic_Dragon",
+      "wiki": "https://stealanegg.fandom.com/wiki/Gargoyle",
       "imageUrl": "https://cdn.discordapp.com/emojis/1544772359083393054.png",
-      "fullText": "-# <@&1550979557194993674> Cosmic Dragon spawned in Cosmic! <@&1550981076963434707> <@&1550981426261004400>\nSecret Egg Spawned!! - <t:1790080505:t>\n🥚 *Egg:* Cosmic Dragon\n🌌*Location:* Cosmic\n⏱ *Spawned:* hace 1 minutos\n💰 *Money:* ~$60m/s\n⚡ *Recommended Speed:* 840M\n🎮 *Join Game:*\nhttps://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f\nSenZ V2 | Steal An Egg Notifier\n🔍 *Wiki:*\nhttps://stealanegg.fandom.com/wiki/Cosmic_Dragon",
-      "timestamp": 1790080570764
+      "fullText": "-# <@&1550979557194993674> Gargoyle spawned in Demons! <@&1550981080973058170> <@&1550981408783335485>\nSecret Egg Spawned!! - <t:1790081106:t>\n🥚 *Egg:* Gargoyle\n😈*Location:* Demons\n⏱ *Spawned:* hace unos segundos\n💰 *Money:* ~$225m/s\n⚡ *Recommended Speed:* 20B\n🎮 *Join Game:*\nhttps://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f\nSenZ V2 | Steal An Egg Notifier\n🔍 *Wiki:*\nhttps://stealanegg.fandom.com/wiki/Gargoyle",
+      "timestamp": 1790081160712
     }
   ]
 }
