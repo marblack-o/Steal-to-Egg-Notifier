@@ -1,29 +1,17 @@
 {
-  "updatedAt": 1790041563894,
+  "updatedAt": 1790042778865,
   "eggs": [
     {
-      "name": "Cosmic Dragon",
-      "moneyText": "~$60m/s",
-      "moneyValue": 60000000,
-      "location": "Cosmic",
-      "speed": "840M",
+      "name": "Cerberus",
+      "moneyText": "~$8m/s",
+      "moneyValue": 8000000,
+      "location": "Volcano",
+      "speed": "840K",
       "join": "https://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f",
-      "wiki": "https://stealanegg.fandom.com/wiki/Cosmic_Dragon",
+      "wiki": "https://stealanegg.fandom.com/wiki/Cerberus",
       "imageUrl": "https://cdn.discordapp.com/emojis/1544772359083393054.png",
-      "fullText": "-# <@&1550979557194993674> Cosmic Dragon spawned in Cosmic! <@&1550981076963434707> <@&1550981426261004400>\nSecret Egg Spawned!! - <t:1790041207:t>\n🥚 *Egg:* Cosmic Dragon\n🌌*Location:* Cosmic\n⏱ *Spawned:* hace unos segundos\n💰 *Money:* ~$60m/s\n⚡ *Recommended Speed:* 840M\n🎮 *Join Game:*\nhttps://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f\nSenZ V2 | Steal An Egg Notifier\n🔍 *Wiki:*\nhttps://stealanegg.fandom.com/wiki/Cosmic_Dragon",
-      "timestamp": 1790041264240
-    },
-    {
-      "name": "TRex",
-      "moneyText": "~$25m/s",
-      "moneyValue": 25000000,
-      "location": "Prehistoric",
-      "speed": "20.5M",
-      "join": "https://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f",
-      "wiki": "https://stealanegg.fandom.com/wiki/TRex",
-      "imageUrl": "https://cdn.discordapp.com/emojis/1544772359083393054.png",
-      "fullText": "-# <@&1550979557194993674> TRex spawned in Prehistoric! <@&1550981072974643281> <@&1550981439066087444>\nSecret Egg Spawned!! - <t:1790041506:t>\n🥚 *Egg:* TRex\n🦖*Location:* Prehistoric\n⏱ *Spawned:* hace unos segundos\n💰 *Money:* ~$25m/s\n⚡ *Recommended Speed:* 20.5M\n🎮 *Join Game:*\nhttps://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f\nSenZ V2 | Steal An Egg Notifier\n🔍 *Wiki:*\nhttps://stealanegg.fandom.com/wiki/TRex",
-      "timestamp": 1790041563194
+      "fullText": "-# <@&1550979557194993674> Cerberus spawned in Volcano! <@&1550981072974643281> <@&1550981446917824544>\nSecret Egg Spawned!! - <t:1790042705:t>\n🥚 *Egg:* Cerberus\n🌋*Location:* Volcano\n⏱ *Spawned:* hace 1 minutos\n💰 *Money:* ~$8m/s\n⚡ *Recommended Speed:* 840K\n🎮 *Join Game:*\nhttps://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f\nSenZ V2 | Steal An Egg Notifier\n🔍 *Wiki:*\nhttps://stealanegg.fandom.com/wiki/Cerberus",
+      "timestamp": 1790042777122
     }
   ]
 }
