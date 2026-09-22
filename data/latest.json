@@ -1,65 +1,17 @@
 {
-  "updatedAt": 1790056865518,
+  "updatedAt": 1790078477536,
   "eggs": [
     {
-      "name": "RazorFang",
-      "moneyText": "~$350m/s",
-      "moneyValue": 350000000,
-      "location": "Demons",
-      "speed": "20B",
+      "name": "Kraken",
+      "moneyText": "~$15m/s",
+      "moneyValue": 15000000,
+      "location": "Abyss Ocean",
+      "speed": "3M",
       "join": "https://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f",
-      "wiki": "https://stealanegg.fandom.com/wiki/RazorFang",
+      "wiki": "https://stealanegg.fandom.com/wiki/Kraken",
       "imageUrl": "https://cdn.discordapp.com/emojis/1544772359083393054.png",
-      "fullText": "-# <@&1550979557194993674> RazorFang spawned in Demons! <@&1550981080973058170> <@&1550981401099239435>\nSecret Egg Spawned!! - <t:1790056805:t>\n🥚 *Egg:* RazorFang\n😈*Location:* Demons\n⏱ *Spawned:* hace unos segundos\n💰 *Money:* ~$350m/s\n⚡ *Recommended Speed:* 20B\n🎮 *Join Game:*\nhttps://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f\nSenZ V2 | Steal An Egg Notifier\n🔍 *Wiki:*\nhttps://stealanegg.fandom.com/wiki/RazorFang",
-      "timestamp": 1790056864414
-    },
-    {
-      "name": "Gargoyle",
-      "moneyText": "~$225m/s",
-      "moneyValue": 225000000,
-      "location": "Demons",
-      "speed": "20B",
-      "join": "https://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f",
-      "wiki": "https://stealanegg.fandom.com/wiki/Gargoyle",
-      "imageUrl": "https://cdn.discordapp.com/emojis/1544772359083393054.png",
-      "fullText": "-# <@&1550979557194993674> Gargoyle spawned in Demons! <@&1550981080973058170> <@&1550981408783335485>\nSecret Egg Spawned!! - <t:1790056206:t>\n🥚 *Egg:* Gargoyle\n😈*Location:* Demons\n⏱ *Spawned:* hace unos segundos\n💰 *Money:* ~$225m/s\n⚡ *Recommended Speed:* 20B\n🎮 *Join Game:*\nhttps://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f\nSenZ V2 | Steal An Egg Notifier\n🔍 *Wiki:*\nhttps://stealanegg.fandom.com/wiki/Gargoyle",
-      "timestamp": 1790056257009
-    },
-    {
-      "name": "Mutant Shark",
-      "moneyText": "~$215m/s",
-      "moneyValue": 215000000,
-      "location": "Titan Temple",
-      "speed": "8.5B",
-      "join": "https://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f",
-      "wiki": "https://stealanegg.fandom.com/wiki/Mutant_Shark",
-      "imageUrl": "https://cdn.discordapp.com/emojis/1544772359083393054.png",
-      "fullText": "-# <@&1550979557194993674> Mutant Shark spawned in Titan Temple! <@&1550981080973058170> <@&1550981417838846033>\nSecret Egg Spawned!! - <t:1790056505:t>\n🥚 *Egg:* Mutant Shark\n🏛️*Location:* Titan Temple\n⏱ *Spawned:* hace unos segundos\n💰 *Money:* ~$215m/s\n⚡ *Recommended Speed:* 8.5B\n🎮 *Join Game:*\nhttps://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f\nSenZ V2 | Steal An Egg Notifier\n🔍 *Wiki:*\nhttps://stealanegg.fandom.com/wiki/Mutant_Shark",
-      "timestamp": 1790056557621
-    },
-    {
-      "name": "Cosmic Dragon",
-      "moneyText": "~$60m/s",
-      "moneyValue": 60000000,
-      "location": "Cosmic",
-      "speed": "840M",
-      "join": "https://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f",
-      "wiki": "https://stealanegg.fandom.com/wiki/Cosmic_Dragon",
-      "imageUrl": "https://cdn.discordapp.com/emojis/1544772359083393054.png",
-      "fullText": "-# <@&1550979557194993674> Cosmic Dragon spawned in Cosmic! <@&1550981076963434707> <@&1550981426261004400>\nSecret Egg Spawned!! - <t:1790056559:t>\n🥚 *Egg:* Cosmic Dragon\n🌌*Location:* Cosmic\n⏱ *Spawned:* hace unos segundos\n💰 *Money:* ~$60m/s\n⚡ *Recommended Speed:* 840M\n🎮 *Join Game:*\nhttps://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f\nSenZ V2 | Steal An Egg Notifier\n🔍 *Wiki:*\nhttps://stealanegg.fandom.com/wiki/Cosmic_Dragon",
-      "timestamp": 1790056611627
-    },
-    {
-      "name": "Yeti",
-      "moneyText": "~$5m/s",
-      "moneyValue": 5000000,
-      "location": "Snow",
-      "speed": "210K",
-      "join": "https://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f",
-      "wiki": "https://stealanegg.fandom.com/wiki/Yeti",
-      "imageUrl": "https://cdn.discordapp.com/emojis/1544772359083393054.png",
-      "fullText": "-# <@&1550979557194993674> Yeti spawned in Snow! <@&1550981072974643281> <@&1550981452659826879>\nSecret Egg Spawned!! - <t:1790056259:t>\n🥚 *Egg:* Yeti\n❄️*Location:* Snow\n⏱ *Spawned:* hace unos segundos\n💰 *Money:* ~$5m/s\n⚡ *Recommended Speed:* 210K\n🎮 *Join Game:*\nhttps://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f\nSenZ V2 | Steal An Egg Notifier\n🔍 *Wiki:*\nhttps://stealanegg.fandom.com/wiki/Yeti",
-      "timestamp": 1790056306923
+      "fullText": "-# <@&1550979557194993674> Kraken spawned in Abyss Ocean! <@&1550981072974643281> <@&1550981442912256123>\nSecret Egg Spawned!! - <t:1790078406:t>\n🥚 *Egg:* Kraken\n🦈*Location:* Abyss Ocean\n⏱ *Spawned:* hace 1 minutos\n💰 *Money:* ~$15m/s\n⚡ *Recommended Speed:* 3M\n🎮 *Join Game:*\nhttps://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f\nSenZ V2 | Steal An Egg Notifier\n🔍 *Wiki:*\nhttps://stealanegg.fandom.com/wiki/Kraken",
+      "timestamp": 1790078476858
     }
   ]
 }
