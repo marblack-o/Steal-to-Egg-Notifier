@@ -1,6 +1,18 @@
 {
-  "updatedAt": 1790110919449,
+  "updatedAt": 1790110935022,
   "eggs": [
+    {
+      "name": "Centaur",
+      "moneyText": "~$350m/s",
+      "moneyValue": 350000000,
+      "location": "Angels",
+      "speed": "20B",
+      "join": "https://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f",
+      "wiki": "https://stealanegg.fandom.com/wiki/Centaur",
+      "imageUrl": "https://cdn.discordapp.com/emojis/1544772359083393054.png",
+      "fullText": "-# <@&1550979557194993674> Centaur spawned in Angels! <@&1550981080973058170> <@&1550981404777521173>\nSecret Egg Spawned!! - <t:1790110810:t>\n🥚 *Egg:* Centaur\n👼*Location:* Angels\n⏱ *Spawned:* hace 2 minutos\n💰 *Money:* ~$350m/s\n⚡ *Recommended Speed:* 20B\n🎮 *Join Game:*\nhttps://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f\nSenZ V2 | Steal An Egg Notifier\n🔍 *Wiki:*\nhttps://stealanegg.fandom.com/wiki/Centaur",
+      "timestamp": 1790110934491
+    },
     {
       "name": "Gargoyle",
       "moneyText": "~$225m/s",
