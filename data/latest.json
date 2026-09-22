@@ -1,53 +1,17 @@
 {
-  "updatedAt": 1790043960066,
+  "updatedAt": 1790044563236,
   "eggs": [
     {
-      "name": "Gargoyle",
-      "moneyText": "~$225m/s",
-      "moneyValue": 225000000,
-      "location": "Demons",
-      "speed": "20B",
+      "name": "Ice Dragon",
+      "moneyText": "~$65m/s",
+      "moneyValue": 65000000,
+      "location": "Snow",
+      "speed": "210K",
       "join": "https://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f",
-      "wiki": "https://stealanegg.fandom.com/wiki/Gargoyle",
-      "imageUrl": "https://cdn.discordapp.com/emojis/1544772359083393054.png",
-      "fullText": "-# <@&1550979557194993674> Gargoyle spawned in Demons! <@&1550981080973058170> <@&1550981408783335485>\nSecret Egg Spawned!! - <t:1790043906:t>\n🥚 *Egg:* Gargoyle\n😈*Location:* Demons\n⏱ *Spawned:* hace unos segundos\n💰 *Money:* ~$225m/s\n⚡ *Recommended Speed:* 20B\n🎮 *Join Game:*\nhttps://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f\nSenZ V2 | Steal An Egg Notifier\n🔍 *Wiki:*\nhttps://stealanegg.fandom.com/wiki/Gargoyle",
-      "timestamp": 1790043959262
-    },
-    {
-      "name": "Lava Dragon",
-      "moneyText": "~$100m/s",
-      "moneyValue": 100000000,
-      "location": "Volcano",
-      "speed": "840K",
-      "join": "https://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f",
-      "wiki": "https://stealanegg.fandom.com/wiki/Lava_Dragon",
+      "wiki": "https://stealanegg.fandom.com/wiki/Ice_Dragon",
       "imageUrl": "https://cdn.discordapp.com/emojis/1544772400435040386.png",
-      "fullText": "-# <@&1550979752842764408> Lava Dragon spawned in Volcano! <@&1550981080973058170> <@&1550981389275631801>\nEternal Egg Spawned!! - <t:1790043661:t>\n🥚 *Egg:* Lava Dragon\n🌋*Location:* Volcano\n⏱ *Spawned:* hace unos segundos\n💰 *Money:* ~$100m/s\n⚡ *Recommended Speed:* 840K\n🎮 *Join Game:*\nhttps://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f\nSenZ V2 | Steal An Egg Notifier\n🔍 *Wiki:*\nhttps://stealanegg.fandom.com/wiki/Lava_Dragon",
-      "timestamp": 1790043713740
-    },
-    {
-      "name": "Cosmic Skeleton Boss",
-      "moneyText": "~$45m/s",
-      "moneyValue": 45000000,
-      "location": "Cosmic",
-      "speed": "840M",
-      "join": "https://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f",
-      "wiki": "https://stealanegg.fandom.com/wiki/Cosmic_Skeleton_Boss",
-      "imageUrl": "https://cdn.discordapp.com/emojis/1544772359083393054.png",
-      "fullText": "-# <@&1550979557194993674> Cosmic Skeleton Boss spawned in Cosmic! <@&1550981072974643281> <@&1550981430534733845>\nSecret Egg Spawned!! - <t:1790043606:t>\n🥚 *Egg:* Cosmic Skeleton Boss\n🌌*Location:* Cosmic\n⏱ *Spawned:* hace unos segundos\n💰 *Money:* ~$45m/s\n⚡ *Recommended Speed:* 840M\n🎮 *Join Game:*\nhttps://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f\nSenZ V2 | Steal An Egg Notifier\n🔍 *Wiki:*\nhttps://stealanegg.fandom.com/wiki/Cosmic_Skeleton_Boss",
-      "timestamp": 1790043660341
-    },
-    {
-      "name": "TRex",
-      "moneyText": "~$25m/s",
-      "moneyValue": 25000000,
-      "location": "Prehistoric",
-      "speed": "20.5M",
-      "join": "https://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f",
-      "wiki": "https://stealanegg.fandom.com/wiki/TRex",
-      "imageUrl": "https://cdn.discordapp.com/emojis/1544772359083393054.png",
-      "fullText": "-# <@&1550979557194993674> TRex spawned in Prehistoric! <@&1550981072974643281> <@&1550981439066087444>\nSecret Egg Spawned!! - <t:1790043307:t>\n🥚 *Egg:* TRex\n🦖*Location:* Prehistoric\n⏱ *Spawned:* hace unos segundos\n💰 *Money:* ~$25m/s\n⚡ *Recommended Speed:* 20.5M\n🎮 *Join Game:*\nhttps://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f\nSenZ V2 | Steal An Egg Notifier\n🔍 *Wiki:*\nhttps://stealanegg.fandom.com/wiki/TRex",
-      "timestamp": 1790043359504
+      "fullText": "-# <@&1550979752842764408> Ice Dragon spawned in Snow! <@&1550981076963434707> <@&1550981397261328515>\nEternal Egg Spawned!! - <t:1790044505:t>\n🥚 *Egg:* Ice Dragon\n❄️*Location:* Snow\n⏱ *Spawned:* hace unos segundos\n💰 *Money:* ~$65m/s\n⚡ *Recommended Speed:* 210K\n🎮 *Join Game:*\nhttps://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f\nSenZ V2 | Steal An Egg Notifier\n🔍 *Wiki:*\nhttps://stealanegg.fandom.com/wiki/Ice_Dragon",
+      "timestamp": 1790044562301
     }
   ]
 }
