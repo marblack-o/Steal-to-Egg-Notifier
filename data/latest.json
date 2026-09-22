@@ -1,53 +1,17 @@
 {
-  "updatedAt": 1790110044582,
+  "updatedAt": 1790110584648,
   "eggs": [
     {
-      "name": "World Burner",
-      "moneyText": "~$5b/s",
-      "moneyValue": 5000000000,
-      "location": "Demons",
-      "speed": "20B",
+      "name": "TRex",
+      "moneyText": "~$25m/s",
+      "moneyValue": 25000000,
+      "location": "Prehistoric",
+      "speed": "20.5M",
       "join": "https://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f",
-      "wiki": "https://stealanegg.fandom.com/wiki/World_Burner",
-      "imageUrl": "https://cdn.discordapp.com/emojis/1544772470714671164.png",
-      "fullText": "-# <@&1550979875400056832> World Burner spawned in Demons! <@&1550981089542021173> <@&1550981340478967869>\nDivine Egg Spawned!! - <t:1790109906:t>\n🥚 *Egg:* World Burner\n😈*Location:* Demons\n⏱ *Spawned:* hace 1 minutos\n💰 *Money:* ~$5b/s\n⚡ *Recommended Speed:* 20B\n🎮 *Join Game:*\nhttps://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f\nSenZ V2 | Steal An Egg Notifier\n🔍 *Wiki:*\nhttps://stealanegg.fandom.com/wiki/World_Burner",
-      "timestamp": 1790109974941
-    },
-    {
-      "name": "Oni Tiger",
-      "moneyText": "~$600m/s",
-      "moneyValue": 600000000,
-      "location": "Cherry Blossom",
-      "speed": "3.5B",
-      "join": "https://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f",
-      "wiki": "https://stealanegg.fandom.com/wiki/Oni_Tiger",
-      "imageUrl": "https://cdn.discordapp.com/emojis/1544772400435040386.png",
-      "fullText": "-# <@&1550979752842764408> Oni Tiger spawned in Cherry Blossom! <@&1550981085825867796> <@&1550981373425221725>\nEternal Egg Spawned!! - <t:1790109606:t>\n🥚 *Egg:* Oni Tiger\n🌸*Location:* Cherry Blossom\n⏱ *Spawned:* hace 2 minutos\n💰 *Money:* ~$600m/s\n⚡ *Recommended Speed:* 3.5B\n🎮 *Join Game:*\nhttps://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f\nSenZ V2 | Steal An Egg Notifier\n🔍 *Wiki:*\nhttps://stealanegg.fandom.com/wiki/Oni_Tiger",
-      "timestamp": 1790109735770
-    },
-    {
-      "name": "Pure Jellyfish",
-      "moneyText": "~$225m/s",
-      "moneyValue": 225000000,
-      "location": "Angels",
-      "speed": "20B",
-      "join": "https://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f",
-      "wiki": "https://stealanegg.fandom.com/wiki/Pure_Jellyfish",
+      "wiki": "https://stealanegg.fandom.com/wiki/TRex",
       "imageUrl": "https://cdn.discordapp.com/emojis/1544772359083393054.png",
-      "fullText": "-# <@&1550979557194993674> Pure Jellyfish spawned in Angels! <@&1550981080973058170> <@&1550981412696358942>\nSecret Egg Spawned!! - <t:1790109978:t>\n🥚 *Egg:* Pure Jellyfish\n👼*Location:* Angels\n⏱ *Spawned:* hace 1 minutos\n💰 *Money:* ~$225m/s\n⚡ *Recommended Speed:* 20B\n🎮 *Join Game:*\nhttps://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f\nSenZ V2 | Steal An Egg Notifier\n🔍 *Wiki:*\nhttps://stealanegg.fandom.com/wiki/Pure_Jellyfish",
-      "timestamp": 1790110044032
-    },
-    {
-      "name": "Cerberus",
-      "moneyText": "~$8m/s",
-      "moneyValue": 8000000,
-      "location": "Volcano",
-      "speed": "840K",
-      "join": "https://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f",
-      "wiki": "https://stealanegg.fandom.com/wiki/Cerberus",
-      "imageUrl": "https://cdn.discordapp.com/emojis/1544772359083393054.png",
-      "fullText": "-# <@&1550979557194993674> Cerberus spawned in Volcano! <@&1550981072974643281> <@&1550981446917824544>\nSecret Egg Spawned!! - <t:1790109611:t>\n🥚 *Egg:* Cerberus\n🌋*Location:* Volcano\n⏱ *Spawned:* hace 2 minutos\n💰 *Money:* ~$8m/s\n⚡ *Recommended Speed:* 840K\n🎮 *Join Game:*\nhttps://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f\nSenZ V2 | Steal An Egg Notifier\n🔍 *Wiki:*\nhttps://stealanegg.fandom.com/wiki/Cerberus",
-      "timestamp": 1790109737582
+      "fullText": "-# <@&1550979557194993674> TRex spawned in Prehistoric! <@&1550981072974643281> <@&1550981439066087444>\nSecret Egg Spawned!! - <t:1790110506:t>\n🥚 *Egg:* TRex\n🦖*Location:* Prehistoric\n⏱ *Spawned:* hace 1 minutos\n💰 *Money:* ~$25m/s\n⚡ *Recommended Speed:* 20.5M\n🎮 *Join Game:*\nhttps://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f\nSenZ V2 | Steal An Egg Notifier\n🔍 *Wiki:*\nhttps://stealanegg.fandom.com/wiki/TRex",
+      "timestamp": 1790110584076
     }
   ]
 }
