@@ -1,41 +1,17 @@
 {
-  "updatedAt": 1790111008935,
+  "updatedAt": 1790111310207,
   "eggs": [
     {
-      "name": "Pegasus",
-      "moneyText": "~$1.3b/s",
-      "moneyValue": 1300000000,
-      "location": "Angels",
-      "speed": "20B",
+      "name": "Kitsune",
+      "moneyText": "~$1.8b/s",
+      "moneyValue": 1800000000,
+      "location": "Cherry Blossom",
+      "speed": "3.5B",
       "join": "https://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f",
-      "wiki": "https://stealanegg.fandom.com/wiki/Pegasus",
-      "imageUrl": "https://cdn.discordapp.com/emojis/1544772400435040386.png",
-      "fullText": "-# <@&1550979752842764408> Pegasus spawned in Angels! <@&1550981089542021173> <@&1550981365531676752>\nEternal Egg Spawned!! - <t:1790110921:t>\n🥚 *Egg:* Pegasus\n👼*Location:* Angels\n⏱ *Spawned:* hace 1 minutos\n💰 *Money:* ~$1.3b/s\n⚡ *Recommended Speed:* 20B\n🎮 *Join Game:*\nhttps://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f\nSenZ V2 | Steal An Egg Notifier\n🔍 *Wiki:*\nhttps://stealanegg.fandom.com/wiki/Pegasus",
-      "timestamp": 1790111008432
-    },
-    {
-      "name": "Centaur",
-      "moneyText": "~$350m/s",
-      "moneyValue": 350000000,
-      "location": "Angels",
-      "speed": "20B",
-      "join": "https://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f",
-      "wiki": "https://stealanegg.fandom.com/wiki/Centaur",
-      "imageUrl": "https://cdn.discordapp.com/emojis/1544772359083393054.png",
-      "fullText": "-# <@&1550979557194993674> Centaur spawned in Angels! <@&1550981080973058170> <@&1550981404777521173>\nSecret Egg Spawned!! - <t:1790110810:t>\n🥚 *Egg:* Centaur\n👼*Location:* Angels\n⏱ *Spawned:* hace 2 minutos\n💰 *Money:* ~$350m/s\n⚡ *Recommended Speed:* 20B\n🎮 *Join Game:*\nhttps://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f\nSenZ V2 | Steal An Egg Notifier\n🔍 *Wiki:*\nhttps://stealanegg.fandom.com/wiki/Centaur",
-      "timestamp": 1790110934491
-    },
-    {
-      "name": "Gargoyle",
-      "moneyText": "~$225m/s",
-      "moneyValue": 225000000,
-      "location": "Demons",
-      "speed": "20B",
-      "join": "https://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f",
-      "wiki": "https://stealanegg.fandom.com/wiki/Gargoyle",
-      "imageUrl": "https://cdn.discordapp.com/emojis/1544772359083393054.png",
-      "fullText": "-# <@&1550979557194993674> Gargoyle spawned in Demons! <@&1550981080973058170> <@&1550981408783335485>\nSecret Egg Spawned!! - <t:1790110806:t>\n🥚 *Egg:* Gargoyle\n😈*Location:* Demons\n⏱ *Spawned:* hace 1 minutos\n💰 *Money:* ~$225m/s\n⚡ *Recommended Speed:* 20B\n🎮 *Join Game:*\nhttps://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f\nSenZ V2 | Steal An Egg Notifier\n🔍 *Wiki:*\nhttps://stealanegg.fandom.com/wiki/Gargoyle",
-      "timestamp": 1790110918853
+      "wiki": "https://stealanegg.fandom.com/wiki/Kitsune",
+      "imageUrl": "https://cdn.discordapp.com/emojis/1544772470714671164.png",
+      "fullText": "-# <@&1550979875400056832> Kitsune spawned in Cherry Blossom! <@&1550981089542021173> <@&1550981353947013260>\nDivine Egg Spawned!! - <t:1790111107:t>\n🥚 *Egg:* Kitsune\n🌸*Location:* Cherry Blossom\n⏱ *Spawned:* hace 3 minutos\n💰 *Money:* ~$1.8b/s\n⚡ *Recommended Speed:* 3.5B\n🎮 *Join Game:*\nhttps://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f\nSenZ V2 | Steal An Egg Notifier\n🔍 *Wiki:*\nhttps://stealanegg.fandom.com/wiki/Kitsune",
+      "timestamp": 1790111309656
     }
   ]
 }
