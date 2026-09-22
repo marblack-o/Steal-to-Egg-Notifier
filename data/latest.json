@@ -1,5 +1,5 @@
 {
-  "updatedAt": 1790109975928,
+  "updatedAt": 1790110044582,
   "eggs": [
     {
       "name": "World Burner",
@@ -24,6 +24,18 @@
       "imageUrl": "https://cdn.discordapp.com/emojis/1544772400435040386.png",
       "fullText": "-# <@&1550979752842764408> Oni Tiger spawned in Cherry Blossom! <@&1550981085825867796> <@&1550981373425221725>\nEternal Egg Spawned!! - <t:1790109606:t>\n🥚 *Egg:* Oni Tiger\n🌸*Location:* Cherry Blossom\n⏱ *Spawned:* hace 2 minutos\n💰 *Money:* ~$600m/s\n⚡ *Recommended Speed:* 3.5B\n🎮 *Join Game:*\nhttps://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f\nSenZ V2 | Steal An Egg Notifier\n🔍 *Wiki:*\nhttps://stealanegg.fandom.com/wiki/Oni_Tiger",
       "timestamp": 1790109735770
+    },
+    {
+      "name": "Pure Jellyfish",
+      "moneyText": "~$225m/s",
+      "moneyValue": 225000000,
+      "location": "Angels",
+      "speed": "20B",
+      "join": "https://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f",
+      "wiki": "https://stealanegg.fandom.com/wiki/Pure_Jellyfish",
+      "imageUrl": "https://cdn.discordapp.com/emojis/1544772359083393054.png",
+      "fullText": "-# <@&1550979557194993674> Pure Jellyfish spawned in Angels! <@&1550981080973058170> <@&1550981412696358942>\nSecret Egg Spawned!! - <t:1790109978:t>\n🥚 *Egg:* Pure Jellyfish\n👼*Location:* Angels\n⏱ *Spawned:* hace 1 minutos\n💰 *Money:* ~$225m/s\n⚡ *Recommended Speed:* 20B\n🎮 *Join Game:*\nhttps://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f\nSenZ V2 | Steal An Egg Notifier\n🔍 *Wiki:*\nhttps://stealanegg.fandom.com/wiki/Pure_Jellyfish",
+      "timestamp": 1790110044032
     },
     {
       "name": "Cerberus",
