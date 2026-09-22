@@ -1,5 +1,5 @@
 {
-  "updatedAt": 1790109736442,
+  "updatedAt": 1790109738092,
   "eggs": [
     {
       "name": "Oni Tiger",
@@ -12,6 +12,18 @@
       "imageUrl": "https://cdn.discordapp.com/emojis/1544772400435040386.png",
       "fullText": "-# <@&1550979752842764408> Oni Tiger spawned in Cherry Blossom! <@&1550981085825867796> <@&1550981373425221725>\nEternal Egg Spawned!! - <t:1790109606:t>\n🥚 *Egg:* Oni Tiger\n🌸*Location:* Cherry Blossom\n⏱ *Spawned:* hace 2 minutos\n💰 *Money:* ~$600m/s\n⚡ *Recommended Speed:* 3.5B\n🎮 *Join Game:*\nhttps://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f\nSenZ V2 | Steal An Egg Notifier\n🔍 *Wiki:*\nhttps://stealanegg.fandom.com/wiki/Oni_Tiger",
       "timestamp": 1790109735770
+    },
+    {
+      "name": "Cerberus",
+      "moneyText": "~$8m/s",
+      "moneyValue": 8000000,
+      "location": "Volcano",
+      "speed": "840K",
+      "join": "https://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f",
+      "wiki": "https://stealanegg.fandom.com/wiki/Cerberus",
+      "imageUrl": "https://cdn.discordapp.com/emojis/1544772359083393054.png",
+      "fullText": "-# <@&1550979557194993674> Cerberus spawned in Volcano! <@&1550981072974643281> <@&1550981446917824544>\nSecret Egg Spawned!! - <t:1790109611:t>\n🥚 *Egg:* Cerberus\n🌋*Location:* Volcano\n⏱ *Spawned:* hace 2 minutos\n💰 *Money:* ~$8m/s\n⚡ *Recommended Speed:* 840K\n🎮 *Join Game:*\nhttps://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f\nSenZ V2 | Steal An Egg Notifier\n🔍 *Wiki:*\nhttps://stealanegg.fandom.com/wiki/Cerberus",
+      "timestamp": 1790109737582
     }
   ]
 }
