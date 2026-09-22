@@ -1,5 +1,5 @@
 {
-  "updatedAt": 1790056257593,
+  "updatedAt": 1790056307409,
   "eggs": [
     {
       "name": "Gargoyle",
@@ -12,6 +12,18 @@
       "imageUrl": "https://cdn.discordapp.com/emojis/1544772359083393054.png",
       "fullText": "-# <@&1550979557194993674> Gargoyle spawned in Demons! <@&1550981080973058170> <@&1550981408783335485>\nSecret Egg Spawned!! - <t:1790056206:t>\n🥚 *Egg:* Gargoyle\n😈*Location:* Demons\n⏱ *Spawned:* hace unos segundos\n💰 *Money:* ~$225m/s\n⚡ *Recommended Speed:* 20B\n🎮 *Join Game:*\nhttps://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f\nSenZ V2 | Steal An Egg Notifier\n🔍 *Wiki:*\nhttps://stealanegg.fandom.com/wiki/Gargoyle",
       "timestamp": 1790056257009
+    },
+    {
+      "name": "Yeti",
+      "moneyText": "~$5m/s",
+      "moneyValue": 5000000,
+      "location": "Snow",
+      "speed": "210K",
+      "join": "https://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f",
+      "wiki": "https://stealanegg.fandom.com/wiki/Yeti",
+      "imageUrl": "https://cdn.discordapp.com/emojis/1544772359083393054.png",
+      "fullText": "-# <@&1550979557194993674> Yeti spawned in Snow! <@&1550981072974643281> <@&1550981452659826879>\nSecret Egg Spawned!! - <t:1790056259:t>\n🥚 *Egg:* Yeti\n❄️*Location:* Snow\n⏱ *Spawned:* hace unos segundos\n💰 *Money:* ~$5m/s\n⚡ *Recommended Speed:* 210K\n🎮 *Join Game:*\nhttps://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f\nSenZ V2 | Steal An Egg Notifier\n🔍 *Wiki:*\nhttps://stealanegg.fandom.com/wiki/Yeti",
+      "timestamp": 1790056306923
     }
   ]
 }
