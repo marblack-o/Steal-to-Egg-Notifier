@@ -1,5 +1,5 @@
 {
-  "updatedAt": 1790202370982,
+  "updatedAt": 1790202668671,
   "eggs": [
     {
       "name": "Gorilla King",
@@ -12,6 +12,18 @@
       "imageUrl": "https://cdn.discordapp.com/emojis/1547091113360359534.png?size=128&quality=lossless",
       "fullText": "-# <@&1550979752842764408> Gorilla King spawned in Titan Temple! <@&1550981085825867796> <@&1550981369168003245>\nEternal Egg Spawned!! - <t:1790202005:t>\n🥚 *Egg:* Gorilla King\n🏛️*Location:* Titan Temple\n⏱ *Spawned:* hace 1 minutos\n💰 *Money:* ~$880m/s\n⚡ *Recommended Speed:* 8.5B\n🎮 *Join Game:*\nhttps://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f\nSenZ V2 | Steal An Egg Notifier\n🔍 *Wiki:*\nhttps://stealanegg.fandom.com/wiki/Gorilla_King",
       "timestamp": 1790202071013
+    },
+    {
+      "name": "El Maja",
+      "moneyText": "~$130m/s",
+      "moneyValue": 130000000,
+      "location": "Abyss Ocean",
+      "speed": "3M",
+      "join": "https://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f",
+      "wiki": "https://stealanegg.fandom.com/wiki/El_Maja",
+      "imageUrl": "https://cdn.discordapp.com/emojis/1547091106448285786.png?size=128&quality=lossless",
+      "fullText": "-# <@&1550979752842764408> El Maja spawned in Abyss Ocean! <@&1550981080973058170> <@&1550981385270067211>\nEternal Egg Spawned!! - <t:1790202605:t>\n🥚 *Egg:* El Maja\n🦈*Location:* Abyss Ocean\n⏱ *Spawned:* hace 1 minutos\n💰 *Money:* ~$130m/s\n⚡ *Recommended Speed:* 3M\n🎮 *Join Game:*\nhttps://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f\nSenZ V2 | Steal An Egg Notifier\n🔍 *Wiki:*\nhttps://stealanegg.fandom.com/wiki/El_Maja",
+      "timestamp": 1790202667466
     },
     {
       "name": "TRex",
