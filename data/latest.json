@@ -1,17 +1,17 @@
 {
-  "updatedAt": 1790182594816,
+  "updatedAt": 1790183796973,
   "eggs": [
     {
-      "name": "Pure Jellyfish",
-      "moneyText": "~$225m/s",
-      "moneyValue": 225000000,
-      "location": "Angels",
-      "speed": "20B",
+      "name": "Stag",
+      "moneyText": "~$145m/s",
+      "moneyValue": 145000000,
+      "location": "Cherry Blossom",
+      "speed": "3.5B",
       "join": "https://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f",
-      "wiki": "https://stealanegg.fandom.com/wiki/Pure_Jellyfish",
-      "imageUrl": "https://cdn.discordapp.com/emojis/1548678024512274564.png?size=128&quality=lossless",
-      "fullText": "-# <@&1550979557194993674> Pure Jellyfish spawned in Angels! <@&1550981080973058170> <@&1550981412696358942>\nSecret Egg Spawned!! - <t:1790182215:t>\n🥚 *Egg:* Pure Jellyfish\n👼*Location:* Angels\n⏱ *Spawned:* hace 6 minutos\n💰 *Money:* ~$225m/s\n⚡ *Recommended Speed:* 20B\n🎮 *Join Game:*\nhttps://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f\nSenZ V2 | Steal An Egg Notifier\n🔍 *Wiki:*\nhttps://stealanegg.fandom.com/wiki/Pure_Jellyfish",
-      "timestamp": 1790182594259
+      "wiki": "https://stealanegg.fandom.com/wiki/Stag",
+      "imageUrl": "https://cdn.discordapp.com/emojis/1547091149846745090.png?size=128&quality=lossless",
+      "fullText": "-# <@&1550979557194993674> Stag spawned in Cherry Blossom! <@&1550981080973058170> <@&1550981422184005762>\nSecret Egg Spawned!! - <t:1790183705:t>\n🥚 *Egg:* Stag\n🌸*Location:* Cherry Blossom\n⏱ *Spawned:* hace 1 minutos\n💰 *Money:* ~$145m/s\n⚡ *Recommended Speed:* 3.5B\n🎮 *Join Game:*\nhttps://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f\nSenZ V2 | Steal An Egg Notifier\n🔍 *Wiki:*\nhttps://stealanegg.fandom.com/wiki/Stag",
+      "timestamp": 1790183796476
     }
   ]
 }
