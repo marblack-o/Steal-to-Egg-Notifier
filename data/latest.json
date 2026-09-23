@@ -1,41 +1,17 @@
 {
-  "updatedAt": 1790200566649,
+  "updatedAt": 1790200880960,
   "eggs": [
     {
-      "name": "Centaur",
-      "moneyText": "~$350m/s",
-      "moneyValue": 350000000,
-      "location": "Angels",
+      "name": "Gargoyle",
+      "moneyText": "~$225m/s",
+      "moneyValue": 225000000,
+      "location": "Demons",
       "speed": "20B",
       "join": "https://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f",
-      "wiki": "https://stealanegg.fandom.com/wiki/Centaur",
-      "imageUrl": "https://cdn.discordapp.com/emojis/1548678014156677250.png?size=128&quality=lossless",
-      "fullText": "-# <@&1550979557194993674> Centaur spawned in Angels! <@&1550981080973058170> <@&1550981404777521173>\nSecret Egg Spawned!! - <t:1790200207:t>\n🥚 *Egg:* Centaur\n👼*Location:* Angels\n⏱ *Spawned:* hace 1 minutos\n💰 *Money:* ~$350m/s\n⚡ *Recommended Speed:* 20B\n🎮 *Join Game:*\nhttps://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f\nSenZ V2 | Steal An Egg Notifier\n🔍 *Wiki:*\nhttps://stealanegg.fandom.com/wiki/Centaur",
-      "timestamp": 1790200268770
-    },
-    {
-      "name": "Tralaledon",
-      "moneyText": "~$32m/s",
-      "moneyValue": 32000000,
-      "location": "Prehistoric",
-      "speed": "20.5M",
-      "join": "https://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f",
-      "wiki": "https://stealanegg.fandom.com/wiki/Tralaledon",
-      "imageUrl": "https://cdn.discordapp.com/emojis/1547091152518258810.png?size=128&quality=lossless",
-      "fullText": "-# <@&1550979557194993674> Tralaledon spawned in Prehistoric! <@&1550981072974643281> <@&1550981435219779594>\nSecret Egg Spawned!! - <t:1790200505:t>\n🥚 *Egg:* Tralaledon\n🦖*Location:* Prehistoric\n⏱ *Spawned:* hace 1 minutos\n💰 *Money:* ~$32m/s\n⚡ *Recommended Speed:* 20.5M\n🎮 *Join Game:*\nhttps://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f\nSenZ V2 | Steal An Egg Notifier\n🔍 *Wiki:*\nhttps://stealanegg.fandom.com/wiki/Tralaledon",
-      "timestamp": 1790200566012
-    },
-    {
-      "name": "Yeti",
-      "moneyText": "~$5m/s",
-      "moneyValue": 5000000,
-      "location": "Snow",
-      "speed": "210K",
-      "join": "https://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f",
-      "wiki": "https://stealanegg.fandom.com/wiki/Yeti",
-      "imageUrl": "https://cdn.discordapp.com/emojis/1547091161787797534.png?size=128&quality=lossless",
-      "fullText": "-# <@&1550979557194993674> Yeti spawned in Snow! <@&1550981072974643281> <@&1550981452659826879>\nSecret Egg Spawned!! - <t:1790199905:t>\n🥚 *Egg:* Yeti\n❄️*Location:* Snow\n⏱ *Spawned:* hace 1 minutos\n💰 *Money:* ~$5m/s\n⚡ *Recommended Speed:* 210K\n🎮 *Join Game:*\nhttps://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f\nSenZ V2 | Steal An Egg Notifier\n🔍 *Wiki:*\nhttps://stealanegg.fandom.com/wiki/Yeti",
-      "timestamp": 1790199971468
+      "wiki": "https://stealanegg.fandom.com/wiki/Gargoyle",
+      "imageUrl": "https://cdn.discordapp.com/emojis/1548678018950758404.png?size=128&quality=lossless",
+      "fullText": "-# <@&1550979557194993674> Gargoyle spawned in Demons! <@&1550981080973058170> <@&1550981408783335485>\nSecret Egg Spawned!! - <t:1790200805:t>\n🥚 *Egg:* Gargoyle\n😈*Location:* Demons\n⏱ *Spawned:* hace 1 minutos\n💰 *Money:* ~$225m/s\n⚡ *Recommended Speed:* 20B\n🎮 *Join Game:*\nhttps://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f\nSenZ V2 | Steal An Egg Notifier\n🔍 *Wiki:*\nhttps://stealanegg.fandom.com/wiki/Gargoyle",
+      "timestamp": 1790200880417
     }
   ]
 }
