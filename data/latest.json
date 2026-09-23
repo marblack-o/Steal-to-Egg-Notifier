@@ -1,17 +1,17 @@
 {
-  "updatedAt": 1790176304902,
+  "updatedAt": 1790176787015,
   "eggs": [
     {
-      "name": "Gargoyle",
-      "moneyText": "~$225m/s",
-      "moneyValue": 225000000,
-      "location": "Demons",
-      "speed": "20B",
+      "name": "Cerberus",
+      "moneyText": "~$8m/s",
+      "moneyValue": 8000000,
+      "location": "Volcano",
+      "speed": "840K",
       "join": "https://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f",
-      "wiki": "https://stealanegg.fandom.com/wiki/Gargoyle",
-      "imageUrl": "https://cdn.discordapp.com/emojis/1548678018950758404.png?size=128&quality=lossless",
-      "fullText": "-# <@&1550979557194993674> Gargoyle spawned in Demons! <@&1550981080973058170> <@&1550981408783335485>\nSecret Egg Spawned!! - <t:1790176207:t>\n🥚 *Egg:* Gargoyle\n😈*Location:* Demons\n⏱ *Spawned:* hace 1 minutos\n💰 *Money:* ~$225m/s\n⚡ *Recommended Speed:* 20B\n🎮 *Join Game:*\nhttps://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f\nSenZ V2 | Steal An Egg Notifier\n🔍 *Wiki:*\nhttps://stealanegg.fandom.com/wiki/Gargoyle",
-      "timestamp": 1790176304323
+      "wiki": "https://stealanegg.fandom.com/wiki/Cerberus",
+      "imageUrl": "https://cdn.discordapp.com/emojis/1547091099036680222.png?size=128&quality=lossless",
+      "fullText": "-# <@&1550979557194993674> Cerberus spawned in Volcano! <@&1550981072974643281> <@&1550981446917824544>\nSecret Egg Spawned!! - <t:1790176508:t>\n🥚 *Egg:* Cerberus\n🌋*Location:* Volcano\n⏱ *Spawned:* hace 4 minutos\n💰 *Money:* ~$8m/s\n⚡ *Recommended Speed:* 840K\n🎮 *Join Game:*\nhttps://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f\nSenZ V2 | Steal An Egg Notifier\n🔍 *Wiki:*\nhttps://stealanegg.fandom.com/wiki/Cerberus",
+      "timestamp": 1790176786139
     }
   ]
 }
