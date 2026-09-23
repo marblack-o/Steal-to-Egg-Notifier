@@ -170,6 +170,27 @@
       pointer-events: none; z-index: 200; box-shadow: 0 8px 24px rgba(0,0,0,0.4);
     }
     .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+    .rift-card { border-color: #4c1d95; }
+    .rift-title {
+      font-size: 0.78rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.04em; color: #c4b5fd; margin-bottom: 8px;
+    }
+    .rift-meta { font-size: 0.82rem; color: var(--muted); margin-bottom: 10px; line-height: 1.5; }
+    .rift-pet {
+      display: flex; align-items: center; gap: 10px;
+      padding: 8px 0; border-top: 1px solid var(--border);
+      font-size: 0.88rem;
+    }
+    .rift-pet img {
+      width: 32px; height: 32px; border-radius: 8px; object-fit: contain;
+      background: #1a1a22; border: 1px solid var(--border);
+    }
+    .rift-pet-name { font-weight: 600; flex: 1; }
+    .rift-chance { color: #fbbf24; font-size: 0.8rem; margin-right: 8px; }
+    .rift-money { color: #4ade80; font-size: 0.8rem; }
+    .rift-empty { color: var(--muted); font-size: 0.85rem; font-style: italic; padding: 8px 0; }
+
     .status-dot {
       display: inline-block; width: 8px; height: 8px; border-radius: 50%;
       background: #4ade80; margin-right: 6px; vertical-align: middle;
@@ -188,6 +209,12 @@
       </button>
     </div>
 
+    <div class="card rift-card" id="riftCard">
+      <div class="rift-title">Rift actual</div>
+      <div class="rift-meta" id="riftMeta">Esperando info del Rift...</div>
+      <div id="riftPets"></div>
+    </div>
+
     <div class="card">
       <div class="session-header">
         <label>Huevos OP</label>
@@ -198,7 +225,7 @@
         <div class="egg-empty">Esperando huevos OP...</div>
       </div>
     </div>
-    <footer>Actualizacion automatica cada 15s · Datos desde el bot</footer>
+    <footer>Actualizacion automatica cada 20s (solo pestaña abierta) · Datos desde el bot</footer>
   </div>
 
   <div class="overlay" id="overlay"></div>
@@ -585,6 +612,47 @@
       }
     });
 
+
+    const RIFT_KEY = 'egg_rift_v1';
+
+    function loadRift() {
+      try { return JSON.parse(localStorage.getItem(RIFT_KEY) || 'null'); }
+      catch (e) { return null; }
+    }
+    function saveRift(r) {
+      localStorage.setItem(RIFT_KEY, JSON.stringify(r));
+    }
+
+    function renderRift() {
+      var rift = loadRift();
+      var meta = document.getElementById('riftMeta');
+      var petsEl = document.getElementById('riftPets');
+      if (!meta || !petsEl) return;
+
+      if (!rift || !rift.pets || !rift.pets.length) {
+        meta.textContent = 'Esperando info del Rift...';
+        petsEl.innerHTML = '';
+        return;
+      }
+
+      var lines = [];
+      if (rift.changedText) lines.push('Changed: ' + rift.changedText);
+      if (rift.nextText) lines.push('Next: ' + rift.nextText);
+      if (rift.timestamp) lines.push('Actualizado: ' + timeAgo(rift.timestamp));
+      meta.innerHTML = lines.join('<br>');
+
+      petsEl.innerHTML = rift.pets.map(function(pet) {
+        var img = pet.imageUrl || petImage(pet.name);
+        if (pet.imageUrl) rememberImage(pet.name, pet.imageUrl);
+        return '<div class="rift-pet">' +
+          '<img src="' + img + '" alt="" onerror="this.style.opacity=0.3">' +
+          '<span class="rift-pet-name">' + (pet.name || '?') + '</span>' +
+          '<span class="rift-chance">🎲 ' + (pet.chance || '') + '</span>' +
+          '<span class="rift-money">' + (pet.money || '') + '</span>' +
+          '</div>';
+      }).join('');
+    }
+
     async function fetchRemoteEggs() {
       try {
         var res = await fetch(JSON_URL + '?t=' + Date.now(), {
@@ -615,18 +683,36 @@
           });
         }
 
-        data.eggs.forEach(function(egg) {
-          if (egg.imageUrl) rememberImage(egg.name, egg.imageUrl);
-        });
-        saveSession(data.eggs);
-        renderSession();
+        if (Array.isArray(data.eggs)) {
+          data.eggs.forEach(function(egg) {
+            if (egg.imageUrl) rememberImage(egg.name, egg.imageUrl);
+          });
+          saveSession(data.eggs);
+          renderSession();
+        }
+        if (data.rift) {
+          saveRift(data.rift);
+          renderRift();
+        }
       } catch(e) {}
     }
 
     renderFilters();
     renderSession();
+    // Ahorro de JSONBin: 20s y solo con pestaña visible
+    var pollMs = 20000;
+    function schedulePoll() {
+      if (window._eggPoll) clearInterval(window._eggPoll);
+      window._eggPoll = setInterval(function() {
+        if (document.hidden) return;
+        fetchRemoteEggs();
+      }, pollMs);
+    }
     fetchRemoteEggs();
-    setInterval(fetchRemoteEggs, 5000);
+    schedulePoll();
+    document.addEventListener('visibilitychange', function() {
+      if (!document.hidden) fetchRemoteEggs();
+    });
     setInterval(renderSession, 30000);
   </script>
 </body>
