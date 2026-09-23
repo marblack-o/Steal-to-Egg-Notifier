@@ -273,7 +273,7 @@
     };
 
 
-    // Cache de imagenes por nombre (se llena con lo que manda el bot)
+    // ===== Imagenes huevo / mascota =====
     const IMG_CACHE_KEY = 'egg_img_cache_v1';
     function loadImgCache() {
       try { return JSON.parse(localStorage.getItem(IMG_CACHE_KEY) || '{}'); }
@@ -284,30 +284,110 @@
     }
     let imgCache = loadImgCache();
 
-    function rememberImage(name, url) {
+    // Discord egg emojis conocidos (se amplian con el bot)
+    const DISCORD_EGG = {
+      'tralaledon': '1547091152518258810',
+      't-rex': '1547091154850545794',
+      'trex': '1547091154850545794',
+      'gargoyle': '1548678018950758404',
+      'pure jellyfish': '1548678024512274564',
+      'mosasaurus': '1547091132276809768'
+    };
+
+    function discordUrl(id) {
+      if (!id) return '';
+      return 'https://cdn.discordapp.com/emojis/' + id + '.png?size=128&quality=lossless';
+    }
+
+    function wikiUrl(name, kind) {
+      var base = (name || '').trim();
+      var file = kind === 'egg' ? (base + ' Egg') : base.replace(/ Egg$/i, '');
+      file = file.replace(/\s+/g, '_');
+      return 'https://stealanegg.fandom.com/wiki/Special:FilePath/' + encodeURIComponent(file + '.png');
+    }
+
+    function rememberImage(name, url, kind) {
       if (!name || !url) return;
       var k = name.toLowerCase().replace(/\s+/g, ' ').trim();
-      if (imgCache[k] === url) return;
-      imgCache[k] = url;
+      var cur = imgCache[k];
+      if (typeof cur === 'string') cur = { egg: cur };
+      if (!cur || typeof cur !== 'object') cur = {};
+      if (kind === 'pet') cur.pet = url;
+      else cur.egg = url;
+      imgCache[k] = cur;
       saveImgCache(imgCache);
+    }
+
+    function cacheEntry(name) {
+      var k = (name || '').toLowerCase().replace(/\s+/g, ' ').trim();
+      var e = imgCache[k] || imgCache[k.replace(/ egg$/, '')] || {};
+      if (typeof e === 'string') return { egg: e, pet: '' };
+      return { egg: e.egg || '', pet: e.pet || '' };
+    }
+
+    function eggImage(name) {
+      if (!name) return '';
+      var c = cacheEntry(name);
+      if (c.egg) return c.egg;
+      var k = name.toLowerCase().replace(/\s+/g, ' ').trim();
+      var id = DISCORD_EGG[k] || DISCORD_EGG[k.replace(/ egg$/, '')];
+      if (id) return discordUrl(id);
+      return wikiUrl(name, 'egg');
     }
 
     function petImage(name) {
       if (!name) return '';
-      var k = name.toLowerCase().replace(/\s+/g, ' ').trim();
-      var k2 = k.replace(/ egg$/, '');
-      if (imgCache[k]) return imgCache[k];
-      if (imgCache[k2]) return imgCache[k2];
-      // Avatar de respaldo con el nombre (siempre visible)
-      return 'https://ui-avatars.com/api/?name=' + encodeURIComponent(name) +
+      var c = cacheEntry(name);
+      if (c.pet) return c.pet;
+      // wiki pet / mismo nombre sin "Egg"
+      return wikiUrl(name, 'pet');
+    }
+
+    function avatarUrl(name) {
+      return 'https://ui-avatars.com/api/?name=' + encodeURIComponent((name || 'E').substring(0, 2)) +
         '&background=2a2a35&color=e8e8ed&size=128&bold=true&format=png';
     }
 
-    function eggThumbHtml(name, extraClass) {
-      var src = petImage(name);
-      var cls = extraClass || 'filter-thumb';
-      return '<img class="' + cls + '" src="' + src + '" alt="" loading="lazy" onerror="this.src=\'https://ui-avatars.com/api/?name=' +
-        encodeURIComponent((name || 'E').charAt(0)) + '&background=2a2a35&color=e8e8ed&size=64\'">';
+    function thumbHtml(name, cls) {
+      cls = cls || 'filter-thumb';
+      var egg = eggImage(name) || '';
+      var pet = petImage(name) || '';
+      var av = avatarUrl(name);
+      var src = egg || pet || av;
+      return '<img class="' + cls + ' js-swap-thumb" data-egg="' + egg +
+        '" data-pet="' + pet + '" data-avatar="' + av +
+        '" data-phase="egg" src="' + src +
+        '" alt="" loading="lazy" onerror="window.__imgFallback&&window.__imgFallback(this)">';
+    }
+
+    window.__imgFallback = function(img) {
+      var egg = img.getAttribute('data-egg') || '';
+      var pet = img.getAttribute('data-pet') || '';
+      var av = img.getAttribute('data-avatar') || '';
+      var src = img.getAttribute('src') || '';
+      if (egg && src.indexOf(egg) !== -1 && pet) { img.src = pet; return; }
+      if (pet && src.indexOf(pet) !== -1 && av) { img.src = av; return; }
+      if (av && src.indexOf('ui-avatars') === -1) { img.src = av; return; }
+      img.style.opacity = '0.35';
+    };
+
+    function startThumbSwap() {
+      if (window._thumbSwap) clearInterval(window._thumbSwap);
+      window._thumbSwap = setInterval(function() {
+        document.querySelectorAll('.js-swap-thumb').forEach(function(img) {
+          var egg = img.getAttribute('data-egg') || '';
+          var pet = img.getAttribute('data-pet') || '';
+          if (!egg && !pet) return;
+          var phase = img.getAttribute('data-phase') || 'egg';
+          if (phase === 'egg' && pet) {
+            img.setAttribute('data-phase', 'pet');
+            img.src = pet;
+          } else if (egg) {
+            img.setAttribute('data-phase', 'egg');
+            img.src = egg;
+          }
+        });
+      }, 3000);
     }
 
 
@@ -413,8 +493,14 @@
           var name = randomPetFromCat(key);
           var img = el.querySelector('img');
           if (img && name) {
-            img.src = petImage(name);
+            var egg = eggImage(name) || '';
+            var pet = petImage(name) || '';
             img.alt = name;
+            img.setAttribute('data-egg', egg);
+            img.setAttribute('data-pet', pet);
+            img.setAttribute('data-phase', 'egg');
+            img.classList.add('js-swap-thumb');
+            img.src = egg || pet || avatarUrl(name);
           }
         });
       }, 5000);
@@ -436,7 +522,7 @@
         var eggsHtml = cat.eggs.map(function(name) {
           var on = settings.eggs[name.toLowerCase()] !== false;
           return '<div class="egg-filter"><div class="egg-filter-left">' +
-            eggThumbHtml(name) +
+            thumbHtml(name) +
             '<span class="egg-filter-name">' + name + '</span></div>' +
             '<button class="toggle-pill ' + (on ? 'on' : 'off') +
             '" data-egg-btn="' + name + '">' + (on ? 'On' : 'Off') + '</button></div>';
@@ -446,7 +532,7 @@
         return '<div class="cat" data-cat="' + key + '">' +
           '<div class="cat-header" data-cat-toggle="' + key + '">' +
           '<span class="cat-eggs-preview" data-cat-preview="' + key + '">' +
-          '<img src="' + petImage(previewName) + '" alt="' + previewName + '"></span>' +
+          '<img class="js-swap-thumb" data-egg="' + (eggImage(previewName)||'') + '" data-pet="' + (petImage(previewName)||'') + '" data-phase="egg" src="' + (eggImage(previewName)||petImage(previewName)||avatarUrl(previewName)) + '" alt="' + previewName + '"></span>' +
           '<span class="cat-name">' + cat.label + '</span>' +
           '<button class="toggle-pill ' + state + '" data-cat-btn="' + key + '">' + stateLabel + '</button>' +
           '<span class="cat-arrow">▶</span></div>' +
@@ -473,9 +559,10 @@
         btn.addEventListener('click', function(e) {
           e.stopPropagation();
           toggleEgg(btn.getAttribute('data-egg-btn'));
-          startCatImageRotation();
-    });
+        });
       });
+      startCatImageRotation();
+      startThumbSwap();
     }
 
     btnNotif.addEventListener('click', async function() {
@@ -578,7 +665,7 @@
       eggList.innerHTML = list.map(function(egg, i) {
         return '<div class="egg-item"><div class="egg-item-header">' +
           '<span class="egg-rank">#' + (i + 1) + '</span>' +
-          (function(){ if(egg.imageUrl) rememberImage(egg.name, egg.imageUrl); var src = egg.imageUrl || petImage(egg.name); return '<img class="egg-thumb" src="' + src + '" alt="" loading="lazy" onerror="this.onerror=null;this.src=\'' + petImage(egg.name || 'E') + '\'">'; })() +
+          (function(){ if(egg.imageUrl) rememberImage(egg.name, egg.imageUrl, 'egg'); if (egg.imageUrl) rememberImage(egg.name, egg.imageUrl, 'egg'); var src = egg.imageUrl || eggImage(egg.name) || petImage(egg.name); return '<img class="egg-thumb" src="' + src + '" alt="" loading="lazy" onerror="this.onerror=null;this.src=\'' + petImage(egg.name || 'E') + '\'">'; })() +
           '<div class="egg-main"><div class="egg-name">' + (egg.name || 'Egg') + '</div>' +
           '<div class="egg-money">💰 ' + (egg.moneyText || formatMoney(egg.moneyValue || 0) + '/s') + '</div>' +
           '<div class="egg-ago">⏱ ' + timeAgo(egg.timestamp) + ' aparecio</div></div>' +
@@ -643,7 +730,7 @@
 
       petsEl.innerHTML = rift.pets.map(function(pet) {
         var img = pet.imageUrl || petImage(pet.name);
-        if (pet.imageUrl) rememberImage(pet.name, pet.imageUrl);
+        if (pet.imageUrl) rememberImage(pet.name, pet.imageUrl, 'pet');
         return '<div class="rift-pet">' +
           '<img src="' + img + '" alt="" onerror="this.style.opacity=0.3">' +
           '<span class="rift-pet-name">' + (pet.name || '?') + '</span>' +
@@ -685,7 +772,7 @@
 
         if (Array.isArray(data.eggs)) {
           data.eggs.forEach(function(egg) {
-            if (egg.imageUrl) rememberImage(egg.name, egg.imageUrl);
+            if (egg.imageUrl) rememberImage(egg.name, egg.imageUrl, 'egg');
           });
           saveSession(data.eggs);
           renderSession();
