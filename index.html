@@ -75,7 +75,23 @@
       cursor: pointer; user-select: none;
     }
     .cat-header:active { background: #1a1a24; }
-    .cat-eggs-preview { font-size: 0.85rem; letter-spacing: -1px; flex-shrink: 0; }
+    .cat-eggs-preview {
+      width: 36px; height: 36px; flex-shrink: 0;
+      border-radius: 8px; overflow: hidden;
+      background: #1a1a22; border: 1px solid var(--border);
+    }
+    .cat-eggs-preview img {
+      width: 100%; height: 100%; object-fit: contain;
+      display: block;
+    }
+    .filter-thumb {
+      width: 28px; height: 28px; border-radius: 6px;
+      object-fit: contain; background: #1a1a22;
+      border: 1px solid var(--border); flex-shrink: 0;
+    }
+    .egg-filter-left {
+      display: flex; align-items: center; gap: 8px; min-width: 0;
+    }
     .cat-name { flex: 1; font-weight: 600; font-size: 0.92rem; }
     .cat-arrow { color: var(--muted); font-size: 0.85rem; transition: transform 0.2s; }
     .cat.open .cat-arrow { transform: rotate(90deg); }
@@ -229,6 +245,45 @@
       }
     };
 
+
+    // Cache de imagenes por nombre (se llena con lo que manda el bot)
+    const IMG_CACHE_KEY = 'egg_img_cache_v1';
+    function loadImgCache() {
+      try { return JSON.parse(localStorage.getItem(IMG_CACHE_KEY) || '{}'); }
+      catch (e) { return {}; }
+    }
+    function saveImgCache(c) {
+      localStorage.setItem(IMG_CACHE_KEY, JSON.stringify(c));
+    }
+    let imgCache = loadImgCache();
+
+    function rememberImage(name, url) {
+      if (!name || !url) return;
+      var k = name.toLowerCase().replace(/\s+/g, ' ').trim();
+      if (imgCache[k] === url) return;
+      imgCache[k] = url;
+      saveImgCache(imgCache);
+    }
+
+    function petImage(name) {
+      if (!name) return '';
+      var k = name.toLowerCase().replace(/\s+/g, ' ').trim();
+      var k2 = k.replace(/ egg$/, '');
+      if (imgCache[k]) return imgCache[k];
+      if (imgCache[k2]) return imgCache[k2];
+      // Avatar de respaldo con el nombre (siempre visible)
+      return 'https://ui-avatars.com/api/?name=' + encodeURIComponent(name) +
+        '&background=2a2a35&color=e8e8ed&size=128&bold=true&format=png';
+    }
+
+    function eggThumbHtml(name, extraClass) {
+      var src = petImage(name);
+      var cls = extraClass || 'filter-thumb';
+      return '<img class="' + cls + '" src="' + src + '" alt="" loading="lazy" onerror="this.src=\'https://ui-avatars.com/api/?name=' +
+        encodeURIComponent((name || 'E').charAt(0)) + '&background=2a2a35&color=e8e8ed&size=64\'">';
+    }
+
+
     const SESSION_KEY = 'egg_session_v1';
     const SETTINGS_KEY = 'egg_settings_v1';
     const JSON_URL = 'https://api.jsonbin.io/v3/b/6ab3086cac6210605aeaff1d/latest';
@@ -317,9 +372,25 @@
       renderFilters();
     }
 
-    function previewEmojis(key) {
-      var n = Math.min(CATALOG[key].eggs.length, 5);
-      return '🥚'.repeat(n);
+    function randomPetFromCat(key) {
+      var list = CATALOG[key].eggs;
+      if (!list || !list.length) return '';
+      return list[Math.floor(Math.random() * list.length)];
+    }
+
+    function startCatImageRotation() {
+      if (window._catRot) clearInterval(window._catRot);
+      window._catRot = setInterval(function() {
+        document.querySelectorAll('[data-cat-preview]').forEach(function(el) {
+          var key = el.getAttribute('data-cat-preview');
+          var name = randomPetFromCat(key);
+          var img = el.querySelector('img');
+          if (img && name) {
+            img.src = petImage(name);
+            img.alt = name;
+          }
+        });
+      }, 5000);
     }
 
     function renderFilters() {
@@ -337,14 +408,18 @@
         var stateLabel = state === 'on' ? 'On' : state === 'off' ? 'Off' : 'Custom';
         var eggsHtml = cat.eggs.map(function(name) {
           var on = settings.eggs[name.toLowerCase()] !== false;
-          return '<div class="egg-filter"><span class="egg-filter-name">🥚 ' + name +
-            '</span><button class="toggle-pill ' + (on ? 'on' : 'off') +
+          return '<div class="egg-filter"><div class="egg-filter-left">' +
+            eggThumbHtml(name) +
+            '<span class="egg-filter-name">' + name + '</span></div>' +
+            '<button class="toggle-pill ' + (on ? 'on' : 'off') +
             '" data-egg-btn="' + name + '">' + (on ? 'On' : 'Off') + '</button></div>';
         }).join('');
 
+        var previewName = randomPetFromCat(key);
         return '<div class="cat" data-cat="' + key + '">' +
           '<div class="cat-header" data-cat-toggle="' + key + '">' +
-          '<span class="cat-eggs-preview">' + previewEmojis(key) + '</span>' +
+          '<span class="cat-eggs-preview" data-cat-preview="' + key + '">' +
+          '<img src="' + petImage(previewName) + '" alt="' + previewName + '"></span>' +
           '<span class="cat-name">' + cat.label + '</span>' +
           '<button class="toggle-pill ' + state + '" data-cat-btn="' + key + '">' + stateLabel + '</button>' +
           '<span class="cat-arrow">▶</span></div>' +
@@ -371,7 +446,8 @@
         btn.addEventListener('click', function(e) {
           e.stopPropagation();
           toggleEgg(btn.getAttribute('data-egg-btn'));
-        });
+          startCatImageRotation();
+    });
       });
     }
 
@@ -475,7 +551,7 @@
       eggList.innerHTML = list.map(function(egg, i) {
         return '<div class="egg-item"><div class="egg-item-header">' +
           '<span class="egg-rank">#' + (i + 1) + '</span>' +
-          (egg.imageUrl ? '<img class="egg-thumb" src="' + egg.imageUrl + '" alt="" loading="lazy" onerror="this.style.display=\'none\'">' : '') +
+          (function(){ if(egg.imageUrl) rememberImage(egg.name, egg.imageUrl); var src = egg.imageUrl || petImage(egg.name); return '<img class="egg-thumb" src="' + src + '" alt="" loading="lazy" onerror="this.onerror=null;this.src=\'' + petImage(egg.name || 'E') + '\'">'; })() +
           '<div class="egg-main"><div class="egg-name">' + (egg.name || 'Egg') + '</div>' +
           '<div class="egg-money">💰 ' + (egg.moneyText || formatMoney(egg.moneyValue || 0) + '/s') + '</div>' +
           '<div class="egg-ago">⏱ ' + timeAgo(egg.timestamp) + ' aparecio</div></div>' +
@@ -539,6 +615,9 @@
           });
         }
 
+        data.eggs.forEach(function(egg) {
+          if (egg.imageUrl) rememberImage(egg.name, egg.imageUrl);
+        });
         saveSession(data.eggs);
         renderSession();
       } catch(e) {}
