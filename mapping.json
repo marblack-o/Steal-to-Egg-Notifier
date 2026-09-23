@@ -1,0 +1,206 @@
+{
+  "king snake": {
+    "egg": "images/king_snake_egg.png",
+    "pet": "images/king_snake_pet.png"
+  },
+  "yeti": {
+    "egg": "images/yeti_egg.png",
+    "pet": "images/yeti_pet.png"
+  },
+  "cerberus": {
+    "egg": "images/cerberus_egg.png",
+    "pet": "images/cerberus_pet.png"
+  },
+  "kraken": {
+    "egg": "images/kraken_egg.png",
+    "pet": "images/kraken_pet.png"
+  },
+  "t-rex": {
+    "egg": "images/t_rex_egg.png",
+    "pet": "images/t_rex_pet.png"
+  },
+  "trex": {
+    "egg": "images/trex_egg.png",
+    "pet": "images/trex_pet.png"
+  },
+  "tralaledon": {
+    "egg": "images/tralaledon_egg.png",
+    "pet": "images/tralaledon_pet.png"
+  },
+  "cosmic skeleton boss": {
+    "egg": "images/cosmic_skeleton_boss_egg.png",
+    "pet": "images/cosmic_skeleton_boss_pet.png"
+  },
+  "cosmic dragon": {
+    "egg": "images/cosmic_dragon_egg.png",
+    "pet": "images/cosmic_dragon_pet.png"
+  },
+  "stag": {
+    "egg": "images/stag_egg.png",
+    "pet": "images/stag_pet.png"
+  },
+  "mutant shark": {
+    "egg": "images/mutant_shark_egg.png",
+    "pet": "images/mutant_shark_pet.png"
+  },
+  "gargoyle": {
+    "egg": "images/gargoyle_egg.png",
+    "pet": "images/gargoyle_pet.png"
+  },
+  "pure jellyfish": {
+    "egg": "images/pure_jellyfish_egg.png",
+    "pet": "images/pure_jellyfish_pet.png"
+  },
+  "centaur": {
+    "egg": "images/centaur_egg.png",
+    "pet": "images/centaur_pet.png"
+  },
+  "razorfang": {
+    "egg": "images/razorfang_egg.png",
+    "pet": "images/razorfang_pet.png"
+  },
+  "electric eel": {
+    "egg": "images/electric_eel_egg.png",
+    "pet": "images/electric_eel_pet.png"
+  },
+  "luminous spike": {
+    "egg": "images/luminous_spike_egg.png",
+    "pet": "images/luminous_spike_pet.png"
+  },
+  "luminous spirit manta": {
+    "egg": "images/luminous_spirit_manta_egg.png",
+    "pet": "images/luminous_spirit_manta_pet.png"
+  },
+  "luminous abyss shark": {
+    "egg": "images/luminous_abyss_shark_egg.png",
+    "pet": "images/luminous_abyss_shark_pet.png"
+  },
+  "abyss overlord": {
+    "egg": "images/abyss_overlord_egg.png",
+    "pet": "images/abyss_overlord_pet.png"
+  },
+  "wendigo": {
+    "egg": "images/wendigo_egg.png",
+    "pet": "images/wendigo_pet.png"
+  },
+  "mawbreaker": {
+    "egg": "images/mawbreaker_egg.png",
+    "pet": "images/mawbreaker_pet.png"
+  },
+  "shardwing": {
+    "egg": "images/shardwing_egg.png",
+    "pet": "images/shardwing_pet.png"
+  },
+  "ice dragon": {
+    "egg": "images/ice_dragon_egg.png",
+    "pet": "images/ice_dragon_pet.png"
+  },
+  "phoenix": {
+    "egg": "images/phoenix_egg.png",
+    "pet": "images/phoenix_pet.png"
+  },
+  "lava dragon": {
+    "egg": "images/lava_dragon_egg.png",
+    "pet": "images/lava_dragon_pet.png"
+  },
+  "el maja": {
+    "egg": "images/el_maja_egg.png",
+    "pet": "images/el_maja_pet.png"
+  },
+  "mosasaurus": {
+    "egg": "images/mosasaurus_egg.png",
+    "pet": "images/mosasaurus_pet.png"
+  },
+  "eternal lunar dragon": {
+    "egg": "images/eternal_lunar_dragon_egg.png",
+    "pet": "images/eternal_lunar_dragon_pet.png"
+  },
+  "oni tiger": {
+    "egg": "images/oni_tiger_egg.png",
+    "pet": "images/oni_tiger_pet.png"
+  },
+  "gorilla king": {
+    "egg": "images/gorilla_king_egg.png",
+    "pet": "images/gorilla_king_pet.png"
+  },
+  "pegasus": {
+    "egg": "images/pegasus_egg.png",
+    "pet": "images/pegasus_pet.png"
+  },
+  "skeleton horse": {
+    "egg": "images/skeleton_horse_egg.png",
+    "pet": "images/skeleton_horse_pet.png"
+  },
+  "equinox": {
+    "egg": "images/equinox_egg.png",
+    "pet": "images/equinox_pet.png"
+  },
+  "terra snapper": {
+    "egg": "images/terra_snapper_egg.png",
+    "pet": "images/terra_snapper_pet.png"
+  },
+  "luminous electric eel": {
+    "egg": "images/luminous_electric_eel_egg.png",
+    "pet": "images/luminous_electric_eel_pet.png"
+  },
+  "luminous terra snapper": {
+    "egg": "images/luminous_terra_snapper_egg.png",
+    "pet": "images/luminous_terra_snapper_pet.png"
+  },
+  "world eater": {
+    "egg": "images/world_eater_egg.png",
+    "pet": "images/world_eater_pet.png"
+  },
+  "shattered drake": {
+    "egg": "images/shattered_drake_egg.png",
+    "pet": "images/shattered_drake_pet.png"
+  },
+  "void serpent": {
+    "egg": "images/void_serpent_egg.png",
+    "pet": "images/void_serpent_pet.png"
+  },
+  "unicorn": {
+    "egg": "images/unicorn_egg.png",
+    "pet": "images/unicorn_pet.png"
+  },
+  "kitsune": {
+    "egg": "images/kitsune_egg.png",
+    "pet": "images/kitsune_pet.png"
+  },
+  "nightflame": {
+    "egg": "images/nightflame_egg.png",
+    "pet": "images/nightflame_pet.png"
+  },
+  "archangel": {
+    "egg": "images/archangel_egg.png",
+    "pet": "images/archangel_pet.png"
+  },
+  "world burner": {
+    "egg": "images/world_burner_egg.png",
+    "pet": "images/world_burner_pet.png"
+  },
+  "aetheron": {
+    "egg": "images/aetheron_egg.png",
+    "pet": "images/aetheron_pet.png"
+  },
+  "cthulhu": {
+    "egg": "images/cthulhu_egg.png",
+    "pet": "images/cthulhu_pet.png"
+  },
+  "luminous cthulhu": {
+    "egg": "images/luminous_cthulhu_egg.png",
+    "pet": "images/luminous_cthulhu_pet.png"
+  },
+  "shattered colossus": {
+    "egg": "images/shattered_colossus_egg.png",
+    "pet": "images/shattered_colossus_pet.png"
+  },
+  "sharding": {
+    "egg": "",
+    "pet": ""
+  },
+  "shattered ram": {
+    "egg": "images/shattered_ram_egg.png",
+    "pet": "images/shattered_ram_pet.png"
+  }
+}
