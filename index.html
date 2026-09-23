@@ -225,7 +225,7 @@
         <div class="egg-empty">Esperando huevos OP...</div>
       </div>
     </div>
-    <footer>Actualizacion automatica cada 20s (solo pestaña abierta) · Datos desde el bot</footer>
+    <footer>Actualizacion automatica Firebase · cada 8s · Datos desde el bot</footer>
   </div>
 
   <div class="overlay" id="overlay"></div>
@@ -313,7 +313,7 @@
 
     const SESSION_KEY = 'egg_session_v1';
     const SETTINGS_KEY = 'egg_settings_v1';
-    const JSON_URL = 'https://api.jsonbin.io/v3/b/6ab3086cac6210605aeaff1d/latest';
+    const JSON_URL = 'https://steal-to-egg-notifier-default-rtdb.firebaseio.com/latest.json';
 
     const burger = document.getElementById('burger');
     const drawer = document.getElementById('drawer');
@@ -700,7 +700,7 @@
     renderFilters();
     renderSession();
     // Ahorro de JSONBin: 20s y solo con pestaña visible
-    var pollMs = 20000;
+    var pollMs = 8000; // Firebase aguanta mas que JSONBin
     function schedulePoll() {
       if (window._eggPoll) clearInterval(window._eggPoll);
       window._eggPoll = setInterval(function() {
