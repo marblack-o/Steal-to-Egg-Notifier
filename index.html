@@ -284,71 +284,63 @@
     }
     let imgCache = loadImgCache();
 
-    // Pack fijo de emojis Discord (huevo / mascota)
-    // Formato: 'nombre': { egg: 'ID', pet: 'ID' }  — pet puede ser igual al egg si solo hay uno
+    // Pack de imagenes desde stealanegg.fandom.com (huevo + mascota)
+    // URLs estaticas de static.wikia.nocookie.net — cargan sin esperar al bot
     const IMAGE_PACK = {
-      // ===== SECRETO =====
-      'king snake': { egg: null, pet: null },
-      'yeti': { egg: null, pet: null },
-      'cerberus': { egg: null, pet: null },
-      'kraken': { egg: null, pet: null },
-      'trex': { egg: '1547091154850545794', pet: '1547091154850545794' },
-      't-rex': { egg: '1547091154850545794', pet: '1547091154850545794' },
-      'tralaledon': { egg: '1547091152518258810', pet: '1547091152518258810' },
-      'cosmic skeleton boss': { egg: null, pet: null },
-      'cosmic dragon': { egg: null, pet: null },
-      'stag': { egg: null, pet: null },
-      'mutant shark': { egg: null, pet: null },
-      'gargoyle': { egg: '1548678018950758404', pet: '1548678018950758404' },
-      'pure jellyfish': { egg: '1548678024512274564', pet: '1548678024512274564' },
-      'centaur': { egg: null, pet: null },
-      'razorfang': { egg: null, pet: null },
-      'electric eel': { egg: null, pet: null },
-      'luminous spike': { egg: null, pet: null },
-      'luminous spirit manta': { egg: null, pet: null },
-      'luminous abyss shark': { egg: null, pet: null },
-      'abyss overlord': { egg: null, pet: null },
-      'wendigo': { egg: null, pet: null },
-      'mawbreaker': { egg: null, pet: null },
-      'shardwing': { egg: '1546007531711635486', pet: '1546007531711635486' },
-      // ===== ETERNO =====
-      'ice dragon': { egg: null, pet: null },
-      'phoenix': { egg: null, pet: null },
-      'lava dragon': { egg: null, pet: null },
-      'el maja': { egg: null, pet: null },
-      'mosasaurus': { egg: '1547091132276809768', pet: '1547091132276809768' },
-      'eternal lunar dragon': { egg: null, pet: null },
-      'oni tiger': { egg: null, pet: null },
-      'gorilla king': { egg: null, pet: null },
-      'pegasus': { egg: null, pet: null },
-      'skeleton horse': { egg: null, pet: null },
-      'equinox': { egg: null, pet: null },
-      'terra snapper': { egg: null, pet: null },
-      'luminous electric eel': { egg: null, pet: null },
-      'luminous terra snapper': { egg: null, pet: null },
-      'world eater': { egg: null, pet: null },
-      'shattered drake': { egg: '1546007536078028890', pet: '1546007536078028890' },
-      'void serpent': { egg: null, pet: null },
-      // ===== DIVINO =====
-      'unicorn': { egg: null, pet: null },
-      'kitsune': { egg: null, pet: null },
-      'nightflame': { egg: null, pet: null },
-      'archangel': { egg: null, pet: null },
-      'world burner': { egg: null, pet: null },
-      'aetheron': { egg: null, pet: null },
-      'cthulhu': { egg: null, pet: null },
-      'luminous cthulhu': { egg: null, pet: null },
-      'shattered colossus': { egg: '1546007534131744899', pet: '1546007534131744899' },
-      // Rift extras
-      'sharding': { egg: '1546007529375666256', pet: '1546007529375666256' },
-      'shattered ram': { egg: '1546007538850340985', pet: '1546007538850340985' }
+      'abyss overlord': { egg: 'https://static.wikia.nocookie.net/stealanegg/images/6/60/Abyss_Overlord.png/revision/latest?cb=20260907221609', pet: 'https://static.wikia.nocookie.net/stealanegg/images/6/60/Abyss_Overlord.png/revision/latest?cb=20260907221609' },
+      'aetheron': { egg: 'https://static.wikia.nocookie.net/stealanegg/images/9/96/Aetheron_Egg.png/revision/latest?cb=20260913045513', pet: 'https://static.wikia.nocookie.net/stealanegg/images/e/e7/Aetheron.png/revision/latest?cb=20260913045520' },
+      'archangel': { egg: 'https://static.wikia.nocookie.net/stealanegg/images/a/a9/ArchAngel_Egg.png/revision/latest?cb=20260912173157', pet: 'https://static.wikia.nocookie.net/stealanegg/images/6/60/ArchAngel.png/revision/latest?cb=20260912164639' },
+      'centaur': { egg: 'https://static.wikia.nocookie.net/stealanegg/images/7/7d/Centaur_Egg.png/revision/latest?cb=20260912173212', pet: 'https://static.wikia.nocookie.net/stealanegg/images/b/bc/Centaur.png/revision/latest?cb=20260912164622' },
+      'cerberus': { egg: 'https://static.wikia.nocookie.net/stealanegg/images/4/44/Cerberus_Egg.png/revision/latest?cb=20260902163812', pet: 'https://static.wikia.nocookie.net/stealanegg/images/4/45/Cerberus.png/revision/latest?cb=20260901194510' },
+      'cosmic dragon': { egg: 'https://static.wikia.nocookie.net/stealanegg/images/4/4c/Cosmic_Dragon_Egg.png/revision/latest?cb=20260902164144', pet: 'https://static.wikia.nocookie.net/stealanegg/images/3/3e/Cosmic_Dragon.png/revision/latest?cb=20260903140720' },
+      'cosmic skeleton boss': { egg: 'https://static.wikia.nocookie.net/stealanegg/images/5/58/Cosmic_Skeleton_Boss_Egg.png/revision/latest?cb=20260902164137', pet: 'https://static.wikia.nocookie.net/stealanegg/images/9/97/Cosmic_Skeleton_Boss.png/revision/latest?cb=20260904110709' },
+      'cthulhu': { egg: 'https://static.wikia.nocookie.net/stealanegg/images/9/9e/Cthulhu.png/revision/latest?cb=20260912182814', pet: 'https://static.wikia.nocookie.net/stealanegg/images/9/9e/Cthulhu.png/revision/latest?cb=20260912182814' },
+      'el maja': { egg: 'https://static.wikia.nocookie.net/stealanegg/images/6/6a/El_Maja_Egg.png/revision/latest?cb=20260902163938', pet: 'https://static.wikia.nocookie.net/stealanegg/images/9/9b/El_Maja.png/revision/latest?cb=20260908051427' },
+      'electric eel': { egg: 'https://static.wikia.nocookie.net/stealanegg/images/0/00/Electric_Eel.png/revision/latest?cb=20260912182830', pet: 'https://static.wikia.nocookie.net/stealanegg/images/0/00/Electric_Eel.png/revision/latest?cb=20260912182830' },
+      'equinox': { egg: 'https://static.wikia.nocookie.net/stealanegg/images/b/be/Equinox_Egg.png/revision/latest?cb=20260913045528', pet: 'https://static.wikia.nocookie.net/stealanegg/images/e/e7/Equinox.png/revision/latest?cb=20260913045536' },
+      'eternal lunar dragon': { egg: 'https://static.wikia.nocookie.net/stealanegg/images/6/6e/Eternal_Lunar_Dragon_Egg.png/revision/latest?cb=20260902164152', pet: 'https://static.wikia.nocookie.net/stealanegg/images/0/07/Eternal_Lunar_Dragon.png/revision/latest?cb=20260904025034' },
+      'gargoyle': { egg: 'https://static.wikia.nocookie.net/stealanegg/images/d/da/Gargoyle_Egg.png/revision/latest?cb=20260912173113', pet: 'https://static.wikia.nocookie.net/stealanegg/images/4/44/Gargoyle.png/revision/latest?cb=20260912164712' },
+      'gorilla king': { egg: 'https://static.wikia.nocookie.net/stealanegg/images/5/51/Gorilla_King_Egg.png/revision/latest?cb=20260908023701', pet: 'https://static.wikia.nocookie.net/stealanegg/images/b/bc/Gorilla_King.png/revision/latest?cb=20260901190751' },
+      'ice dragon': { egg: 'https://static.wikia.nocookie.net/stealanegg/images/2/2c/Ice_Dragon_Egg.png/revision/latest?cb=20260902163726', pet: 'https://static.wikia.nocookie.net/stealanegg/images/b/bb/Ice_Dragon.png/revision/latest?cb=20260904110044' },
+      'king snake': { egg: 'https://static.wikia.nocookie.net/stealanegg/images/9/92/King_Snake_Egg.png/revision/latest?cb=20260902163528', pet: 'https://static.wikia.nocookie.net/stealanegg/images/f/fc/King_Snake.png/revision/latest?cb=20260901191831' },
+      'kitsune': { egg: 'https://static.wikia.nocookie.net/stealanegg/images/3/3d/Kitsune_Egg.png/revision/latest?cb=20260908022827', pet: 'https://static.wikia.nocookie.net/stealanegg/images/0/04/Kitsune.png/revision/latest?cb=20260903135644' },
+      'kraken': { egg: 'https://static.wikia.nocookie.net/stealanegg/images/8/8b/Kraken_Egg.png/revision/latest?cb=20260902163929', pet: 'https://static.wikia.nocookie.net/stealanegg/images/d/d3/Kraken.png/revision/latest?cb=20260904110057' },
+      'lava dragon': { egg: 'https://static.wikia.nocookie.net/stealanegg/images/4/41/Lava_Dragon_Egg.png/revision/latest?cb=20260902163828', pet: 'https://static.wikia.nocookie.net/stealanegg/images/7/77/Lava_Dragon.png/revision/latest?cb=20260904025223' },
+      'luminous abyss shark': { egg: 'https://static.wikia.nocookie.net/stealanegg/images/2/20/Luminous_Abyss_Shark.png/revision/latest?cb=20260912182750', pet: 'https://static.wikia.nocookie.net/stealanegg/images/2/20/Luminous_Abyss_Shark.png/revision/latest?cb=20260912182750' },
+      'luminous cthulhu': { egg: 'https://static.wikia.nocookie.net/stealanegg/images/5/54/Luminous_Cthulhu.png/revision/latest?cb=20260912182725', pet: 'https://static.wikia.nocookie.net/stealanegg/images/5/54/Luminous_Cthulhu.png/revision/latest?cb=20260912182725' },
+      'luminous electric eel': { egg: 'https://static.wikia.nocookie.net/stealanegg/images/c/c3/Luminous_Electric_Eel.png/revision/latest?cb=20260912182742', pet: 'https://static.wikia.nocookie.net/stealanegg/images/c/c3/Luminous_Electric_Eel.png/revision/latest?cb=20260912182742' },
+      'luminous spike': { egg: 'https://static.wikia.nocookie.net/stealanegg/images/1/13/Luminous_Spike.png/revision/latest?cb=20260912182805', pet: 'https://static.wikia.nocookie.net/stealanegg/images/1/13/Luminous_Spike.png/revision/latest?cb=20260912182805' },
+      'luminous spirit manta': { egg: 'https://static.wikia.nocookie.net/stealanegg/images/b/bb/Luminous_Spirit_Manta.png/revision/latest?cb=20260912182757', pet: 'https://static.wikia.nocookie.net/stealanegg/images/b/bb/Luminous_Spirit_Manta.png/revision/latest?cb=20260912182757' },
+      'luminous terra snapper': { egg: 'https://static.wikia.nocookie.net/stealanegg/images/0/0b/Luminous_Terra_Snapper.png/revision/latest?cb=20260912182734', pet: 'https://static.wikia.nocookie.net/stealanegg/images/0/0b/Luminous_Terra_Snapper.png/revision/latest?cb=20260912182734' },
+      'mawbreaker': { egg: 'https://static.wikia.nocookie.net/stealanegg/images/4/43/Mawbreaker.png/revision/latest?cb=20260907221007', pet: 'https://static.wikia.nocookie.net/stealanegg/images/4/43/Mawbreaker.png/revision/latest?cb=20260907221007' },
+      'mosasaurus': { egg: 'https://static.wikia.nocookie.net/stealanegg/images/e/ee/Mosasaurus_Egg.png/revision/latest?cb=20260902164044', pet: 'https://static.wikia.nocookie.net/stealanegg/images/b/b0/Mosasaurus.png/revision/latest?cb=20260904025233' },
+      'mutant shark': { egg: 'https://static.wikia.nocookie.net/stealanegg/images/8/8c/Mutant_Shark_Egg.png/revision/latest?cb=20260908022852', pet: 'https://static.wikia.nocookie.net/stealanegg/images/e/e5/Mutant_Shark.png/revision/latest?cb=20260901190802' },
+      'nightflame': { egg: 'https://static.wikia.nocookie.net/stealanegg/images/b/b9/Nightflame_Egg.png/revision/latest?cb=20260908023646', pet: 'https://static.wikia.nocookie.net/stealanegg/images/a/aa/Nightflame.png/revision/latest?cb=20260901190742' },
+      'oni tiger': { egg: 'https://static.wikia.nocookie.net/stealanegg/images/d/d6/Oni_Tiger_Egg.png/revision/latest?cb=20260908114553', pet: 'https://static.wikia.nocookie.net/stealanegg/images/5/55/Oni_Tiger.png/revision/latest?cb=20260903135620' },
+      'pegasus': { egg: 'https://static.wikia.nocookie.net/stealanegg/images/e/e9/Pegasus_Egg.png/revision/latest?cb=20260912173205', pet: 'https://static.wikia.nocookie.net/stealanegg/images/4/4a/Pegasus.png/revision/latest?cb=20260912164629' },
+      'phoenix': { egg: 'https://static.wikia.nocookie.net/stealanegg/images/c/cd/Phoenix_Egg.png/revision/latest?cb=20260902163822', pet: 'https://static.wikia.nocookie.net/stealanegg/images/c/c1/Phoenix.png/revision/latest?cb=20260904025201' },
+      'pure jellyfish': { egg: 'https://static.wikia.nocookie.net/stealanegg/images/6/6a/Pure_Jellyfish_Egg.png/revision/latest?cb=20260912173222', pet: 'https://static.wikia.nocookie.net/stealanegg/images/7/7e/Pure_Jellyfish.png/revision/latest?cb=20260912164614' },
+      'razorfang': { egg: 'https://static.wikia.nocookie.net/stealanegg/images/3/3d/RazorFang_Egg.png/revision/latest?cb=20260912173103', pet: 'https://static.wikia.nocookie.net/stealanegg/images/c/c2/RazorFang.png/revision/latest?cb=20260912164720' },
+      'sharding': { egg: '', pet: '' },
+      'shardwing': { egg: 'https://static.wikia.nocookie.net/stealanegg/images/5/56/Shardwing.png/revision/latest?cb=20260907221101', pet: 'https://static.wikia.nocookie.net/stealanegg/images/5/56/Shardwing.png/revision/latest?cb=20260907221101' },
+      'shattered colossus': { egg: 'https://static.wikia.nocookie.net/stealanegg/images/a/a4/Shattered_Colossus.png/revision/latest?cb=20260907221329', pet: 'https://static.wikia.nocookie.net/stealanegg/images/a/a4/Shattered_Colossus.png/revision/latest?cb=20260907221329' },
+      'shattered drake': { egg: 'https://static.wikia.nocookie.net/stealanegg/images/c/ce/Shattered_Drake.png/revision/latest?cb=20260907221122', pet: 'https://static.wikia.nocookie.net/stealanegg/images/c/ce/Shattered_Drake.png/revision/latest?cb=20260907221122' },
+      'shattered ram': { egg: 'https://static.wikia.nocookie.net/stealanegg/images/4/44/Shattered_Ram.png/revision/latest?cb=20260907221048', pet: 'https://static.wikia.nocookie.net/stealanegg/images/4/44/Shattered_Ram.png/revision/latest?cb=20260907221048' },
+      'skeleton horse': { egg: 'https://static.wikia.nocookie.net/stealanegg/images/4/49/Skeleton_Horse_Egg.png/revision/latest?cb=20260912173044', pet: 'https://static.wikia.nocookie.net/stealanegg/images/d/de/Skeleton_Horse.png/revision/latest?cb=20260912164727' },
+      'stag': { egg: 'https://static.wikia.nocookie.net/stealanegg/images/2/2f/Stag_Egg.png/revision/latest?cb=20260904031758', pet: 'https://static.wikia.nocookie.net/stealanegg/images/1/10/Stag.png/revision/latest?cb=20260903135633' },
+      't-rex': { egg: 'https://static.wikia.nocookie.net/stealanegg/images/6/63/T-Rex_Egg.png/revision/latest?cb=20260902190920', pet: 'https://static.wikia.nocookie.net/stealanegg/images/f/f8/T-Rex.png/revision/latest?cb=20260903161834' },
+      'terra snapper': { egg: 'https://static.wikia.nocookie.net/stealanegg/images/1/1b/Terra_Snapper.png/revision/latest?cb=20260912182822', pet: 'https://static.wikia.nocookie.net/stealanegg/images/1/1b/Terra_Snapper.png/revision/latest?cb=20260912182822' },
+      'tralaledon': { egg: 'https://static.wikia.nocookie.net/stealanegg/images/4/4a/Tralaledon_Egg.png/revision/latest?cb=20260902164034', pet: 'https://static.wikia.nocookie.net/stealanegg/images/3/34/Tralaledon.png/revision/latest?cb=20260901194501' },
+      'trex': { egg: 'https://static.wikia.nocookie.net/stealanegg/images/b/bc/TRex_Egg.png/revision/latest?cb=20260902164023', pet: 'https://static.wikia.nocookie.net/stealanegg/images/b/bc/TRex_Egg.png/revision/latest?cb=20260902164023' },
+      'unicorn': { egg: 'https://static.wikia.nocookie.net/stealanegg/images/4/4f/Unicorn_Egg.png/revision/latest?cb=20260902164200', pet: 'https://static.wikia.nocookie.net/stealanegg/images/7/7e/Unicorn.png/revision/latest?cb=20260901185215' },
+      'void serpent': { egg: 'https://static.wikia.nocookie.net/stealanegg/images/0/04/Void_Serpent.png/revision/latest?cb=20260907221017', pet: 'https://static.wikia.nocookie.net/stealanegg/images/0/04/Void_Serpent.png/revision/latest?cb=20260907221017' },
+      'wendigo': { egg: 'https://static.wikia.nocookie.net/stealanegg/images/8/8a/Wendigo.png/revision/latest?cb=20260907220833', pet: 'https://static.wikia.nocookie.net/stealanegg/images/8/8a/Wendigo.png/revision/latest?cb=20260907220833' },
+      'world burner': { egg: 'https://static.wikia.nocookie.net/stealanegg/images/1/1b/World_Burner_Egg.png/revision/latest?cb=20260912173051', pet: 'https://static.wikia.nocookie.net/stealanegg/images/f/fe/World_Burner.png/revision/latest?cb=20260912164738' },
+      'world eater': { egg: 'https://static.wikia.nocookie.net/stealanegg/images/4/40/World_Eater.png/revision/latest?cb=20260907220911', pet: 'https://static.wikia.nocookie.net/stealanegg/images/4/40/World_Eater.png/revision/latest?cb=20260907220911' },
+      'yeti': { egg: 'https://static.wikia.nocookie.net/stealanegg/images/0/0d/Yeti_Egg.png/revision/latest?cb=20260902163712', pet: 'https://static.wikia.nocookie.net/stealanegg/images/7/7d/Yeti.png/revision/latest?cb=20260904025057' },
     };
 
-    // compat nombre viejo
     const DISCORD_EGG = {};
-    Object.keys(IMAGE_PACK).forEach(function(k) {
-      if (IMAGE_PACK[k].egg) DISCORD_EGG[k] = IMAGE_PACK[k].egg;
-    });
 
     function discordUrl(id) {
       if (!id) return '';
@@ -388,22 +380,23 @@
 
     function eggImage(name) {
       if (!name) return '';
+      // 1) pack wiki (siempre disponible)
+      var pack = packEntry(name);
+      if (pack && pack.egg) return pack.egg;
+      // 2) cache del bot (discord)
       var c = cacheEntry(name);
       if (c.egg) return c.egg;
-      var pack = packEntry(name);
-      if (pack && pack.egg) return discordUrl(pack.egg);
-      var k = name.toLowerCase().replace(/\s+/g, ' ').trim();
-      if (DISCORD_EGG[k]) return discordUrl(DISCORD_EGG[k]);
       return '';
     }
 
     function petImage(name) {
       if (!name) return '';
+      var pack = packEntry(name);
+      if (pack && pack.pet) return pack.pet;
+      if (pack && pack.egg) return pack.egg;
       var c = cacheEntry(name);
       if (c.pet) return c.pet;
-      var pack = packEntry(name);
-      if (pack && pack.pet) return discordUrl(pack.pet);
-      if (pack && pack.egg) return discordUrl(pack.egg);
+      if (c.egg) return c.egg;
       return eggImage(name);
     }
 
