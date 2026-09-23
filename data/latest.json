@@ -1,17 +1,17 @@
 {
-  "updatedAt": 1790128877937,
+  "updatedAt": 1790129462703,
   "eggs": [
     {
-      "name": "Kraken",
-      "moneyText": "~$15m/s",
-      "moneyValue": 15000000,
-      "location": "Abyss Ocean",
-      "speed": "3M",
+      "name": "Yeti",
+      "moneyText": "~$5m/s",
+      "moneyValue": 5000000,
+      "location": "Snow",
+      "speed": "210K",
       "join": "https://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f",
-      "wiki": "https://stealanegg.fandom.com/wiki/Kraken",
-      "imageUrl": "https://cdn.discordapp.com/emojis/1547091128178704414.png?size=128&quality=lossless",
-      "fullText": "-# <@&1550979557194993674> Kraken spawned in Abyss Ocean! <@&1550981072974643281> <@&1550981442912256123>\nSecret Egg Spawned!! - <t:1790128805:t>\n🥚 *Egg:* Kraken\n🦈*Location:* Abyss Ocean\n⏱ *Spawned:* hace 1 minutos\n💰 *Money:* ~$15m/s\n⚡ *Recommended Speed:* 3M\n🎮 *Join Game:*\nhttps://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f\nSenZ V2 | Steal An Egg Notifier\n🔍 *Wiki:*\nhttps://stealanegg.fandom.com/wiki/Kraken",
-      "timestamp": 1790128876931
+      "wiki": "https://stealanegg.fandom.com/wiki/Yeti",
+      "imageUrl": "https://cdn.discordapp.com/emojis/1547091161787797534.png?size=128&quality=lossless",
+      "fullText": "-# <@&1550979557194993674> Yeti spawned in Snow! <@&1550981072974643281> <@&1550981452659826879>\nSecret Egg Spawned!! - <t:1790129406:t>\n🥚 *Egg:* Yeti\n❄️*Location:* Snow\n⏱ *Spawned:* hace unos segundos\n💰 *Money:* ~$5m/s\n⚡ *Recommended Speed:* 210K\n🎮 *Join Game:*\nhttps://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f\nSenZ V2 | Steal An Egg Notifier\n🔍 *Wiki:*\nhttps://stealanegg.fandom.com/wiki/Yeti",
+      "timestamp": 1790129462173
     }
   ]
 }
