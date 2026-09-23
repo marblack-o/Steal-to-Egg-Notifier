@@ -1,29 +1,17 @@
 {
-  "updatedAt": 1790122031168,
+  "updatedAt": 1790122865353,
   "eggs": [
     {
-      "name": "Eternal Lunar Dragon",
-      "moneyText": "~$250m/s",
-      "moneyValue": 250000000,
-      "location": "Cosmic",
-      "speed": "840M",
+      "name": "TRex",
+      "moneyText": "~$25m/s",
+      "moneyValue": 25000000,
+      "location": "Prehistoric",
+      "speed": "20.5M",
       "join": "https://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f",
-      "wiki": "https://stealanegg.fandom.com/wiki/Eternal_Lunar_Dragon",
-      "imageUrl": "https://cdn.discordapp.com/emojis/1544772400435040386.png",
-      "fullText": "-# <@&1550979752842764408> Eternal Lunar Dragon spawned in Cosmic! <@&1550981080973058170> <@&1550981377103626332>\nEternal Egg Spawned!! - <t:1790121906:t>\n🥚 *Egg:* Eternal Lunar Dragon\n🌌*Location:* Cosmic\n⏱ *Spawned:* hace 1 minutos\n💰 *Money:* ~$250m/s\n⚡ *Recommended Speed:* 840M\n🎮 *Join Game:*\nhttps://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f\nSenZ V2 | Steal An Egg Notifier\n🔍 *Wiki:*\nhttps://stealanegg.fandom.com/wiki/Eternal_Lunar_Dragon",
-      "timestamp": 1790121967401
-    },
-    {
-      "name": "Pure Jellyfish",
-      "moneyText": "~$225m/s",
-      "moneyValue": 225000000,
-      "location": "Angels",
-      "speed": "20B",
-      "join": "https://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f",
-      "wiki": "https://stealanegg.fandom.com/wiki/Pure_Jellyfish",
+      "wiki": "https://stealanegg.fandom.com/wiki/TRex",
       "imageUrl": "https://cdn.discordapp.com/emojis/1544772359083393054.png",
-      "fullText": "-# <@&1550979557194993674> Pure Jellyfish spawned in Angels! <@&1550981080973058170> <@&1550981412696358942>\nSecret Egg Spawned!! - <t:1790121971:t>\n🥚 *Egg:* Pure Jellyfish\n👼*Location:* Angels\n⏱ *Spawned:* hace unos segundos\n💰 *Money:* ~$225m/s\n⚡ *Recommended Speed:* 20B\n🎮 *Join Game:*\nhttps://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f\nSenZ V2 | Steal An Egg Notifier\n🔍 *Wiki:*\nhttps://stealanegg.fandom.com/wiki/Pure_Jellyfish",
-      "timestamp": 1790122030367
+      "fullText": "-# <@&1550979557194993674> TRex spawned in Prehistoric! <@&1550981072974643281> <@&1550981439066087444>\nSecret Egg Spawned!! - <t:1790122805:t>\n🥚 *Egg:* TRex\n🦖*Location:* Prehistoric\n⏱ *Spawned:* hace unos segundos\n💰 *Money:* ~$25m/s\n⚡ *Recommended Speed:* 20.5M\n🎮 *Join Game:*\nhttps://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f\nSenZ V2 | Steal An Egg Notifier\n🔍 *Wiki:*\nhttps://stealanegg.fandom.com/wiki/TRex",
+      "timestamp": 1790122864615
     }
   ]
 }
