@@ -40,9 +40,6 @@
     .drawer {
       background: rgba(20, 20, 28, 0.96);
     }
-    .status-dot { background: var(--accent); }
-    .egg-money { color: var(--accent); }
-    .toggle-pill.on { background: color-mix(in srgb, var(--accent) 35%, #14532d); }
     .accent-row {
       display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px;
     }
@@ -95,7 +92,11 @@
       font-weight: 700; font-size: 0.75rem; cursor: pointer; text-transform: uppercase; letter-spacing: 0.04em;
     }
     .toggle-pill.off { background: #3f1212; color: #fca5a5; }
-    .toggle-pill.on { background: #14532d; color: #86efac; }
+    .toggle-pill.on {
+      background: var(--accent);
+      color: #0a0a0f;
+      font-weight: 800;
+    }
     .toggle-pill.custom { background: #422006; color: #fde68a; }
     .filters-title {
       margin-top: 22px; font-size: 0.78rem; font-weight: 700;
@@ -175,7 +176,7 @@
       font-weight: 600; font-size: 0.95rem; white-space: nowrap;
       overflow: hidden; text-overflow: ellipsis;
     }
-    .egg-money { font-size: 0.82rem; color: #4ade80; margin-top: 2px; }
+    .egg-money { font-size: 0.82rem; color: var(--accent); margin-top: 2px; }
     .egg-ago { font-size: 0.75rem; color: var(--muted); margin-top: 2px; }
     .egg-arrow { font-size: 0.9rem; color: var(--muted); transition: transform 0.2s; }
     .egg-item.open .egg-arrow { transform: rotate(90deg); }
@@ -184,15 +185,22 @@
       font-size: 0.88rem; line-height: 1.6; color: var(--muted);
     }
     .egg-item.open .egg-details { display: block; padding-top: 12px; }
-    .egg-details a { color: #7c5cff; word-break: break-all; }
+    .egg-details a { color: var(--accent); word-break: break-all; }
     .egg-empty {
       text-align: center; color: var(--muted); font-size: 0.9rem;
       padding: 24px 10px; font-style: italic;
     }
     .btn-secondary {
-      background: #2a2a35; color: var(--text); border: none; border-radius: 8px;
-      padding: 8px 12px; font-size: 0.8rem; cursor: pointer;
+      background: #2a2a35; color: var(--text); border: 1px solid var(--border);
+      border-radius: 8px; padding: 8px 12px; font-size: 0.8rem; cursor: pointer;
     }
+    .btn-secondary:active {
+      border-color: var(--accent); color: var(--accent);
+    }
+    .egg-rank { color: var(--accent) !important; }
+    .burger { border-color: var(--accent); }
+    .burger span { background: var(--accent); }
+    .toast { background: var(--accent) !important; color: #0a0a0f !important; }
     footer {
       text-align: center; color: var(--muted); font-size: 0.75rem;
       margin-top: 8px; padding-bottom: 20px;
@@ -224,12 +232,13 @@
     }
     .rift-pet-name { font-weight: 600; flex: 1; }
     .rift-chance { color: #fbbf24; font-size: 0.8rem; margin-right: 8px; }
-    .rift-money { color: #4ade80; font-size: 0.8rem; }
+    .rift-money { color: var(--accent); font-size: 0.8rem; }
     .rift-empty { color: var(--muted); font-size: 0.85rem; font-style: italic; padding: 8px 0; }
 
     .status-dot {
       display: inline-block; width: 8px; height: 8px; border-radius: 50%;
-      background: #4ade80; margin-right: 6px; vertical-align: middle;
+      background: var(--accent); margin-right: 6px; vertical-align: middle;
+      box-shadow: 0 0 8px var(--accent);
     }
   </style>
 </head>
@@ -923,9 +932,10 @@
     let theme = Object.assign({ bg: true, music: false, accent: '#7c5cff' }, loadTheme());
 
     function applyAccent(color) {
+      if (!color) color = '#7c5cff';
       theme.accent = color;
       document.documentElement.style.setProperty('--accent', color);
-      /* accent only; money stays green */
+      document.body.style.setProperty('--accent', color);
       document.querySelectorAll('.accent-swatch').forEach(function(btn) {
         btn.classList.toggle('active', btn.getAttribute('data-accent') === color);
       });
