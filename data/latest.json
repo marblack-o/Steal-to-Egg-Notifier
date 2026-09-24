@@ -1,17 +1,17 @@
 {
-  "updatedAt": 1790225169971,
+  "updatedAt": 1790225476581,
   "eggs": [
     {
-      "name": "Kraken",
-      "moneyText": "~$15m/s",
-      "moneyValue": 15000000,
-      "location": "Abyss Ocean",
-      "speed": "3M",
+      "name": "Cerberus",
+      "moneyText": "~$8m/s",
+      "moneyValue": 8000000,
+      "location": "Volcano",
+      "speed": "840K",
       "join": "https://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f",
-      "wiki": "https://stealanegg.fandom.com/wiki/Kraken",
-      "imageUrl": "https://cdn.discordapp.com/emojis/1547091128178704414.png?size=128&quality=lossless",
-      "fullText": "-# <@&1550979557194993674> Kraken spawned in Abyss Ocean! <@&1550981072974643281> <@&1550981442912256123>\nSecret Egg Spawned!! - <t:1790225105:t>\n🥚 *Egg:* Kraken\n🦈*Location:* Abyss Ocean\n⏱ *Spawned:* hace 1 minutos\n💰 *Money:* ~$15m/s\n⚡ *Recommended Speed:* 3M\n🎮 *Join Game:*\nhttps://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f\nSenZ V2 | Steal An Egg Notifier\n🔍 *Wiki:*\nhttps://stealanegg.fandom.com/wiki/Kraken",
-      "timestamp": 1790225169252
+      "wiki": "https://stealanegg.fandom.com/wiki/Cerberus",
+      "imageUrl": "https://cdn.discordapp.com/emojis/1547091099036680222.png?size=128&quality=lossless",
+      "fullText": "-# <@&1550979557194993674> Cerberus spawned in Volcano! <@&1550981072974643281> <@&1550981446917824544>\nSecret Egg Spawned!! - <t:1790225406:t>\n🥚 *Egg:* Cerberus\n🌋*Location:* Volcano\n⏱ *Spawned:* hace 1 minutos\n💰 *Money:* ~$8m/s\n⚡ *Recommended Speed:* 840K\n🎮 *Join Game:*\nhttps://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f\nSenZ V2 | Steal An Egg Notifier\n🔍 *Wiki:*\nhttps://stealanegg.fandom.com/wiki/Cerberus",
+      "timestamp": 1790225475740
     }
   ]
 }
