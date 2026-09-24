@@ -17,13 +17,49 @@
     :root {
       --bg: #0f0f13; --card: #1a1a22; --border: #2a2a35;
       --text: #e8e8ed; --muted: #9a9aad; --green: #22c55e;
+      --accent: #7c5cff;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
       background: var(--bg); color: var(--text); min-height: 100dvh; padding: 16px; line-height: 1.45;
+      position: relative;
     }
-    .container { max-width: 520px; margin: 0 auto; }
+    #bgCanvas {
+      position: fixed; inset: 0; width: 100%; height: 100%;
+      z-index: 0; pointer-events: none;
+    }
+    .container { max-width: 520px; margin: 0 auto; position: relative; z-index: 1; }
+    .card, .drawer, .toast, .overlay, .burger, .topbar {
+      /* keep above canvas */
+    }
+    .card {
+      background: rgba(26, 26, 34, 0.88);
+      backdrop-filter: blur(8px);
+    }
+    .drawer {
+      background: rgba(20, 20, 28, 0.96);
+    }
+    .status-dot { background: var(--accent); }
+    .egg-money { color: var(--accent); }
+    .toggle-pill.on { background: color-mix(in srgb, var(--accent) 35%, #14532d); }
+    .accent-row {
+      display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px;
+    }
+    .accent-swatch {
+      width: 28px; height: 28px; border-radius: 50%;
+      border: 2px solid transparent; cursor: pointer;
+    }
+    .accent-swatch.active { border-color: #fff; box-shadow: 0 0 0 2px var(--accent); }
+    .personalize-block {
+      padding: 14px 0; border-bottom: 1px solid var(--border);
+    }
+    .personalize-block label {
+      font-size: 0.92rem; font-weight: 600; display: block; margin-bottom: 8px;
+    }
+    .personalize-block .hint {
+      font-size: 0.78rem; color: var(--muted); margin-top: 6px;
+    }
     .topbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; padding-top: 4px; }
     .topbar h1 { font-size: 1.2rem; font-weight: 700; }
     .topbar p { color: var(--muted); font-size: 0.8rem; margin-top: 2px; }
@@ -198,6 +234,7 @@
   </style>
 </head>
 <body>
+  <canvas id="bgCanvas"></canvas>
   <div class="container">
     <div class="topbar">
       <div>
@@ -235,6 +272,35 @@
       <label>Notificaciones en tiempo real</label>
       <button class="toggle-pill off" id="btnNotif">Off</button>
     </div>
+
+    <div class="filters-title">Personalización</div>
+    <div class="personalize-block">
+      <label>Fondo Pixel Night</label>
+      <div class="menu-row" style="border:none;padding:0">
+        <span style="font-size:0.85rem;color:var(--muted)">Animación de ciudad</span>
+        <button class="toggle-pill on" id="btnBg">On</button>
+      </div>
+    </div>
+    <div class="personalize-block">
+      <label>Música (Pixel Night / chiptune)</label>
+      <div class="menu-row" style="border:none;padding:0">
+        <span style="font-size:0.85rem;color:var(--muted)">Libre uso · toca para activar</span>
+        <button class="toggle-pill off" id="btnMusic">Off</button>
+      </div>
+      <p class="hint">El navegador solo deja reproducir tras un toque tuyo.</p>
+    </div>
+    <div class="personalize-block">
+      <label>Color de acento</label>
+      <div class="accent-row" id="accentRow">
+        <button type="button" class="accent-swatch" data-accent="#7c5cff" style="background:#7c5cff" title="Violeta"></button>
+        <button type="button" class="accent-swatch" data-accent="#22c55e" style="background:#22c55e" title="Verde"></button>
+        <button type="button" class="accent-swatch" data-accent="#38bdf8" style="background:#38bdf8" title="Cielo"></button>
+        <button type="button" class="accent-swatch" data-accent="#f472b6" style="background:#f472b6" title="Rosa"></button>
+        <button type="button" class="accent-swatch" data-accent="#fbbf24" style="background:#fbbf24" title="Dorado"></button>
+        <button type="button" class="accent-swatch" data-accent="#ff6b6b" style="background:#ff6b6b" title="Coral"></button>
+      </div>
+    </div>
+
     <div class="filters-title">Filtros</div>
     <p class="filters-desc">Los que esten en <b style="color:#86efac">verde</b> recibiras notificacion. Rojo = off. Amarillo = personalizado.</p>
     <div id="filterCats"></div>
@@ -841,6 +907,189 @@
       } catch(e) {}
     }
 
+
+    // ===== Personalización: fondo Pixel Night + música + acento =====
+    const THEME_KEY = 'egg_theme_v1';
+    const MUSIC_URL = 'https://marblack-o.github.io/Grok-x-Claude/inono777-chiptune-but-461573.mp3';
+
+    function loadTheme() {
+      try {
+        return JSON.parse(localStorage.getItem(THEME_KEY) || '{}');
+      } catch (e) { return {}; }
+    }
+    function saveTheme(th) {
+      localStorage.setItem(THEME_KEY, JSON.stringify(th));
+    }
+    let theme = Object.assign({ bg: true, music: false, accent: '#7c5cff' }, loadTheme());
+
+    function applyAccent(color) {
+      theme.accent = color;
+      document.documentElement.style.setProperty('--accent', color);
+      /* accent only; money stays green */
+      document.querySelectorAll('.accent-swatch').forEach(function(btn) {
+        btn.classList.toggle('active', btn.getAttribute('data-accent') === color);
+      });
+      saveTheme(theme);
+    }
+
+    // --- Canvas Pixel Night ---
+    var bgCanvas = document.getElementById('bgCanvas');
+    var bgAnimId = null;
+    var bgTickFn = null;
+
+    function setupPixelNight() {
+      if (!bgCanvas) return;
+      var ctx = bgCanvas.getContext('2d');
+      function resize() {
+        bgCanvas.width = window.innerWidth;
+        bgCanvas.height = window.innerHeight;
+        buildCity();
+      }
+      var buildings = [];
+      var BW = 12;
+      function buildCity() {
+        var numBuildings = Math.ceil(bgCanvas.width / BW) + 2;
+        var rows = Math.ceil(bgCanvas.height / BW);
+        buildings = [];
+        var curX = 0;
+        for (var i = 0; i < numBuildings; i++) {
+          var w = Math.floor(Math.random() * 3 + 2) * BW;
+          var h = Math.floor(Math.random() * (rows * 0.55) + rows * 0.15);
+          var windows = [];
+          for (var r = 0; r < h; r++) {
+            var row = [];
+            for (var c = 0; c < w / BW; c++) row.push(Math.random() > 0.45);
+            windows.push(row);
+          }
+          buildings.push({ x: curX, width: w, height: h, windows: windows });
+          curX += w + 1;
+        }
+      }
+      var tick = 0;
+      bgTickFn = function() {
+        if (!theme.bg) return;
+        tick++;
+        var w = bgCanvas.width, h = bgCanvas.height;
+        var sky = ctx.createLinearGradient(0, 0, 0, h);
+        sky.addColorStop(0, '#000010');
+        sky.addColorStop(0.6, '#000428');
+        sky.addColorStop(1, '#0a0a1a');
+        ctx.fillStyle = sky;
+        ctx.fillRect(0, 0, w, h);
+        var moonX = w * 0.82, moonY = h * 0.12;
+        var glow = ctx.createRadialGradient(moonX, moonY, 0, moonX, moonY, 60);
+        glow.addColorStop(0, 'rgba(255,255,200,0.3)');
+        glow.addColorStop(1, 'rgba(0,0,0,0)');
+        ctx.fillStyle = glow;
+        ctx.fillRect(0, 0, w, h);
+        ctx.beginPath();
+        ctx.arc(moonX, moonY, 18, 0, Math.PI * 2);
+        ctx.fillStyle = '#fffff0';
+        ctx.shadowColor = '#ffffaa';
+        ctx.shadowBlur = 15;
+        ctx.fill();
+        ctx.shadowBlur = 0;
+        buildings.forEach(function(b) {
+          var bTop = h - b.height * BW;
+          ctx.fillStyle = '#08081e';
+          ctx.fillRect(b.x, bTop, b.width, b.height * BW);
+          ctx.strokeStyle = '#1a1a3e';
+          ctx.lineWidth = 1;
+          ctx.strokeRect(b.x, bTop, b.width, b.height * BW);
+          b.windows.forEach(function(row, ri) {
+            row.forEach(function(lit, ci) {
+              if (!lit) return;
+              var wx = b.x + ci * BW + 2;
+              var wy = h - (ri + 1) * BW + 2;
+              var pulse = 0.7 + 0.3 * Math.sin(tick * 0.05 + ri * 0.4 + ci);
+              ctx.fillStyle = 'rgba(255, 220, 100, ' + pulse + ')';
+              ctx.fillRect(wx, wy, BW - 4, BW - 4);
+            });
+          });
+        });
+      };
+      function loop() {
+        if (theme.bg && bgTickFn) bgTickFn();
+        bgAnimId = requestAnimationFrame(loop);
+      }
+      window.addEventListener('resize', resize);
+      resize();
+      if (bgAnimId) cancelAnimationFrame(bgAnimId);
+      loop();
+    }
+
+    function setBgEnabled(on) {
+      theme.bg = !!on;
+      saveTheme(theme);
+      var btn = document.getElementById('btnBg');
+      if (btn) {
+        btn.textContent = on ? 'On' : 'Off';
+        btn.className = 'toggle-pill ' + (on ? 'on' : 'off');
+      }
+      if (!on && bgCanvas) {
+        var ctx = bgCanvas.getContext('2d');
+        ctx.fillStyle = '#0f0f13';
+        ctx.fillRect(0, 0, bgCanvas.width, bgCanvas.height);
+      }
+    }
+
+    // --- Música ---
+    var audioBg = null;
+    function ensureAudio() {
+      if (!audioBg) {
+        audioBg = new Audio(MUSIC_URL);
+        audioBg.loop = true;
+        audioBg.volume = 0.35;
+      }
+      return audioBg;
+    }
+    function setMusicEnabled(on) {
+      theme.music = !!on;
+      saveTheme(theme);
+      var btn = document.getElementById('btnMusic');
+      if (btn) {
+        btn.textContent = on ? 'On' : 'Off';
+        btn.className = 'toggle-pill ' + (on ? 'on' : 'off');
+      }
+      var a = ensureAudio();
+      if (on) {
+        a.play().catch(function() {
+          theme.music = false;
+          saveTheme(theme);
+          if (btn) { btn.textContent = 'Off'; btn.className = 'toggle-pill off'; }
+        });
+      } else {
+        a.pause();
+      }
+    }
+
+    function initPersonalization() {
+      applyAccent(theme.accent || '#7c5cff');
+      setBgEnabled(theme.bg !== false);
+      // music starts off until user taps (browser policy)
+      var btnM = document.getElementById('btnMusic');
+      if (btnM) {
+        btnM.textContent = theme.music ? 'On' : 'Off';
+        btnM.className = 'toggle-pill ' + (theme.music ? 'on' : 'off');
+      }
+      setupPixelNight();
+
+      var btnBg = document.getElementById('btnBg');
+      if (btnBg) btnBg.addEventListener('click', function() {
+        setBgEnabled(!theme.bg);
+      });
+      if (btnM) btnM.addEventListener('click', function() {
+        setMusicEnabled(!theme.music);
+      });
+      document.querySelectorAll('.accent-swatch').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          applyAccent(btn.getAttribute('data-accent'));
+        });
+      });
+    }
+
+
+    initPersonalization();
     renderFilters();
     renderSession();
     // Ahorro de JSONBin: 20s y solo con pestaña visible
