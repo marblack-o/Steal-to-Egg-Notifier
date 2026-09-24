@@ -1,17 +1,17 @@
 {
-  "updatedAt": 1790231769837,
+  "updatedAt": 1790232376576,
   "eggs": [
     {
-      "name": "Stag",
-      "moneyText": "~$145m/s",
-      "moneyValue": 145000000,
-      "location": "Cherry Blossom",
-      "speed": "3.5B",
+      "name": "Cosmic Dragon",
+      "moneyText": "~$60m/s",
+      "moneyValue": 60000000,
+      "location": "Cosmic",
+      "speed": "840M",
       "join": "https://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f",
-      "wiki": "https://stealanegg.fandom.com/wiki/Stag",
-      "imageUrl": "https://cdn.discordapp.com/emojis/1547091149846745090.png?size=128&quality=lossless",
-      "fullText": "-# <@&1550979557194993674> Stag spawned in Cherry Blossom! <@&1550981080973058170> <@&1550981422184005762>\nSecret Egg Spawned!! - <t:1790231705:t>\n🥚 *Egg:* Stag\n🌸*Location:* Cherry Blossom\n⏱ *Spawned:* hace 1 minutos\n💰 *Money:* ~$145m/s\n⚡ *Recommended Speed:* 3.5B\n🎮 *Join Game:*\nhttps://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f\nSenZ V2 | Steal An Egg Notifier\n🔍 *Wiki:*\nhttps://stealanegg.fandom.com/wiki/Stag",
-      "timestamp": 1790231769118
+      "wiki": "https://stealanegg.fandom.com/wiki/Cosmic_Dragon",
+      "imageUrl": "https://cdn.discordapp.com/emojis/1547091101221916703.png?size=128&quality=lossless",
+      "fullText": "-# <@&1550979557194993674> Cosmic Dragon spawned in Cosmic! <@&1550981076963434707> <@&1550981426261004400>\nSecret Egg Spawned!! - <t:1790232308:t>\n🥚 *Egg:* Cosmic Dragon\n🌌*Location:* Cosmic\n⏱ *Spawned:* hace 1 minutos\n💰 *Money:* ~$60m/s\n⚡ *Recommended Speed:* 840M\n🎮 *Join Game:*\nhttps://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f\nSenZ V2 | Steal An Egg Notifier\n🔍 *Wiki:*\nhttps://stealanegg.fandom.com/wiki/Cosmic_Dragon",
+      "timestamp": 1790232375855
     }
   ]
 }
