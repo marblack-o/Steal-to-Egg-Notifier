@@ -1,5 +1,5 @@
 {
-  "updatedAt": 1790215873612,
+  "updatedAt": 1790216170678,
   "eggs": [
     {
       "name": "Gorilla King",
@@ -12,6 +12,18 @@
       "imageUrl": "https://cdn.discordapp.com/emojis/1547091113360359534.png?size=128&quality=lossless",
       "fullText": "-# <@&1550979752842764408> Gorilla King spawned in Titan Temple! <@&1550981085825867796> <@&1550981369168003245>\nEternal Egg Spawned!! - <t:1790215807:t>\n🥚 *Egg:* Gorilla King\n🏛️*Location:* Titan Temple\n⏱ *Spawned:* hace 1 minutos\n💰 *Money:* ~$880m/s\n⚡ *Recommended Speed:* 8.5B\n🎮 *Join Game:*\nhttps://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f\nSenZ V2 | Steal An Egg Notifier\n🔍 *Wiki:*\nhttps://stealanegg.fandom.com/wiki/Gorilla_King",
       "timestamp": 1790215872084
+    },
+    {
+      "name": "Gargoyle",
+      "moneyText": "~$225m/s",
+      "moneyValue": 225000000,
+      "location": "Demons",
+      "speed": "20B",
+      "join": "https://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f",
+      "wiki": "https://stealanegg.fandom.com/wiki/Gargoyle",
+      "imageUrl": "https://cdn.discordapp.com/emojis/1548678018950758404.png?size=128&quality=lossless",
+      "fullText": "-# <@&1550979557194993674> Gargoyle spawned in Demons! <@&1550981080973058170> <@&1550981408783335485>\nSecret Egg Spawned!! - <t:1790216105:t>\n🥚 *Egg:* Gargoyle\n😈*Location:* Demons\n⏱ *Spawned:* hace 1 minutos\n💰 *Money:* ~$225m/s\n⚡ *Recommended Speed:* 20B\n🎮 *Join Game:*\nhttps://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f\nSenZ V2 | Steal An Egg Notifier\n🔍 *Wiki:*\nhttps://stealanegg.fandom.com/wiki/Gargoyle",
+      "timestamp": 1790216170052
     }
   ]
 }
