@@ -48,6 +48,19 @@
       border: 2px solid transparent; cursor: pointer;
     }
     .accent-swatch.active { border-color: #fff; box-shadow: 0 0 0 2px var(--accent); }
+    .accent-row.locked {
+      opacity: 0.45;
+      pointer-events: none;
+      filter: grayscale(0.4);
+    }
+    .party-lock-msg {
+      display: none;
+      font-size: 0.8rem;
+      color: #fbbf24;
+      margin-top: 8px;
+      font-weight: 600;
+    }
+    .party-lock-msg.show { display: block; }
     .personalize-block {
       padding: 14px 0; border-bottom: 1px solid var(--border);
     }
@@ -308,6 +321,7 @@
         <button type="button" class="accent-swatch" data-accent="#fbbf24" style="background:#fbbf24" title="Dorado"></button>
         <button type="button" class="accent-swatch" data-accent="#ff6b6b" style="background:#ff6b6b" title="Coral"></button>
       </div>
+      <p class="party-lock-msg" id="partyLockMsg">¿No quieres divertirte??? 🎉 La fiesta sigue...</p>
     </div>
 
     <div class="filters-title">Filtros</div>
@@ -965,13 +979,25 @@
       saveTheme(theme);
     }
 
+    function isPartyLocked() {
+      return lightState.phase === 'party' || lightState.phase === 'partyOut';
+    }
+
+    function updatePartyLockUI() {
+      var row = document.getElementById('accentRow');
+      var msg = document.getElementById('partyLockMsg');
+      var locked = isPartyLocked();
+      if (row) row.classList.toggle('locked', locked);
+      if (msg) msg.classList.toggle('show', locked);
+    }
+
     function applyAccent(color, opts) {
       opts = opts || {};
       if (!color) color = '#7c5cff';
-      applyAccentUI(color);
-      lightState.targetColor = color;
 
       if (opts.skipAnim) {
+        applyAccentUI(color);
+        lightState.targetColor = color;
         lightState.displayColor = color;
         lightState.intensity = 1;
         lightState.startIntensity = 1;
@@ -979,15 +1005,25 @@
         lightState.running = false;
         lightState.party = false;
         syncMusicToLights();
+        updatePartyLockUI();
         return;
       }
 
-      var now = Date.now();
-      lightState.clicks = lightState.clicks.filter(function(ts) { return now - ts < 8000; });
-      lightState.clicks.push(now);
-      var party = lightState.clicks.length >= 4;
+      // Durante la fiesta: menú bloqueado
+      if (isPartyLocked()) {
+        updatePartyLockUI();
+        try { showToast('¿No quieres divertirte??? 🎉'); } catch (e) {}
+        return;
+      }
 
-      // Si ya está animando, reinicia el apagado DESDE la intensidad actual (sin flash)
+      applyAccentUI(color);
+      lightState.targetColor = color;
+
+      var now = Date.now();
+      lightState.clicks = lightState.clicks.filter(function(ts) { return now - ts < 12000; });
+      lightState.clicks.push(now);
+      var party = lightState.clicks.length >= 10; // 10 cambios en ~12s
+
       startLightSequence(party);
     }
 
@@ -1087,6 +1123,7 @@
         }
       }
       syncMusicToLights();
+      updatePartyLockUI();
     }
 
     function currentLightColor() {
