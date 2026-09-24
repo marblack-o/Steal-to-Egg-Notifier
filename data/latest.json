@@ -1,41 +1,17 @@
 {
-  "updatedAt": 1790211430045,
+  "updatedAt": 1790211973168,
   "eggs": [
     {
-      "name": "RazorFang",
-      "moneyText": "~$350m/s",
-      "moneyValue": 350000000,
+      "name": "Gargoyle",
+      "moneyText": "~$225m/s",
+      "moneyValue": 225000000,
       "location": "Demons",
       "speed": "20B",
       "join": "https://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f",
-      "wiki": "https://stealanegg.fandom.com/wiki/RazorFang",
-      "imageUrl": "https://cdn.discordapp.com/emojis/1548678027209212009.png?size=128&quality=lossless",
-      "fullText": "-# <@&1550979557194993674> RazorFang spawned in Demons! <@&1550981080973058170> <@&1550981401099239435>\nSecret Egg Spawned!! - <t:1790211305:t>\n🥚 *Egg:* RazorFang\n😈*Location:* Demons\n⏱ *Spawned:* hace 1 minutos\n💰 *Money:* ~$350m/s\n⚡ *Recommended Speed:* 20B\n🎮 *Join Game:*\nhttps://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f\nSenZ V2 | Steal An Egg Notifier\n🔍 *Wiki:*\nhttps://stealanegg.fandom.com/wiki/RazorFang",
-      "timestamp": 1790211366966
-    },
-    {
-      "name": "Mosasaurus",
-      "moneyText": "~$180m/s",
-      "moneyValue": 180000000,
-      "location": "Prehistoric",
-      "speed": "20.5M",
-      "join": "https://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f",
-      "wiki": "https://stealanegg.fandom.com/wiki/Mosasaurus",
-      "imageUrl": "https://cdn.discordapp.com/emojis/1547091132276809768.png?size=128&quality=lossless",
-      "fullText": "-# <@&1550979752842764408> Mosasaurus spawned in Prehistoric! <@&1550981080973058170> <@&1550981381293871204>\nEternal Egg Spawned!! - <t:1790211367:t>\n🥚 *Egg:* Mosasaurus\n🦖*Location:* Prehistoric\n⏱ *Spawned:* hace 1 minutos\n💰 *Money:* ~$180m/s\n⚡ *Recommended Speed:* 20.5M\n🎮 *Join Game:*\nhttps://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f\nSenZ V2 | Steal An Egg Notifier\n🔍 *Wiki:*\nhttps://stealanegg.fandom.com/wiki/Mosasaurus",
-      "timestamp": 1790211429495
-    },
-    {
-      "name": "Kraken",
-      "moneyText": "~$15m/s",
-      "moneyValue": 15000000,
-      "location": "Abyss Ocean",
-      "speed": "3M",
-      "join": "https://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f",
-      "wiki": "https://stealanegg.fandom.com/wiki/Kraken",
-      "imageUrl": "https://cdn.discordapp.com/emojis/1547091128178704414.png?size=128&quality=lossless",
-      "fullText": "-# <@&1550979557194993674> Kraken spawned in Abyss Ocean! <@&1550981072974643281> <@&1550981442912256123>\nSecret Egg Spawned!! - <t:1790211005:t>\n🥚 *Egg:* Kraken\n🦈*Location:* Abyss Ocean\n⏱ *Spawned:* hace 1 minutos\n💰 *Money:* ~$15m/s\n⚡ *Recommended Speed:* 3M\n🎮 *Join Game:*\nhttps://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f\nSenZ V2 | Steal An Egg Notifier\n🔍 *Wiki:*\nhttps://stealanegg.fandom.com/wiki/Kraken",
-      "timestamp": 1790211074270
+      "wiki": "https://stealanegg.fandom.com/wiki/Gargoyle",
+      "imageUrl": "https://cdn.discordapp.com/emojis/1548678018950758404.png?size=128&quality=lossless",
+      "fullText": "-# <@&1550979557194993674> Gargoyle spawned in Demons! <@&1550981080973058170> <@&1550981408783335485>\nSecret Egg Spawned!! - <t:1790211908:t>\n🥚 *Egg:* Gargoyle\n😈*Location:* Demons\n⏱ *Spawned:* hace 1 minutos\n💰 *Money:* ~$225m/s\n⚡ *Recommended Speed:* 20B\n🎮 *Join Game:*\nhttps://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f\nSenZ V2 | Steal An Egg Notifier\n🔍 *Wiki:*\nhttps://stealanegg.fandom.com/wiki/Gargoyle",
+      "timestamp": 1790211972690
     }
   ]
 }
