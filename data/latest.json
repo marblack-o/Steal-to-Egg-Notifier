@@ -1,5 +1,5 @@
 {
-  "updatedAt": 1790289100224,
+  "updatedAt": 1790289210285,
   "eggs": [
     {
       "name": "Pure Jellyfish",
@@ -12,6 +12,18 @@
       "imageUrl": "https://cdn.discordapp.com/emojis/1548678024512274564.png?size=128&quality=lossless",
       "fullText": "-# <@&1550979557194993674> Pure Jellyfish spawned in Angels! <@&1550981080973058170> <@&1550981412696358942>\nSecret Egg Spawned!! - <t:1790289009:t>\n🥚 *Egg:* Pure Jellyfish\n👼*Location:* Angels\n⏱ *Spawned:* hace 1 minutos\n💰 *Money:* ~$225m/s\n⚡ *Recommended Speed:* 20B\n🎮 *Join Game:*\nhttps://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f\nSenZ V2 | Steal An Egg Notifier\n🔍 *Wiki:*\nhttps://stealanegg.fandom.com/wiki/Pure_Jellyfish",
       "timestamp": 1790289099673
+    },
+    {
+      "name": "Lava Dragon",
+      "moneyText": "~$100m/s",
+      "moneyValue": 100000000,
+      "location": "Volcano",
+      "speed": "840K",
+      "join": "https://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f",
+      "wiki": "https://stealanegg.fandom.com/wiki/Lava_Dragon",
+      "imageUrl": "https://cdn.discordapp.com/emojis/1547091130254884984.png?size=128&quality=lossless",
+      "fullText": "-# <@&1550979752842764408> Lava Dragon spawned in Volcano! <@&1550981080973058170> <@&1550981389275631801>\nEternal Egg Spawned!! - <t:1790289104:t>\n🥚 *Egg:* Lava Dragon\n🌋*Location:* Volcano\n⏱ *Spawned:* hace 1 minutos\n💰 *Money:* ~$100m/s\n⚡ *Recommended Speed:* 840K\n🎮 *Join Game:*\nhttps://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f\nSenZ V2 | Steal An Egg Notifier\n🔍 *Wiki:*\nhttps://stealanegg.fandom.com/wiki/Lava_Dragon",
+      "timestamp": 1790289209698
     }
   ]
 }
