@@ -919,7 +919,6 @@
 
     // ===== Personalización: fondo Pixel Night + música + acento =====
     const THEME_KEY = 'egg_theme_v1';
-    const MUSIC_URL = 'https://marblack-o.github.io/Grok-x-Claude/inono777-chiptune-but-461573.mp3';
 
     function loadTheme() {
       try {
@@ -933,14 +932,17 @@
 
     // Estado de luces del fondo (easter egg / transiciones)
     var lightState = {
-      intensity: 1,           // 0..1
-      phase: 'idle',          // idle | fadeOut | dark | fadeIn | party | partyOut
+      intensity: 1,
+      startIntensity: 1,
+      phase: 'idle',
       phaseStart: 0,
-      targetColor: '#7c5cff', // color al final
+      targetColor: '#7c5cff',
+      displayColor: '#7c5cff', // color visible actual (no salta)
       partyColors: ['#7c5cff', '#22c55e', '#38bdf8', '#f472b6', '#fbbf24', '#ff6b6b', '#a78bfa', '#fb7185'],
       partyIdx: 0,
       partyColor: '#7c5cff',
-      clicks: [],             // timestamps de cambios recientes
+      party: false,
+      clicks: [],
       running: false
     };
 
@@ -948,6 +950,7 @@
       hex = (hex || '#7c5cff').replace('#', '');
       if (hex.length === 3) hex = hex[0]+hex[0]+hex[1]+hex[1]+hex[2]+hex[2];
       var n = parseInt(hex, 16);
+      if (isNaN(n)) return { r: 124, g: 92, b: 255 };
       return { r: (n >> 16) & 255, g: (n >> 8) & 255, b: n & 255 };
     }
 
@@ -966,59 +969,76 @@
       opts = opts || {};
       if (!color) color = '#7c5cff';
       applyAccentUI(color);
-      if (opts.skipAnim) {
-        lightState.targetColor = color;
-        lightState.intensity = 1;
-        lightState.phase = 'idle';
-        return;
-      }
-      // Contar cambios en los últimos 8s
-      var now = Date.now();
-      lightState.clicks = lightState.clicks.filter(function(t) { return now - t < 8000; });
-      lightState.clicks.push(now);
       lightState.targetColor = color;
 
-      var party = lightState.clicks.length >= 4; // 4+ cambios = fiesta
+      if (opts.skipAnim) {
+        lightState.displayColor = color;
+        lightState.intensity = 1;
+        lightState.startIntensity = 1;
+        lightState.phase = 'idle';
+        lightState.running = false;
+        lightState.party = false;
+        syncMusicToLights();
+        return;
+      }
+
+      var now = Date.now();
+      lightState.clicks = lightState.clicks.filter(function(ts) { return now - ts < 8000; });
+      lightState.clicks.push(now);
+      var party = lightState.clicks.length >= 4;
+
+      // Si ya está animando, reinicia el apagado DESDE la intensidad actual (sin flash)
       startLightSequence(party);
     }
 
     function startLightSequence(party) {
       lightState.running = true;
-      lightState.phase = 'fadeOut';
-      lightState.phaseStart = performance.now();
       lightState.party = !!party;
+      lightState.startIntensity = Math.max(0, Math.min(1, lightState.intensity));
+      // si ya estaba casi apagado, no hacer fadeOut largo
+      if (lightState.startIntensity < 0.05) {
+        lightState.intensity = 0;
+        lightState.phase = 'dark';
+        lightState.phaseStart = performance.now();
+      } else {
+        lightState.phase = 'fadeOut';
+        lightState.phaseStart = performance.now();
+      }
       lightState.partyIdx = 0;
       lightState.partyColor = lightState.partyColors[0];
       if (party) {
         try { showToast('Fiesta de luces 🎉'); } catch (e) {}
       }
+      syncMusicToLights();
     }
 
     function updateLightPhase(now) {
-      if (!lightState.running && lightState.phase === 'idle') return;
+      if (!lightState.running && lightState.phase === 'idle') {
+        syncMusicToLights();
+        return;
+      }
       var elapsed = now - lightState.phaseStart;
 
       if (lightState.phase === 'fadeOut') {
-        // 2.0s apagando
-        lightState.intensity = Math.max(0, 1 - elapsed / 2000);
+        var si = lightState.startIntensity > 0 ? lightState.startIntensity : 1;
+        lightState.intensity = Math.max(0, si * (1 - elapsed / 2000));
+        // color de pantalla se queda en el actual hasta apagar (no salta al nuevo)
         if (elapsed >= 2000) {
           lightState.intensity = 0;
           lightState.phase = 'dark';
           lightState.phaseStart = now;
         }
       } else if (lightState.phase === 'dark') {
-        // 1.3s a oscuras
         lightState.intensity = 0;
         if (elapsed >= 1300) {
+          // recién aquí aplicamos el color nuevo a las luces
+          lightState.displayColor = lightState.targetColor;
           lightState.phase = lightState.party ? 'party' : 'fadeIn';
           lightState.phaseStart = now;
+          lightState.startIntensity = 0;
           if (lightState.phase === 'party') {
             lightState.partyIdx = 0;
             lightState.partyColor = lightState.partyColors[0];
-            // reiniciar timers de cada ventana (desfasados)
-            if (typeof buildings !== 'undefined') {
-              // buildings is local to setupPixelNight - use window._eggBuildings
-            }
             if (window._eggBuildings) {
               window._eggBuildings.forEach(function(b) {
                 b.windows.forEach(function(row) {
@@ -1026,57 +1046,55 @@
                     if (typeof win === 'object') {
                       win.colorIdx = Math.floor(Math.random() * lightState.partyColors.length);
                       win.interval = 200 + Math.random() * 1300;
-                      win.nextChange = performance.now() + Math.random() * 800;
+                      win.nextChange = now + Math.random() * 800;
                     }
                   });
                 });
               });
             }
           }
+          syncMusicToLights();
         }
       } else if (lightState.phase === 'fadeIn') {
-        // 2.2s prendiendo al color elegido
+        lightState.displayColor = lightState.targetColor;
         lightState.intensity = Math.min(1, elapsed / 2200);
         if (elapsed >= 2200) {
           lightState.intensity = 1;
           lightState.phase = 'idle';
           lightState.running = false;
+          lightState.party = false;
+          syncMusicToLights();
         }
       } else if (lightState.phase === 'party') {
-        // 20s de fiesta: luces a full, colores rotando
-        lightState.intensity = Math.min(1, elapsed / 2200); // prenden en 2.2s al inicio
-        if (elapsed < 2200) {
-          // todavía entrando
-        } else {
-          lightState.intensity = 1;
-        }
-        // cambiar color cada ~0.7s
-        var idx = Math.floor((elapsed - Math.min(elapsed, 2200)) / 700) % lightState.partyColors.length;
-        if (elapsed >= 2200) {
-          lightState.partyIdx = idx;
-          lightState.partyColor = lightState.partyColors[idx];
-        }
+        lightState.intensity = Math.min(1, elapsed / 2200);
+        if (elapsed >= 2200) lightState.intensity = 1;
         if (elapsed >= 20000) {
           lightState.phase = 'partyOut';
           lightState.phaseStart = now;
+          lightState.startIntensity = lightState.intensity;
+          syncMusicToLights();
         }
       } else if (lightState.phase === 'partyOut') {
-        // apagar lento 2s y luego prender color del user 2.2s
-        lightState.intensity = Math.max(0, 1 - elapsed / 2000);
+        var si2 = lightState.startIntensity > 0 ? lightState.startIntensity : 1;
+        lightState.intensity = Math.max(0, si2 * (1 - elapsed / 2000));
         if (elapsed >= 2000) {
           lightState.intensity = 0;
           lightState.phase = 'dark';
           lightState.phaseStart = now;
-          lightState.party = false; // después del dark → fadeIn al color elegido
+          lightState.party = false;
+          lightState.displayColor = lightState.targetColor;
+          syncMusicToLights();
         }
       }
+      syncMusicToLights();
     }
 
     function currentLightColor() {
-      if (lightState.phase === 'party' || (lightState.phase === 'partyOut' && lightState.party)) {
+      if (lightState.phase === 'party') {
         return lightState.partyColor || lightState.targetColor;
       }
-      return lightState.targetColor || theme.accent || '#7c5cff';
+      // durante fadeOut/dark usamos displayColor (viejo); tras dark → target
+      return lightState.displayColor || lightState.targetColor || theme.accent || '#7c5cff';
     }
 
     // --- Canvas Pixel Night ---
@@ -1106,13 +1124,11 @@
           for (var r = 0; r < h; r++) {
             var row = [];
             for (var c = 0; c < w / BW; c++) {
-              var lit = Math.random() > 0.45;
               row.push({
-                lit: lit,
-                // estado por ventana para la fiesta
+                lit: Math.random() > 0.45,
                 colorIdx: Math.floor(Math.random() * 8),
                 nextChange: 0,
-                interval: 200 + Math.random() * 1300 // 0.2s .. 1.5s
+                interval: 200 + Math.random() * 1300
               });
             }
             windows.push(row);
@@ -1129,16 +1145,16 @@
         var now = performance.now();
         updateLightPhase(now);
         var inten = lightState.intensity;
+        // sin pulse fuerte en transiciones (evita "aparecer" antes de tiempo)
+        var pulseAmt = (lightState.phase === 'idle' || lightState.phase === 'party') ? 0.25 : 0.08;
         var lightCol = currentLightColor();
         var rgb = hexToRgb(lightCol);
         var w = bgCanvas.width, h = bgCanvas.height;
 
-        // Cielo: de noche normal a teñido por las luces (fiesta / intensidad)
         var sky = ctx.createLinearGradient(0, 0, 0, h);
         var skyTint = 0.08 + 0.22 * inten;
         if (lightState.phase === 'party') {
           skyTint = 0.15 + 0.4 * inten;
-          // cielo "baila" un poco con el color medio de la fiesta
           lightCol = lightState.partyColors[Math.floor(now / 400) % lightState.partyColors.length];
           rgb = hexToRgb(lightCol);
         }
@@ -1154,7 +1170,6 @@
         ctx.fillStyle = sky;
         ctx.fillRect(0, 0, w, h);
 
-        // Luna
         var moonX = w * 0.82, moonY = h * 0.12;
         var glow = ctx.createRadialGradient(moonX, moonY, 0, moonX, moonY, 60);
         glow.addColorStop(0, 'rgba(255,255,200,' + (0.25 + 0.15 * inten) + ')');
@@ -1169,7 +1184,6 @@
         ctx.fill();
         ctx.shadowBlur = 0;
 
-        // Halo de ciudad por abajo cuando hay luces
         if (inten > 0.05) {
           var cityGlow = ctx.createLinearGradient(0, h * 0.55, 0, h);
           cityGlow.addColorStop(0, 'rgba(0,0,0,0)');
@@ -1189,18 +1203,16 @@
           ctx.strokeRect(b.x, bTop, b.width, b.height * BW);
           b.windows.forEach(function(row, ri) {
             row.forEach(function(win, ci) {
-              // compat: boolean viejo o objeto
               var lit = (typeof win === 'object') ? win.lit : win;
               if (!lit) return;
               var wx = b.x + ci * BW + 2;
               var wy = h - (ri + 1) * BW + 2;
-              var pulse = 0.75 + 0.25 * Math.sin(tick * 0.05 + ri * 0.4 + ci);
+              var pulse = 0.75 + pulseAmt * Math.sin(tick * 0.05 + ri * 0.4 + ci);
               var a = inten * pulse;
-              if (a < 0.02) return;
+              if (a < 0.03) return;
 
               var useRgb = rgb;
               if (partyMode && typeof win === 'object') {
-                // cada ventana cambia a su ritmo (0.2s - 1.5s)
                 if (now >= win.nextChange) {
                   win.colorIdx = Math.floor(Math.random() * colors.length);
                   win.interval = 200 + Math.random() * 1300;
@@ -1224,6 +1236,7 @@
       if (bgAnimId) cancelAnimationFrame(bgAnimId);
       loop();
       lightState.targetColor = theme.accent || '#7c5cff';
+      lightState.displayColor = lightState.targetColor;
     }
 
     function setBgEnabled(on) {
@@ -1241,23 +1254,123 @@
       }
     }
 
+    // --- Música ---
+    const MUSIC_AMBIENT = 'https://marblack-o.github.io/Grok-x-Claude/inono777-chiptune-but-461573.mp3';
+    const MUSIC_PARTY = 'https://marblack-o.github.io/Grok-x-Claude/hitslab-cyberpunk-futuristic-cyberpunk-industrial-music-474697.mp3';
+    var audioAmbient = null;
+    var audioParty = null;
+    var musicWanted = false; // usuario quiere música
+    var musicMode = 'ambient'; // ambient | party
+
+    function ensureAudioTracks() {
+      if (!audioAmbient) {
+        audioAmbient = new Audio(MUSIC_AMBIENT);
+        audioAmbient.loop = true;
+        audioAmbient.preload = 'auto';
+        audioAmbient.volume = 0;
+      }
+      if (!audioParty) {
+        audioParty = new Audio(MUSIC_PARTY);
+        audioParty.loop = true;
+        audioParty.preload = 'auto';
+        audioParty.volume = 0;
+      }
+    }
+
+    function setMusicEnabled(on) {
+      musicWanted = !!on;
+      theme.music = musicWanted;
+      saveTheme(theme);
+      var btn = document.getElementById('btnMusic');
+      if (btn) {
+        btn.textContent = on ? 'On' : 'Off';
+        btn.className = 'toggle-pill ' + (on ? 'on' : 'off');
+      }
+      ensureAudioTracks();
+      if (!on) {
+        try { audioAmbient.pause(); } catch (e) {}
+        try { audioParty.pause(); } catch (e) {}
+        audioAmbient.volume = 0;
+        audioParty.volume = 0;
+        return;
+      }
+      // necesita gesto del usuario
+      var track = (musicMode === 'party') ? audioParty : audioAmbient;
+      var other = (musicMode === 'party') ? audioAmbient : audioParty;
+      try { other.pause(); } catch (e) {}
+      track.volume = 0.35;
+      var p = track.play();
+      if (p && p.catch) {
+        p.catch(function() {
+          musicWanted = false;
+          theme.music = false;
+          saveTheme(theme);
+          if (btn) { btn.textContent = 'Off'; btn.className = 'toggle-pill off'; }
+          try { showToast('Toca de nuevo para activar música'); } catch (e2) {}
+        });
+      }
+      syncMusicToLights();
+    }
+
+    function syncMusicToLights() {
+      if (!musicWanted) return;
+      ensureAudioTracks();
+      var inten = lightState.intensity;
+      var phase = lightState.phase;
+      var wantParty = (phase === 'party');
+
+      // Cambiar track al entrar/salir de fiesta
+      if (wantParty && musicMode !== 'party') {
+        musicMode = 'party';
+        try { audioAmbient.pause(); audioAmbient.volume = 0; } catch (e) {}
+        audioParty.volume = 0;
+        audioParty.play().catch(function() {});
+      } else if (!wantParty && musicMode === 'party' && (phase === 'idle' || phase === 'fadeIn' || phase === 'dark' || phase === 'fadeOut' || phase === 'partyOut')) {
+        // al apagar fiesta o volver a normal
+        if (phase === 'idle' || phase === 'fadeIn') {
+          musicMode = 'ambient';
+          try { audioParty.pause(); audioParty.volume = 0; } catch (e) {}
+          audioAmbient.volume = 0;
+          audioAmbient.play().catch(function() {});
+        }
+      }
+
+      // Volumen sigue a las luces
+      var base = musicMode === 'party' ? 0.55 : 0.35;
+      var vol = 0;
+      if (phase === 'idle') vol = base;
+      else if (phase === 'fadeOut' || phase === 'partyOut') vol = base * inten;
+      else if (phase === 'dark') vol = 0;
+      else if (phase === 'fadeIn' || phase === 'party') vol = base * Math.max(inten, 0.05);
+
+      try {
+        if (musicMode === 'party') {
+          audioParty.volume = Math.max(0, Math.min(1, vol));
+          audioAmbient.volume = 0;
+        } else {
+          audioAmbient.volume = Math.max(0, Math.min(1, vol));
+          audioParty.volume = 0;
+        }
+      } catch (e) {}
+    }
+
     function initPersonalization() {
+      musicWanted = !!theme.music;
       applyAccent(theme.accent || '#7c5cff', { skipAnim: true });
       setBgEnabled(theme.bg !== false);
-      // music starts off until user taps (browser policy)
-      var btnM = document.getElementById('btnMusic');
-      if (btnM) {
-        btnM.textContent = theme.music ? 'On' : 'Off';
-        btnM.className = 'toggle-pill ' + (theme.music ? 'on' : 'off');
-      }
       setupPixelNight();
 
+      var btnM = document.getElementById('btnMusic');
+      if (btnM) {
+        btnM.textContent = musicWanted ? 'On' : 'Off';
+        btnM.className = 'toggle-pill ' + (musicWanted ? 'on' : 'off');
+        btnM.addEventListener('click', function() {
+          setMusicEnabled(!musicWanted);
+        });
+      }
       var btnBg = document.getElementById('btnBg');
       if (btnBg) btnBg.addEventListener('click', function() {
         setBgEnabled(!theme.bg);
-      });
-      if (btnM) btnM.addEventListener('click', function() {
-        setMusicEnabled(!theme.music);
       });
       document.querySelectorAll('.accent-swatch').forEach(function(btn) {
         btn.addEventListener('click', function() {
