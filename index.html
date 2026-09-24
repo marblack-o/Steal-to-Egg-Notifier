@@ -931,7 +931,27 @@
     }
     let theme = Object.assign({ bg: true, music: false, accent: '#7c5cff' }, loadTheme());
 
-    function applyAccent(color) {
+    // Estado de luces del fondo (easter egg / transiciones)
+    var lightState = {
+      intensity: 1,           // 0..1
+      phase: 'idle',          // idle | fadeOut | dark | fadeIn | party | partyOut
+      phaseStart: 0,
+      targetColor: '#7c5cff', // color al final
+      partyColors: ['#7c5cff', '#22c55e', '#38bdf8', '#f472b6', '#fbbf24', '#ff6b6b', '#a78bfa', '#fb7185'],
+      partyIdx: 0,
+      partyColor: '#7c5cff',
+      clicks: [],             // timestamps de cambios recientes
+      running: false
+    };
+
+    function hexToRgb(hex) {
+      hex = (hex || '#7c5cff').replace('#', '');
+      if (hex.length === 3) hex = hex[0]+hex[0]+hex[1]+hex[1]+hex[2]+hex[2];
+      var n = parseInt(hex, 16);
+      return { r: (n >> 16) & 255, g: (n >> 8) & 255, b: n & 255 };
+    }
+
+    function applyAccentUI(color) {
       if (!color) color = '#7c5cff';
       theme.accent = color;
       document.documentElement.style.setProperty('--accent', color);
@@ -940,6 +960,123 @@
         btn.classList.toggle('active', btn.getAttribute('data-accent') === color);
       });
       saveTheme(theme);
+    }
+
+    function applyAccent(color, opts) {
+      opts = opts || {};
+      if (!color) color = '#7c5cff';
+      applyAccentUI(color);
+      if (opts.skipAnim) {
+        lightState.targetColor = color;
+        lightState.intensity = 1;
+        lightState.phase = 'idle';
+        return;
+      }
+      // Contar cambios en los últimos 8s
+      var now = Date.now();
+      lightState.clicks = lightState.clicks.filter(function(t) { return now - t < 8000; });
+      lightState.clicks.push(now);
+      lightState.targetColor = color;
+
+      var party = lightState.clicks.length >= 4; // 4+ cambios = fiesta
+      startLightSequence(party);
+    }
+
+    function startLightSequence(party) {
+      lightState.running = true;
+      lightState.phase = 'fadeOut';
+      lightState.phaseStart = performance.now();
+      lightState.party = !!party;
+      lightState.partyIdx = 0;
+      lightState.partyColor = lightState.partyColors[0];
+      if (party) {
+        try { showToast('Fiesta de luces 🎉'); } catch (e) {}
+      }
+    }
+
+    function updateLightPhase(now) {
+      if (!lightState.running && lightState.phase === 'idle') return;
+      var elapsed = now - lightState.phaseStart;
+
+      if (lightState.phase === 'fadeOut') {
+        // 2.0s apagando
+        lightState.intensity = Math.max(0, 1 - elapsed / 2000);
+        if (elapsed >= 2000) {
+          lightState.intensity = 0;
+          lightState.phase = 'dark';
+          lightState.phaseStart = now;
+        }
+      } else if (lightState.phase === 'dark') {
+        // 1.3s a oscuras
+        lightState.intensity = 0;
+        if (elapsed >= 1300) {
+          lightState.phase = lightState.party ? 'party' : 'fadeIn';
+          lightState.phaseStart = now;
+          if (lightState.phase === 'party') {
+            lightState.partyIdx = 0;
+            lightState.partyColor = lightState.partyColors[0];
+            // reiniciar timers de cada ventana (desfasados)
+            if (typeof buildings !== 'undefined') {
+              // buildings is local to setupPixelNight - use window._eggBuildings
+            }
+            if (window._eggBuildings) {
+              window._eggBuildings.forEach(function(b) {
+                b.windows.forEach(function(row) {
+                  row.forEach(function(win) {
+                    if (typeof win === 'object') {
+                      win.colorIdx = Math.floor(Math.random() * lightState.partyColors.length);
+                      win.interval = 200 + Math.random() * 1300;
+                      win.nextChange = performance.now() + Math.random() * 800;
+                    }
+                  });
+                });
+              });
+            }
+          }
+        }
+      } else if (lightState.phase === 'fadeIn') {
+        // 2.2s prendiendo al color elegido
+        lightState.intensity = Math.min(1, elapsed / 2200);
+        if (elapsed >= 2200) {
+          lightState.intensity = 1;
+          lightState.phase = 'idle';
+          lightState.running = false;
+        }
+      } else if (lightState.phase === 'party') {
+        // 20s de fiesta: luces a full, colores rotando
+        lightState.intensity = Math.min(1, elapsed / 2200); // prenden en 2.2s al inicio
+        if (elapsed < 2200) {
+          // todavía entrando
+        } else {
+          lightState.intensity = 1;
+        }
+        // cambiar color cada ~0.7s
+        var idx = Math.floor((elapsed - Math.min(elapsed, 2200)) / 700) % lightState.partyColors.length;
+        if (elapsed >= 2200) {
+          lightState.partyIdx = idx;
+          lightState.partyColor = lightState.partyColors[idx];
+        }
+        if (elapsed >= 20000) {
+          lightState.phase = 'partyOut';
+          lightState.phaseStart = now;
+        }
+      } else if (lightState.phase === 'partyOut') {
+        // apagar lento 2s y luego prender color del user 2.2s
+        lightState.intensity = Math.max(0, 1 - elapsed / 2000);
+        if (elapsed >= 2000) {
+          lightState.intensity = 0;
+          lightState.phase = 'dark';
+          lightState.phaseStart = now;
+          lightState.party = false; // después del dark → fadeIn al color elegido
+        }
+      }
+    }
+
+    function currentLightColor() {
+      if (lightState.phase === 'party' || (lightState.phase === 'partyOut' && lightState.party)) {
+        return lightState.partyColor || lightState.targetColor;
+      }
+      return lightState.targetColor || theme.accent || '#7c5cff';
     }
 
     // --- Canvas Pixel Night ---
@@ -968,27 +1105,59 @@
           var windows = [];
           for (var r = 0; r < h; r++) {
             var row = [];
-            for (var c = 0; c < w / BW; c++) row.push(Math.random() > 0.45);
+            for (var c = 0; c < w / BW; c++) {
+              var lit = Math.random() > 0.45;
+              row.push({
+                lit: lit,
+                // estado por ventana para la fiesta
+                colorIdx: Math.floor(Math.random() * 8),
+                nextChange: 0,
+                interval: 200 + Math.random() * 1300 // 0.2s .. 1.5s
+              });
+            }
             windows.push(row);
           }
           buildings.push({ x: curX, width: w, height: h, windows: windows });
           curX += w + 1;
         }
+        window._eggBuildings = buildings;
       }
       var tick = 0;
       bgTickFn = function() {
         if (!theme.bg) return;
         tick++;
+        var now = performance.now();
+        updateLightPhase(now);
+        var inten = lightState.intensity;
+        var lightCol = currentLightColor();
+        var rgb = hexToRgb(lightCol);
         var w = bgCanvas.width, h = bgCanvas.height;
+
+        // Cielo: de noche normal a teñido por las luces (fiesta / intensidad)
         var sky = ctx.createLinearGradient(0, 0, 0, h);
+        var skyTint = 0.08 + 0.22 * inten;
+        if (lightState.phase === 'party') {
+          skyTint = 0.15 + 0.4 * inten;
+          // cielo "baila" un poco con el color medio de la fiesta
+          lightCol = lightState.partyColors[Math.floor(now / 400) % lightState.partyColors.length];
+          rgb = hexToRgb(lightCol);
+        }
         sky.addColorStop(0, '#000010');
-        sky.addColorStop(0.6, '#000428');
-        sky.addColorStop(1, '#0a0a1a');
+        sky.addColorStop(0.45, 'rgb(' +
+          Math.floor(0 + rgb.r * skyTint * 0.5) + ',' +
+          Math.floor(4 + rgb.g * skyTint * 0.4) + ',' +
+          Math.floor(40 + rgb.b * skyTint * 0.6) + ')');
+        sky.addColorStop(1, 'rgb(' +
+          Math.floor(10 + rgb.r * skyTint) + ',' +
+          Math.floor(10 + rgb.g * skyTint * 0.8) + ',' +
+          Math.floor(26 + rgb.b * skyTint) + ')');
         ctx.fillStyle = sky;
         ctx.fillRect(0, 0, w, h);
+
+        // Luna
         var moonX = w * 0.82, moonY = h * 0.12;
         var glow = ctx.createRadialGradient(moonX, moonY, 0, moonX, moonY, 60);
-        glow.addColorStop(0, 'rgba(255,255,200,0.3)');
+        glow.addColorStop(0, 'rgba(255,255,200,' + (0.25 + 0.15 * inten) + ')');
         glow.addColorStop(1, 'rgba(0,0,0,0)');
         ctx.fillStyle = glow;
         ctx.fillRect(0, 0, w, h);
@@ -999,6 +1168,18 @@
         ctx.shadowBlur = 15;
         ctx.fill();
         ctx.shadowBlur = 0;
+
+        // Halo de ciudad por abajo cuando hay luces
+        if (inten > 0.05) {
+          var cityGlow = ctx.createLinearGradient(0, h * 0.55, 0, h);
+          cityGlow.addColorStop(0, 'rgba(0,0,0,0)');
+          cityGlow.addColorStop(1, 'rgba(' + rgb.r + ',' + rgb.g + ',' + rgb.b + ',' + (0.15 * inten) + ')');
+          ctx.fillStyle = cityGlow;
+          ctx.fillRect(0, 0, w, h);
+        }
+
+        var partyMode = (lightState.phase === 'party');
+        var colors = lightState.partyColors;
         buildings.forEach(function(b) {
           var bTop = h - b.height * BW;
           ctx.fillStyle = '#08081e';
@@ -1007,12 +1188,28 @@
           ctx.lineWidth = 1;
           ctx.strokeRect(b.x, bTop, b.width, b.height * BW);
           b.windows.forEach(function(row, ri) {
-            row.forEach(function(lit, ci) {
+            row.forEach(function(win, ci) {
+              // compat: boolean viejo o objeto
+              var lit = (typeof win === 'object') ? win.lit : win;
               if (!lit) return;
               var wx = b.x + ci * BW + 2;
               var wy = h - (ri + 1) * BW + 2;
-              var pulse = 0.7 + 0.3 * Math.sin(tick * 0.05 + ri * 0.4 + ci);
-              ctx.fillStyle = 'rgba(255, 220, 100, ' + pulse + ')';
+              var pulse = 0.75 + 0.25 * Math.sin(tick * 0.05 + ri * 0.4 + ci);
+              var a = inten * pulse;
+              if (a < 0.02) return;
+
+              var useRgb = rgb;
+              if (partyMode && typeof win === 'object') {
+                // cada ventana cambia a su ritmo (0.2s - 1.5s)
+                if (now >= win.nextChange) {
+                  win.colorIdx = Math.floor(Math.random() * colors.length);
+                  win.interval = 200 + Math.random() * 1300;
+                  win.nextChange = now + win.interval;
+                }
+                useRgb = hexToRgb(colors[win.colorIdx % colors.length]);
+              }
+
+              ctx.fillStyle = 'rgba(' + useRgb.r + ',' + useRgb.g + ',' + useRgb.b + ',' + a + ')';
               ctx.fillRect(wx, wy, BW - 4, BW - 4);
             });
           });
@@ -1026,6 +1223,7 @@
       resize();
       if (bgAnimId) cancelAnimationFrame(bgAnimId);
       loop();
+      lightState.targetColor = theme.accent || '#7c5cff';
     }
 
     function setBgEnabled(on) {
@@ -1043,38 +1241,8 @@
       }
     }
 
-    // --- Música ---
-    var audioBg = null;
-    function ensureAudio() {
-      if (!audioBg) {
-        audioBg = new Audio(MUSIC_URL);
-        audioBg.loop = true;
-        audioBg.volume = 0.35;
-      }
-      return audioBg;
-    }
-    function setMusicEnabled(on) {
-      theme.music = !!on;
-      saveTheme(theme);
-      var btn = document.getElementById('btnMusic');
-      if (btn) {
-        btn.textContent = on ? 'On' : 'Off';
-        btn.className = 'toggle-pill ' + (on ? 'on' : 'off');
-      }
-      var a = ensureAudio();
-      if (on) {
-        a.play().catch(function() {
-          theme.music = false;
-          saveTheme(theme);
-          if (btn) { btn.textContent = 'Off'; btn.className = 'toggle-pill off'; }
-        });
-      } else {
-        a.pause();
-      }
-    }
-
     function initPersonalization() {
-      applyAccent(theme.accent || '#7c5cff');
+      applyAccent(theme.accent || '#7c5cff', { skipAnim: true });
       setBgEnabled(theme.bg !== false);
       // music starts off until user taps (browser policy)
       var btnM = document.getElementById('btnMusic');
