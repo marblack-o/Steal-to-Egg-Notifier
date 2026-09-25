@@ -1,17 +1,17 @@
 {
-  "updatedAt": 1790340381607,
+  "updatedAt": 1790340715615,
   "eggs": [
     {
-      "name": "T-Rex",
-      "moneyText": "~$25m/s",
-      "moneyValue": 25000000,
-      "location": "Prehistoric",
-      "speed": "20.5M",
+      "name": "Pure Jellyfish",
+      "moneyText": "~$225m/s",
+      "moneyValue": 225000000,
+      "location": "Angels",
+      "speed": "20B",
       "join": "https://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f",
-      "wiki": "https://stealanegg.fandom.com/wiki/T-Rex",
-      "imageUrl": "https://cdn.discordapp.com/emojis/1547091154850545794.png?size=128&quality=lossless",
-      "fullText": "-# <@&1550979557194993674> T-Rex spawned in Prehistoric! <@&1550981072974643281> <@&1550981439066087444>\nSecret Egg Spawned!! - <t:1790340303:t>\n🥚 *Egg:* T-Rex\n🦖*Location:* Prehistoric\n⏱ *Spawned:* hace 1 minutos\n💰 *Money:* ~$25m/s\n⚡ *Recommended Speed:* 20.5M\n🎮 *Join Game:*\nhttps://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f\nSenZ V2 | Steal An Egg Notifier\n🔍 *Wiki:*\nhttps://stealanegg.fandom.com/wiki/T-Rex",
-      "timestamp": 1790340381111
+      "wiki": "https://stealanegg.fandom.com/wiki/Pure_Jellyfish",
+      "imageUrl": "https://cdn.discordapp.com/emojis/1548678024512274564.png?size=128&quality=lossless",
+      "fullText": "-# <@&1550979557194993674> Pure Jellyfish spawned in Angels! <@&1550981080973058170> <@&1550981412696358942>\nSecret Egg Spawned!! - <t:1790340603:t>\n🥚 *Egg:* Pure Jellyfish\n👼*Location:* Angels\n⏱ *Spawned:* hace 1 minutos\n💰 *Money:* ~$225m/s\n⚡ *Recommended Speed:* 20B\n🎮 *Join Game:*\nhttps://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f\nSenZ V2 | Steal An Egg Notifier\n🔍 *Wiki:*\nhttps://stealanegg.fandom.com/wiki/Pure_Jellyfish",
+      "timestamp": 1790340715039
     }
   ]
 }
