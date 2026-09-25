@@ -1,5 +1,5 @@
 {
-  "updatedAt": 1790299275854,
+  "updatedAt": 1790299570358,
   "eggs": [
     {
       "name": "Tralaledon",
@@ -12,6 +12,18 @@
       "imageUrl": "https://cdn.discordapp.com/emojis/1547091152518258810.png?size=128&quality=lossless",
       "fullText": "-# <@&1550979557194993674> Tralaledon spawned in Prehistoric! <@&1550981072974643281> <@&1550981435219779594>\nSecret Egg Spawned!! - <t:1790299207:t>\n🥚 *Egg:* Tralaledon\n🦖*Location:* Prehistoric\n⏱ *Spawned:* hace 1 minutos\n💰 *Money:* ~$32m/s\n⚡ *Recommended Speed:* 20.5M\n🎮 *Join Game:*\nhttps://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f\nSenZ V2 | Steal An Egg Notifier\n🔍 *Wiki:*\nhttps://stealanegg.fandom.com/wiki/Tralaledon",
       "timestamp": 1790299275334
+    },
+    {
+      "name": "Kraken",
+      "moneyText": "~$15m/s",
+      "moneyValue": 15000000,
+      "location": "Abyss Ocean",
+      "speed": "3M",
+      "join": "https://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f",
+      "wiki": "https://stealanegg.fandom.com/wiki/Kraken",
+      "imageUrl": "https://cdn.discordapp.com/emojis/1547091128178704414.png?size=128&quality=lossless",
+      "fullText": "-# <@&1550979557194993674> Kraken spawned in Abyss Ocean! <@&1550981072974643281> <@&1550981442912256123>\nSecret Egg Spawned!! - <t:1790299506:t>\n🥚 *Egg:* Kraken\n🦈*Location:* Abyss Ocean\n⏱ *Spawned:* hace 1 minutos\n💰 *Money:* ~$15m/s\n⚡ *Recommended Speed:* 3M\n🎮 *Join Game:*\nhttps://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f\nSenZ V2 | Steal An Egg Notifier\n🔍 *Wiki:*\nhttps://stealanegg.fandom.com/wiki/Kraken",
+      "timestamp": 1790299569308
     }
   ]
 }
