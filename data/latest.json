@@ -1,5 +1,5 @@
 {
-  "updatedAt": 1790367726840,
+  "updatedAt": 1790367729854,
   "eggs": [
     {
       "name": "Gargoyle",
@@ -12,6 +12,18 @@
       "imageUrl": "https://cdn.discordapp.com/emojis/1548678018950758404.png?size=128&quality=lossless",
       "fullText": "-# <@&1550979557194993674> Gargoyle spawned in Demons! <@&1550981080973058170> <@&1550981408783335485>\nSecret Egg Spawned!! - <t:1790367602:t>\n🥚 *Egg:* Gargoyle\n😈*Location:* Demons\n⏱ *Spawned:* hace 2 minutos\n💰 *Money:* ~$225m/s\n⚡ *Recommended Speed:* 20B\n🎮 *Join Game:*\nhttps://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f\nSenZ V2 | Steal An Egg Notifier\n🔍 *Wiki:*\nhttps://stealanegg.fandom.com/wiki/Gargoyle",
       "timestamp": 1790367726348
+    },
+    {
+      "name": "T-Rex",
+      "moneyText": "~$25m/s",
+      "moneyValue": 25000000,
+      "location": "Prehistoric",
+      "speed": "20.5M",
+      "join": "https://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f",
+      "wiki": "https://stealanegg.fandom.com/wiki/T-Rex",
+      "imageUrl": "https://cdn.discordapp.com/emojis/1547091154850545794.png?size=128&quality=lossless",
+      "fullText": "-# <@&1550979557194993674> T-Rex spawned in Prehistoric! <@&1550981072974643281> <@&1550981439066087444>\nSecret Egg Spawned!! - <t:1790367607:t>\n🥚 *Egg:* T-Rex\n🦖*Location:* Prehistoric\n⏱ *Spawned:* hace 2 minutos\n💰 *Money:* ~$25m/s\n⚡ *Recommended Speed:* 20.5M\n🎮 *Join Game:*\nhttps://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f\nSenZ V2 | Steal An Egg Notifier\n🔍 *Wiki:*\nhttps://stealanegg.fandom.com/wiki/T-Rex",
+      "timestamp": 1790367729598
     }
   ]
 }
