@@ -1,17 +1,17 @@
 {
-  "updatedAt": 1790296322890,
+  "updatedAt": 1790297179232,
   "eggs": [
     {
-      "name": "Gargoyle",
-      "moneyText": "~$225m/s",
-      "moneyValue": 225000000,
-      "location": "Demons",
-      "speed": "20B",
+      "name": "Kraken",
+      "moneyText": "~$15m/s",
+      "moneyValue": 15000000,
+      "location": "Abyss Ocean",
+      "speed": "3M",
       "join": "https://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f",
-      "wiki": "https://stealanegg.fandom.com/wiki/Gargoyle",
-      "imageUrl": "https://cdn.discordapp.com/emojis/1548678018950758404.png?size=128&quality=lossless",
-      "fullText": "-# <@&1550979557194993674> Gargoyle spawned in Demons! <@&1550981080973058170> <@&1550981408783335485>\nSecret Egg Spawned!! - <t:1790296206:t>\n🥚 *Egg:* Gargoyle\n😈*Location:* Demons\n⏱ *Spawned:* hace 1 minutos\n💰 *Money:* ~$225m/s\n⚡ *Recommended Speed:* 20B\n🎮 *Join Game:*\nhttps://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f\nSenZ V2 | Steal An Egg Notifier\n🔍 *Wiki:*\nhttps://stealanegg.fandom.com/wiki/Gargoyle",
-      "timestamp": 1790296322147
+      "wiki": "https://stealanegg.fandom.com/wiki/Kraken",
+      "imageUrl": "https://cdn.discordapp.com/emojis/1547091128178704414.png?size=128&quality=lossless",
+      "fullText": "-# <@&1550979557194993674> Kraken spawned in Abyss Ocean! <@&1550981072974643281> <@&1550981442912256123>\nSecret Egg Spawned!! - <t:1790297107:t>\n🥚 *Egg:* Kraken\n🦈*Location:* Abyss Ocean\n⏱ *Spawned:* hace 1 minutos\n💰 *Money:* ~$15m/s\n⚡ *Recommended Speed:* 3M\n🎮 *Join Game:*\nhttps://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f\nSenZ V2 | Steal An Egg Notifier\n🔍 *Wiki:*\nhttps://stealanegg.fandom.com/wiki/Kraken",
+      "timestamp": 1790297178671
     }
   ]
 }
