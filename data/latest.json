@@ -1,17 +1,17 @@
 {
-  "updatedAt": 1790342507899,
+  "updatedAt": 1790343395218,
   "eggs": [
     {
-      "name": "Centaur",
-      "moneyText": "~$350m/s",
-      "moneyValue": 350000000,
-      "location": "Angels",
-      "speed": "20B",
+      "name": "Kraken",
+      "moneyText": "~$15m/s",
+      "moneyValue": 15000000,
+      "location": "Abyss Ocean",
+      "speed": "3M",
       "join": "https://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f",
-      "wiki": "https://stealanegg.fandom.com/wiki/Centaur",
-      "imageUrl": "https://cdn.discordapp.com/emojis/1548678014156677250.png?size=128&quality=lossless",
-      "fullText": "-# <@&1550979557194993674> Centaur spawned in Angels! <@&1550981080973058170> <@&1550981404777521173>\nSecret Egg Spawned!! - <t:1790342403:t>\n🥚 *Egg:* Centaur\n👼*Location:* Angels\n⏱ *Spawned:* hace 1 minutos\n💰 *Money:* ~$350m/s\n⚡ *Recommended Speed:* 20B\n🎮 *Join Game:*\nhttps://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f\nSenZ V2 | Steal An Egg Notifier\n🔍 *Wiki:*\nhttps://stealanegg.fandom.com/wiki/Centaur",
-      "timestamp": 1790342507159
+      "wiki": "https://stealanegg.fandom.com/wiki/Kraken",
+      "imageUrl": "https://cdn.discordapp.com/emojis/1547091128178704414.png?size=128&quality=lossless",
+      "fullText": "-# <@&1550979557194993674> Kraken spawned in Abyss Ocean! <@&1550981072974643281> <@&1550981442912256123>\nSecret Egg Spawned!! - <t:1790343002:t>\n🥚 *Egg:* Kraken\n🦈*Location:* Abyss Ocean\n⏱ *Spawned:* hace 6 minutos\n💰 *Money:* ~$15m/s\n⚡ *Recommended Speed:* 3M\n🎮 *Join Game:*\nhttps://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f\nSenZ V2 | Steal An Egg Notifier\n🔍 *Wiki:*\nhttps://stealanegg.fandom.com/wiki/Kraken",
+      "timestamp": 1790343394404
     }
   ]
 }
