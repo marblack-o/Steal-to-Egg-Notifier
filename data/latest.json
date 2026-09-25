@@ -1,5 +1,5 @@
 {
-  "updatedAt": 1790305327508,
+  "updatedAt": 1790305599008,
   "eggs": [
     {
       "name": "Phoenix",
@@ -12,6 +12,18 @@
       "imageUrl": "https://cdn.discordapp.com/emojis/1547091145517965322.png?size=128&quality=lossless",
       "fullText": "-# <@&1550979752842764408> Phoenix spawned in Volcano! <@&1550981076963434707> <@&1550981392785997958>\nEternal Egg Spawned!! - <t:1790305213:t>\n🥚 *Egg:* Phoenix\n🌋*Location:* Volcano\n⏱ *Spawned:* hace 1 minutos\n💰 *Money:* ~$85m/s\n⚡ *Recommended Speed:* 840K\n🎮 *Join Game:*\nhttps://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f\nSenZ V2 | Steal An Egg Notifier\n🔍 *Wiki:*\nhttps://stealanegg.fandom.com/wiki/Phoenix",
       "timestamp": 1790305326924
+    },
+    {
+      "name": "King Snake",
+      "moneyText": "~$3.5m/s",
+      "moneyValue": 3500000,
+      "location": "Jungle",
+      "speed": "50K",
+      "join": "https://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f",
+      "wiki": "https://stealanegg.fandom.com/wiki/King_Snake",
+      "imageUrl": "https://cdn.discordapp.com/emojis/1547091118523424908.png?size=128&quality=lossless",
+      "fullText": "-# <@&1550979557194993674> King Snake spawned in Jungle! <@&1550981072974643281> <@&1550981457638330388>\nSecret Egg Spawned!! - <t:1790305506:t>\n🥚 *Egg:* King Snake\n😈 *Location:* Jungle\n⏱ *Spawned:* hace 1 minutos\n💰 *Money:* ~$3.5m/s\n⚡ *Recommended Speed:* 50K\n🎮 *Join Game:*\nhttps://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f\nSenZ V2 | Steal An Egg Notifier\n🔍 *Wiki:*\nhttps://stealanegg.fandom.com/wiki/King_Snake",
+      "timestamp": 1790305598462
     }
   ]
 }
