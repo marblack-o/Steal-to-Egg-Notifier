@@ -1,41 +1,17 @@
 {
-  "updatedAt": 1790343404535,
+  "updatedAt": 1790344075575,
   "eggs": [
     {
-      "name": "Pure Jellyfish",
-      "moneyText": "~$225m/s",
-      "moneyValue": 225000000,
-      "location": "Angels",
-      "speed": "20B",
+      "name": "Cosmic Skeleton Boss",
+      "moneyText": "~$45m/s",
+      "moneyValue": 45000000,
+      "location": "Cosmic",
+      "speed": "840M",
       "join": "https://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f",
-      "wiki": "https://stealanegg.fandom.com/wiki/Pure_Jellyfish",
-      "imageUrl": "https://cdn.discordapp.com/emojis/1548678024512274564.png?size=128&quality=lossless",
-      "fullText": "-# <@&1550979557194993674> Pure Jellyfish spawned in Angels! <@&1550981080973058170> <@&1550981412696358942>\nSecret Egg Spawned!! - <t:1790343007:t>\n🥚 *Egg:* Pure Jellyfish\n👼*Location:* Angels\n⏱ *Spawned:* hace 6 minutos\n💰 *Money:* ~$225m/s\n⚡ *Recommended Speed:* 20B\n🎮 *Join Game:*\nhttps://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f\nSenZ V2 | Steal An Egg Notifier\n🔍 *Wiki:*\nhttps://stealanegg.fandom.com/wiki/Pure_Jellyfish",
-      "timestamp": 1790343404119
-    },
-    {
-      "name": "Kraken",
-      "moneyText": "~$15m/s",
-      "moneyValue": 15000000,
-      "location": "Abyss Ocean",
-      "speed": "3M",
-      "join": "https://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f",
-      "wiki": "https://stealanegg.fandom.com/wiki/Kraken",
-      "imageUrl": "https://cdn.discordapp.com/emojis/1547091128178704414.png?size=128&quality=lossless",
-      "fullText": "-# <@&1550979557194993674> Kraken spawned in Abyss Ocean! <@&1550981072974643281> <@&1550981442912256123>\nSecret Egg Spawned!! - <t:1790343002:t>\n🥚 *Egg:* Kraken\n🦈*Location:* Abyss Ocean\n⏱ *Spawned:* hace 6 minutos\n💰 *Money:* ~$15m/s\n⚡ *Recommended Speed:* 3M\n🎮 *Join Game:*\nhttps://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f\nSenZ V2 | Steal An Egg Notifier\n🔍 *Wiki:*\nhttps://stealanegg.fandom.com/wiki/Kraken",
-      "timestamp": 1790343394404
-    },
-    {
-      "name": "Cerberus",
-      "moneyText": "~$8m/s",
-      "moneyValue": 8000000,
-      "location": "Volcano",
-      "speed": "840K",
-      "join": "https://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f",
-      "wiki": "https://stealanegg.fandom.com/wiki/Cerberus",
-      "imageUrl": "https://cdn.discordapp.com/emojis/1547091099036680222.png?size=128&quality=lossless",
-      "fullText": "-# <@&1550979557194993674> Cerberus spawned in Volcano! <@&1550981072974643281> <@&1550981446917824544>\nSecret Egg Spawned!! - <t:1790343007:t>\n🥚 *Egg:* Cerberus\n🌋*Location:* Volcano\n⏱ *Spawned:* hace 6 minutos\n💰 *Money:* ~$8m/s\n⚡ *Recommended Speed:* 840K\n🎮 *Join Game:*\nhttps://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f\nSenZ V2 | Steal An Egg Notifier\n🔍 *Wiki:*\nhttps://stealanegg.fandom.com/wiki/Cerberus",
-      "timestamp": 1790343400806
+      "wiki": "https://stealanegg.fandom.com/wiki/Cosmic_Skeleton_Boss",
+      "imageUrl": "https://cdn.discordapp.com/emojis/1547091103537438741.png?size=128&quality=lossless",
+      "fullText": "-# <@&1550979557194993674> Cosmic Skeleton Boss spawned in Cosmic! <@&1550981072974643281> <@&1550981430534733845>\nSecret Egg Spawned!! - <t:1790343903:t>\n🥚 *Egg:* Cosmic Skeleton Boss\n🌌*Location:* Cosmic\n⏱ *Spawned:* hace 2 minutos\n💰 *Money:* ~$45m/s\n⚡ *Recommended Speed:* 840M\n🎮 *Join Game:*\nhttps://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f\nSenZ V2 | Steal An Egg Notifier\n🔍 *Wiki:*\nhttps://stealanegg.fandom.com/wiki/Cosmic_Skeleton_Boss",
+      "timestamp": 1790344074499
     }
   ]
 }
