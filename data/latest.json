@@ -1,41 +1,17 @@
 {
-  "updatedAt": 1790407439946,
+  "updatedAt": 1790408036637,
   "eggs": [
     {
-      "name": "Pure Jellyfish",
-      "moneyText": "~$225m/s",
-      "moneyValue": 225000000,
-      "location": "Angels",
-      "speed": "20B",
+      "name": "Mutant Shark",
+      "moneyText": "~$215m/s",
+      "moneyValue": 215000000,
+      "location": "Titan Temple",
+      "speed": "8.5B",
       "join": "https://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f",
-      "wiki": "https://stealanegg.fandom.com/wiki/Pure_Jellyfish",
-      "imageUrl": "https://cdn.discordapp.com/emojis/1548678024512274564.png?size=128&quality=lossless",
-      "fullText": "-# <@&1550979557194993674> Pure Jellyfish spawned in Angels! <@&1550981080973058170> <@&1550981412696358942>\nSecret Egg Spawned!! - <t:1790406907:t>\n🥚 *Egg:* Pure Jellyfish\n👼*Location:* Angels\n⏱ *Spawned:* hace 1 minutos\n💰 *Money:* ~$225m/s\n⚡ *Recommended Speed:* 20B\n🎮 *Join Game:*\nhttps://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f\nSenZ V2 | Steal An Egg Notifier\n🔍 *Wiki:*\nhttps://stealanegg.fandom.com/wiki/Pure_Jellyfish",
-      "timestamp": 1790407003875
-    },
-    {
-      "name": "Ice Dragon",
-      "moneyText": "~$65m/s",
-      "moneyValue": 65000000,
-      "location": "Snow",
-      "speed": "210K",
-      "join": "https://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f",
-      "wiki": "https://stealanegg.fandom.com/wiki/Ice_Dragon",
-      "imageUrl": "https://cdn.discordapp.com/emojis/1547091116606627900.png?size=128&quality=lossless",
-      "fullText": "-# <@&1550979752842764408> Ice Dragon spawned in Snow! <@&1550981076963434707> <@&1550981397261328515>\nEternal Egg Spawned!! - <t:1790407205:t>\n🥚 *Egg:* Ice Dragon\n❄️*Location:* Snow\n⏱ *Spawned:* hace 3 minutos\n💰 *Money:* ~$65m/s\n⚡ *Recommended Speed:* 210K\n🎮 *Join Game:*\nhttps://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f\nSenZ V2 | Steal An Egg Notifier\n🔍 *Wiki:*\nhttps://stealanegg.fandom.com/wiki/Ice_Dragon",
-      "timestamp": 1790407439401
-    },
-    {
-      "name": "TRex",
-      "moneyText": "~$25m/s",
-      "moneyValue": 25000000,
-      "location": "Prehistoric",
-      "speed": "20.5M",
-      "join": "https://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f",
-      "wiki": "https://stealanegg.fandom.com/wiki/TRex",
-      "imageUrl": "https://cdn.discordapp.com/emojis/1547091154850545794.png?size=128&quality=lossless",
-      "fullText": "-# <@&1550979557194993674> TRex spawned in Prehistoric! <@&1550981072974643281> <@&1550981439066087444>\nSecret Egg Spawned!! - <t:1790407007:t>\n🥚 *Egg:* TRex\n🦖*Location:* Prehistoric\n⏱ *Spawned:* hace 2 minutos\n💰 *Money:* ~$25m/s\n⚡ *Recommended Speed:* 20.5M\n🎮 *Join Game:*\nhttps://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f\nSenZ V2 | Steal An Egg Notifier\n🔍 *Wiki:*\nhttps://stealanegg.fandom.com/wiki/TRex",
-      "timestamp": 1790407148134
+      "wiki": "https://stealanegg.fandom.com/wiki/Mutant_Shark",
+      "imageUrl": "https://cdn.discordapp.com/emojis/1547091135439314954.png?size=128&quality=lossless",
+      "fullText": "-# <@&1550979557194993674> Mutant Shark spawned in Titan Temple! <@&1550981080973058170> <@&1550981417838846033>\nSecret Egg Spawned!! - <t:1790407443:t>\n🥚 *Egg:* Mutant Shark\n🏛️*Location:* Titan Temple\n⏱ *Spawned:* hace 9 minutos\n💰 *Money:* ~$215m/s\n⚡ *Recommended Speed:* 8.5B\n🎮 *Join Game:*\nhttps://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f\nSenZ V2 | Steal An Egg Notifier\n🔍 *Wiki:*\nhttps://stealanegg.fandom.com/wiki/Mutant_Shark",
+      "timestamp": 1790408036035
     }
   ]
 }
