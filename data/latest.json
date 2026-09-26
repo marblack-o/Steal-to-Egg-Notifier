@@ -1,17 +1,17 @@
 {
-  "updatedAt": 1790395131239,
+  "updatedAt": 1790395713235,
   "eggs": [
     {
-      "name": "Pure Jellyfish",
-      "moneyText": "~$225m/s",
-      "moneyValue": 225000000,
-      "location": "Angels",
-      "speed": "20B",
+      "name": "Cosmic Dragon",
+      "moneyText": "~$60m/s",
+      "moneyValue": 60000000,
+      "location": "Cosmic",
+      "speed": "840M",
       "join": "https://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f",
-      "wiki": "https://stealanegg.fandom.com/wiki/Pure_Jellyfish",
-      "imageUrl": "https://cdn.discordapp.com/emojis/1548678024512274564.png?size=128&quality=lossless",
-      "fullText": "-# <@&1550979557194993674> Pure Jellyfish spawned in Angels! <@&1550981080973058170> <@&1550981412696358942>\nSecret Egg Spawned!! - <t:1790394902:t>\n🥚 *Egg:* Pure Jellyfish\n👼*Location:* Angels\n⏱ *Spawned:* hace 3 minutos\n💰 *Money:* ~$225m/s\n⚡ *Recommended Speed:* 20B\n🎮 *Join Game:*\nhttps://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f\nSenZ V2 | Steal An Egg Notifier\n🔍 *Wiki:*\nhttps://stealanegg.fandom.com/wiki/Pure_Jellyfish",
-      "timestamp": 1790395130712
+      "wiki": "https://stealanegg.fandom.com/wiki/Cosmic_Dragon",
+      "imageUrl": "https://cdn.discordapp.com/emojis/1547091101221916703.png?size=128&quality=lossless",
+      "fullText": "-# <@&1550979557194993674> Cosmic Dragon spawned in Cosmic! <@&1550981076963434707> <@&1550981426261004400>\nSecret Egg Spawned!! - <t:1790395505:t>\n🥚 *Egg:* Cosmic Dragon\n🌌*Location:* Cosmic\n⏱ *Spawned:* hace 3 minutos\n💰 *Money:* ~$60m/s\n⚡ *Recommended Speed:* 840M\n🎮 *Join Game:*\nhttps://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f\nSenZ V2 | Steal An Egg Notifier\n🔍 *Wiki:*\nhttps://stealanegg.fandom.com/wiki/Cosmic_Dragon",
+      "timestamp": 1790395712464
     }
   ]
 }
