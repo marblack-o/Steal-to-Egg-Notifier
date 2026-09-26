@@ -1,5 +1,5 @@
 {
-  "updatedAt": 1790437804393,
+  "updatedAt": 1790437874618,
   "eggs": [
     {
       "name": "Eternal Lunar Dragon",
@@ -12,6 +12,18 @@
       "imageUrl": "https://cdn.discordapp.com/emojis/1547091108662607892.png?size=128&quality=lossless",
       "fullText": "-# <@&1550979752842764408> Eternal Lunar Dragon spawned in Cosmic! <@&1550981080973058170> <@&1550981377103626332>\nEternal Egg Spawned!! - <t:1790437513:t>\n🥚 *Egg:* Eternal Lunar Dragon\n🌌*Location:* Cosmic\n⏱ *Spawned:* hace 4 minutos\n💰 *Money:* ~$250m/s\n⚡ *Recommended Speed:* 840M\n🎮 *Join Game:*\nhttps://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f\nSenZ V2 | Steal An Egg Notifier\n🔍 *Wiki:*\nhttps://stealanegg.fandom.com/wiki/Eternal_Lunar_Dragon",
       "timestamp": 1790437803415
+    },
+    {
+      "name": "Cosmic Skeleton Boss",
+      "moneyText": "~$45m/s",
+      "moneyValue": 45000000,
+      "location": "Cosmic",
+      "speed": "840M",
+      "join": "https://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f",
+      "wiki": "https://stealanegg.fandom.com/wiki/Cosmic_Skeleton_Boss",
+      "imageUrl": "https://cdn.discordapp.com/emojis/1547091103537438741.png?size=128&quality=lossless",
+      "fullText": "-# <@&1550979557194993674> Cosmic Skeleton Boss spawned in Cosmic! <@&1550981072974643281> <@&1550981430534733845>\nSecret Egg Spawned!! - <t:1790437537:t>\n🥚 *Egg:* Cosmic Skeleton Boss\n🌌*Location:* Cosmic\n⏱ *Spawned:* hace 5 minutos\n💰 *Money:* ~$45m/s\n⚡ *Recommended Speed:* 840M\n🎮 *Join Game:*\nhttps://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f\nSenZ V2 | Steal An Egg Notifier\n🔍 *Wiki:*\nhttps://stealanegg.fandom.com/wiki/Cosmic_Skeleton_Boss",
+      "timestamp": 1790437874088
     }
   ]
 }
