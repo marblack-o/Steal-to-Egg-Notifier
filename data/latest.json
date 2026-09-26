@@ -1,41 +1,17 @@
 {
-  "updatedAt": 1790394805484,
+  "updatedAt": 1790395131239,
   "eggs": [
     {
-      "name": "NightFlame",
-      "moneyText": "~$3b/s",
-      "moneyValue": 3000000000,
-      "location": "Titan Temple",
-      "speed": "8.5B",
-      "join": "https://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f",
-      "wiki": "https://stealanegg.fandom.com/wiki/NightFlame",
-      "imageUrl": "https://cdn.discordapp.com/emojis/1547091143156703303.png?size=128&quality=lossless",
-      "fullText": "-# <@&1550979875400056832> NightFlame spawned in Titan Temple! <@&1550981089542021173> <@&1550981349668552820>\nDivine Egg Spawned!! - <t:1790394307:t>\n🥚 *Egg:* NightFlame\n🏛️*Location:* Titan Temple\n⏱ *Spawned:* hace 4 minutos\n💰 *Money:* ~$3b/s\n⚡ *Recommended Speed:* 8.5B\n🎮 *Join Game:*\nhttps://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f\nSenZ V2 | Steal An Egg Notifier\n🔍 *Wiki:*\nhttps://stealanegg.fandom.com/wiki/NightFlame",
-      "timestamp": 1790394551693
-    },
-    {
-      "name": "Gargoyle",
+      "name": "Pure Jellyfish",
       "moneyText": "~$225m/s",
       "moneyValue": 225000000,
-      "location": "Demons",
+      "location": "Angels",
       "speed": "20B",
       "join": "https://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f",
-      "wiki": "https://stealanegg.fandom.com/wiki/Gargoyle",
-      "imageUrl": "https://cdn.discordapp.com/emojis/1548678018950758404.png?size=128&quality=lossless",
-      "fullText": "-# <@&1550979557194993674> Gargoyle spawned in Demons! <@&1550981080973058170> <@&1550981408783335485>\nSecret Egg Spawned!! - <t:1790394302:t>\n🥚 *Egg:* Gargoyle\n😈*Location:* Demons\n⏱ *Spawned:* hace 4 minutos\n💰 *Money:* ~$225m/s\n⚡ *Recommended Speed:* 20B\n🎮 *Join Game:*\nhttps://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f\nSenZ V2 | Steal An Egg Notifier\n🔍 *Wiki:*\nhttps://stealanegg.fandom.com/wiki/Gargoyle",
-      "timestamp": 1790394548542
-    },
-    {
-      "name": "Tralaledon",
-      "moneyText": "~$32m/s",
-      "moneyValue": 32000000,
-      "location": "Prehistoric",
-      "speed": "20.5M",
-      "join": "https://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f",
-      "wiki": "https://stealanegg.fandom.com/wiki/Tralaledon",
-      "imageUrl": "https://cdn.discordapp.com/emojis/1547091152518258810.png?size=128&quality=lossless",
-      "fullText": "-# <@&1550979557194993674> Tralaledon spawned in Prehistoric! <@&1550981072974643281> <@&1550981435219779594>\nSecret Egg Spawned!! - <t:1790394602:t>\n🥚 *Egg:* Tralaledon\n🦖*Location:* Prehistoric\n⏱ *Spawned:* hace 3 minutos\n💰 *Money:* ~$32m/s\n⚡ *Recommended Speed:* 20.5M\n🎮 *Join Game:*\nhttps://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f\nSenZ V2 | Steal An Egg Notifier\n🔍 *Wiki:*\nhttps://stealanegg.fandom.com/wiki/Tralaledon",
-      "timestamp": 1790394804895
+      "wiki": "https://stealanegg.fandom.com/wiki/Pure_Jellyfish",
+      "imageUrl": "https://cdn.discordapp.com/emojis/1548678024512274564.png?size=128&quality=lossless",
+      "fullText": "-# <@&1550979557194993674> Pure Jellyfish spawned in Angels! <@&1550981080973058170> <@&1550981412696358942>\nSecret Egg Spawned!! - <t:1790394902:t>\n🥚 *Egg:* Pure Jellyfish\n👼*Location:* Angels\n⏱ *Spawned:* hace 3 minutos\n💰 *Money:* ~$225m/s\n⚡ *Recommended Speed:* 20B\n🎮 *Join Game:*\nhttps://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f\nSenZ V2 | Steal An Egg Notifier\n🔍 *Wiki:*\nhttps://stealanegg.fandom.com/wiki/Pure_Jellyfish",
+      "timestamp": 1790395130712
     }
   ]
 }
