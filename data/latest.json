@@ -1,6 +1,18 @@
 {
-  "updatedAt": 1790412924159,
+  "updatedAt": 1790412930970,
   "eggs": [
+    {
+      "name": "Gargoyle",
+      "moneyText": "~$225m/s",
+      "moneyValue": 225000000,
+      "location": "Demons",
+      "speed": "20B",
+      "join": "https://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f",
+      "wiki": "https://stealanegg.fandom.com/wiki/Gargoyle",
+      "imageUrl": "https://cdn.discordapp.com/emojis/1548678018950758404.png?size=128&quality=lossless",
+      "fullText": "-# <@&1550979557194993674> Gargoyle spawned in Demons! <@&1550981080973058170> <@&1550981408783335485>\nSecret Egg Spawned!! - <t:1790412014:t>\n🥚 *Egg:* Gargoyle\n😈*Location:* Demons\n⏱ *Spawned:* hace 15 minutos\n💰 *Money:* ~$225m/s\n⚡ *Recommended Speed:* 20B\n🎮 *Join Game:*\nhttps://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f\nSenZ V2 | Steal An Egg Notifier\n🔍 *Wiki:*\nhttps://stealanegg.fandom.com/wiki/Gargoyle",
+      "timestamp": 1790412930429
+    },
     {
       "name": "Phoenix",
       "moneyText": "~$85m/s",
