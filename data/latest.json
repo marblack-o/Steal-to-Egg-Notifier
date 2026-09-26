@@ -1,29 +1,17 @@
 {
-  "updatedAt": 1790413280761,
+  "updatedAt": 1790414331878,
   "eggs": [
     {
-      "name": "RazorFang",
-      "moneyText": "~$350m/s",
-      "moneyValue": 350000000,
-      "location": "Demons",
-      "speed": "20B",
+      "name": "Cosmic Skeleton Boss",
+      "moneyText": "~$45m/s",
+      "moneyValue": 45000000,
+      "location": "Cosmic",
+      "speed": "840M",
       "join": "https://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f",
-      "wiki": "https://stealanegg.fandom.com/wiki/RazorFang",
-      "imageUrl": "https://cdn.discordapp.com/emojis/1548678027209212009.png?size=128&quality=lossless",
-      "fullText": "-# <@&1550979557194993674> RazorFang spawned in Demons! <@&1550981080973058170> <@&1550981401099239435>\nSecret Egg Spawned!! - <t:1790412612:t>\n🥚 *Egg:* RazorFang\n😈*Location:* Demons\n⏱ *Spawned:* hace 11 minutos\n💰 *Money:* ~$350m/s\n⚡ *Recommended Speed:* 20B\n🎮 *Join Game:*\nhttps://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f\nSenZ V2 | Steal An Egg Notifier\n🔍 *Wiki:*\nhttps://stealanegg.fandom.com/wiki/RazorFang",
-      "timestamp": 1790413280268
-    },
-    {
-      "name": "Lava Dragon",
-      "moneyText": "~$100m/s",
-      "moneyValue": 100000000,
-      "location": "Volcano",
-      "speed": "840K",
-      "join": "https://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f",
-      "wiki": "https://stealanegg.fandom.com/wiki/Lava_Dragon",
-      "imageUrl": "https://cdn.discordapp.com/emojis/1547091130254884984.png?size=128&quality=lossless",
-      "fullText": "-# <@&1550979752842764408> Lava Dragon spawned in Volcano! <@&1550981080973058170> <@&1550981389275631801>\nEternal Egg Spawned!! - <t:1790412306:t>\n🥚 *Egg:* Lava Dragon\n🌋*Location:* Volcano\n⏱ *Spawned:* hace 15 minutos\n💰 *Money:* ~$100m/s\n⚡ *Recommended Speed:* 840K\n🎮 *Join Game:*\nhttps://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f\nSenZ V2 | Steal An Egg Notifier\n🔍 *Wiki:*\nhttps://stealanegg.fandom.com/wiki/Lava_Dragon",
-      "timestamp": 1790413235358
+      "wiki": "https://stealanegg.fandom.com/wiki/Cosmic_Skeleton_Boss",
+      "imageUrl": "https://cdn.discordapp.com/emojis/1547091103537438741.png?size=128&quality=lossless",
+      "fullText": "-# <@&1550979557194993674> Cosmic Skeleton Boss spawned in Cosmic! <@&1550981072974643281> <@&1550981430534733845>\nSecret Egg Spawned!! - <t:1790414103:t>\n🥚 *Egg:* Cosmic Skeleton Boss\n🌌*Location:* Cosmic\n⏱ *Spawned:* hace 3 minutos\n💰 *Money:* ~$45m/s\n⚡ *Recommended Speed:* 840M\n🎮 *Join Game:*\nhttps://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f\nSenZ V2 | Steal An Egg Notifier\n🔍 *Wiki:*\nhttps://stealanegg.fandom.com/wiki/Cosmic_Skeleton_Boss",
+      "timestamp": 1790414331396
     }
   ]
 }
