@@ -257,35 +257,167 @@
 </head>
 <body>
   <canvas id="bgCanvas"></canvas>
-  <div class="container">
-    <div class="topbar">
-      <div>
-        <h1>Steal to Egg Notifier</h1>
-        <p><span class="status-dot"></span>Secret · Eternal · Divine</p>
+  <div class="container" id="mainContainer">
+    <!-- VIEW: Notificador -->
+    <div class="view-panel active" id="viewNotifier">
+      <div class="topbar">
+        <div>
+          <h1>Steal to Egg Notifier</h1>
+          <p><span class="status-dot"></span>Secret · Eternal · Divine</p>
+        </div>
+        <button class="burger" id="burger" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
       </div>
-      <button class="burger" id="burger" aria-label="Menu">
-        <span></span><span></span><span></span>
-      </button>
+
+      <div class="card rift-card" id="riftCard">
+        <div class="rift-title">Rift actual</div>
+        <div class="rift-meta" id="riftMeta">Esperando info del Rift...</div>
+        <div id="riftPets"></div>
+      </div>
+
+      <div class="card">
+        <div class="session-header">
+          <label>Huevos OP</label>
+          <button class="btn-clear-session" id="btnClearSession">Borrar lista</button>
+        </div>
+        <div class="last-seen" id="lastSeen"></div>
+        <div class="egg-list" id="eggList">
+          <div class="egg-empty">Esperando huevos OP...</div>
+        </div>
+      </div>
+      <footer>Actualizacion automatica Firebase · cada 8s · Datos desde el bot</footer>
     </div>
 
-    <div class="card rift-card" id="riftCard">
-      <div class="rift-title">Rift actual</div>
-      <div class="rift-meta" id="riftMeta">Esperando info del Rift...</div>
-      <div id="riftPets"></div>
-    </div>
+    <!-- VIEW: Guía del juego -->
+    <div class="view-panel info-panel" id="viewInfo">
+      <div class="topbar">
+        <div>
+          <h1>Guía Steal an Egg</h1>
+          <p>Resumen de mecánicas y rarezas</p>
+        </div>
+      </div>
 
-    <div class="card">
-      <div class="session-header">
-        <label>Huevos OP</label>
-        <button class="btn-clear-session" id="btnClearSession">Borrar lista</button>
+      <p class="info-lead">
+        Guía compacta del juego de Roblox <b>Steal an Egg</b>: cómo progresar, rarezas OP,
+        ciclos de spawn y eventos. Los valores de $/s y Speed pueden cambiar con actualizaciones del juego.
+      </p>
+
+      <div class="info-section">
+        <h3>🎯 Cómo funciona</h3>
+        <p>Robas huevos de nidos en biomas, los llevas a tu base y eclosionan mascotas que generan <b>$/s</b>.</p>
+        <ul>
+          <li>El dinero compra mejoras (treadmills, trails, pens) → más <b>Speed</b>.</li>
+          <li>Más Speed = biomas más altos = huevos más raros.</li>
+          <li>Los guardianes protegen los nidos: tienes que robar y escapar.</li>
+        </ul>
       </div>
-      <div class="last-seen" id="lastSeen"></div>
-      <div class="egg-list" id="eggList">
-        <div class="egg-empty">Esperando huevos OP...</div>
+
+      <div class="info-section">
+        <h3>⏱ Ciclo de huevos (~5 min)</h3>
+        <ul>
+          <li>Los nidos se <b>resetean cada ~5 minutos</b>.</li>
+          <li>En ese ciclo el servidor puede anunciar un huevo raro (Secret / Eternal / Divine).</li>
+          <li>Hay una fase corta de “noche” entre días del ciclo (comunidad ~10 s).</li>
+          <li>Esta app avisa sobre spawns <b>Secret en adelante</b> cuando el bot los detecta.</li>
+        </ul>
+      </div>
+
+      <div class="info-section">
+        <h3>💎 Escala de rarezas (de menor a mayor)</h3>
+        <p class="muted">Aprox. por ingreso base; hay solapamientos entre tiers.</p>
+        <table class="info-table">
+          <tr><th>Rareza</th><th>Rol</th></tr>
+          <tr><td>Common → Legendary</td><td>Progresión temprana / filler</td></tr>
+          <tr><td>Mythic / Cosmic</td><td>Medio-late; buen $/s</td></tr>
+          <tr><td><b>Secret</b></td><td>OP anuncio de servidor; gran salto de ingreso</td></tr>
+          <tr><td><b>Eternal</b></td><td>Más alto que la mayoría de Secrets</td></tr>
+          <tr><td><b>Divine</b></td><td>Tope de rareza hatchable en biomas finales</td></tr>
+        </table>
+      </div>
+
+      <div class="info-section">
+        <h3>🗺️ Biomas y Speed (aprox.)</h3>
+        <table class="info-table">
+          <tr><th>Bioma</th><th>Speed ~</th><th>Destacados</th></tr>
+          <tr><td>Forest</td><td>0</td><td>Inicio</td></tr>
+          <tr><td>Lake</td><td>900</td><td>Primer gate</td></tr>
+          <tr><td>Desert</td><td>10K</td><td>—</td></tr>
+          <tr><td>Jungle</td><td>40K</td><td>King Snake (Secret)</td></tr>
+          <tr><td>Snow</td><td>170K</td><td>Yeti · Ice Dragon</td></tr>
+          <tr><td>Volcano</td><td>700K</td><td>Cerberus · Phoenix</td></tr>
+          <tr><td>Abyss Ocean</td><td>2.5M</td><td>Kraken · El Maja</td></tr>
+          <tr><td>Prehistoric</td><td>18M</td><td>T-Rex · Mosasaurus</td></tr>
+          <tr><td>Cosmic</td><td>700M</td><td>Unicorn (Divine)</td></tr>
+          <tr><td>Cherry Blossom</td><td>2.5B+</td><td>Kitsune (Divine)</td></tr>
+          <tr><td>Titan Temple</td><td>~7B+</td><td>Nightflame · Gorilla King</td></tr>
+          <tr><td>Angels &amp; Demons</td><td>Evento</td><td>ArchAngel · World Burner</td></tr>
+        </table>
+        <p class="muted">Llevar ~2× el Speed mínimo ayuda a escapar de guardianes.</p>
+      </div>
+
+      <div class="info-section">
+        <h3>🌀 Rift</h3>
+        <ul>
+          <li>Cada ~30 min pueden abrirse rifts / rotar pool de mascotas.</li>
+          <li>Muestra chances (%) y $/s de cada pet del pool actual.</li>
+          <li>Boss del Rift y tienda de tokens (mutaciones como Fractured) según la temporada.</li>
+        </ul>
+        <p class="muted">La tarjeta “Rift actual” de la campana se actualiza cuando el bot lo detecta.</p>
+      </div>
+
+      <div class="info-section">
+        <h3>✨ Mutaciones (multiplican $/s)</h3>
+        <table class="info-table">
+          <tr><th>Mutación</th><th>~Multi</th><th>Origen típico</th></tr>
+          <tr><td>Rainbow</td><td>3.5×</td><td>Spawn natural (muy raro)</td></tr>
+          <tr><td>Parasite</td><td>3×</td><td>Evento / Monster Chest</td></tr>
+          <tr><td>Fractured</td><td>2.75×</td><td>Tienda del Rift Boss</td></tr>
+          <tr><td>Spirit Bloom</td><td>2.5×</td><td>Sakura Incubator</td></tr>
+          <tr><td>Golden</td><td>2×</td><td>Spawn natural</td></tr>
+          <tr><td>Bloom</td><td>1.25×</td><td>Sakura Incubator</td></tr>
+          <tr><td>Silver</td><td>1.2×</td><td>Spawn natural</td></tr>
+        </table>
+        <p class="muted">Mutación × tamaño (Huge, etc.) se multiplican entre sí.</p>
+      </div>
+
+      <div class="info-section">
+        <h3>🔔 Qué hace esta página</h3>
+        <ul>
+          <li>Lee spawns OP desde Firebase (bot de Discord).</li>
+          <li>Notificaciones del navegador según filtros (menú ☰).</li>
+          <li>Servidor de respaldo: si el bot del celular cae, la PC puede tomar el relevo.</li>
+        </ul>
+      </div>
+
+      <div class="info-sources">
+        <h3>📚 Fuentes citadas</h3>
+        <a href="https://stealanegg.fandom.com/wiki/Eggs" target="_blank" rel="noopener">Steal An Egg Wiki (Fandom) — Eggs</a>
+        <a href="https://stealanegg.fandom.com/wiki/Updates" target="_blank" rel="noopener">Steal An Egg Wiki (Fandom) — Updates</a>
+        <a href="https://stealanegg.wikirealm.com/" target="_blank" rel="noopener">Steal An Egg Wiki (WikiRealm) — Eggs, Pets &amp; Biomes</a>
+        <a href="https://stealanegg.wikirealm.com/eggs/" target="_blank" rel="noopener">WikiRealm — All Eggs / reset cycle guides</a>
+        <a href="https://stealaneggwiki.xyz/biomes/all-biomes/" target="_blank" rel="noopener">Steal An Egg Wiki XYZ — Biomes &amp; Speed</a>
+        <a href="https://stealaneggwiki.xyz/eggs/mutations/" target="_blank" rel="noopener">Steal An Egg Wiki XYZ — Mutations</a>
+        <a href="https://stealaneggguide.wiki/" target="_blank" rel="noopener">Steal an Egg Guide Wiki — Spawn times &amp; tiers</a>
+        <a href="https://stealanegg-wiki.com/wiki/events" target="_blank" rel="noopener">Steal an Egg Player Wiki — Events &amp; Rift</a>
+        <p class="info-note">
+          Resumen no oficial con fines informativos. El juego (Roblox) y los wikis de fans pueden actualizar datos;
+          si algo no cuadra con lo que ves in-game, confía en el cliente del juego. Última revisión de esta guía: sep 2026.
+        </p>
       </div>
     </div>
-    <footer>Actualizacion automatica Firebase · cada 8s · Datos desde el bot</footer>
   </div>
+
+  <nav class="bottom-nav" id="bottomNav" aria-label="Navegación principal">
+    <button type="button" class="active" data-view="notifier" id="tabNotifier">
+      <span class="nav-ico" aria-hidden="true">🔔</span>
+      <span>Notificador</span>
+    </button>
+    <button type="button" data-view="info" id="tabInfo">
+      <span class="nav-ico" aria-hidden="true">ℹ️</span>
+      <span>Info</span>
+    </button>
+  </nav>
 
   <div class="overlay" id="overlay"></div>
   <aside class="drawer" id="drawer">
@@ -1435,6 +1567,27 @@
       if (!document.hidden) fetchRemoteEggs();
     });
     setInterval(renderSession, 30000);
+  
+    // Bottom tabs: Notificador / Info
+    (function() {
+      var tabs = document.querySelectorAll('#bottomNav button');
+      var viewN = document.getElementById('viewNotifier');
+      var viewI = document.getElementById('viewInfo');
+      function showView(name) {
+        tabs.forEach(function(b) {
+          b.classList.toggle('active', b.getAttribute('data-view') === name);
+        });
+        if (viewN) viewN.classList.toggle('active', name === 'notifier');
+        if (viewI) viewI.classList.toggle('active', name === 'info');
+        if (name === 'info') window.scrollTo(0, 0);
+      }
+      tabs.forEach(function(b) {
+        b.addEventListener('click', function() {
+          showView(b.getAttribute('data-view'));
+        });
+      });
+    })();
+
   </script>
 </body>
 </html>
