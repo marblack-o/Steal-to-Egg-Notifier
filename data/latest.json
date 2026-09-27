@@ -1,17 +1,17 @@
 {
-  "updatedAt": 1790530986357,
+  "updatedAt": 1790532233032,
   "eggs": [
     {
-      "name": "Alerts — Now Activated Here!",
+      "name": "Lab Tracker",
       "moneyText": "",
       "moneyValue": 0,
       "location": "",
       "speed": "",
-      "join": "",
-      "wiki": "https://stealanegg.fandom.com/wiki/Alerts_%E2%80%94_Now_Activated_Here!",
-      "imageUrl": "",
-      "fullText": "<a:verify:1523393238172569681> Steal An Egg Alerts — Now Activated Here!\nThis channel is now set up to receive Steal An Egg spawn alerts (Secret / Eternal / Divine).\nSenZ V2 · Steal An Egg\nSteal An Egg Alert Config\n🔍 *Wiki:*\nhttps://stealanegg.fandom.com/wiki/Alerts_%E2%80%94_Now_Activated_Here!",
-      "timestamp": 1790530985573
+      "join": "https://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f",
+      "wiki": "https://stealanegg.fandom.com/wiki/Lab_Tracker",
+      "imageUrl": "https://cdn.discordapp.com/emojis/1553433755622838402.png?size=128&quality=lossless",
+      "fullText": "Unstable DNA is Active!\n*Changed:* <t:1790532002:t> (hace 3 minutos)\n*Next Change:* <t:1790542802:t> (hace unos segundos)\n🎮 *Join Game:*\nhttps://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f\nSenZ V2 | Steal An Egg Lab Tracker\n🔍 *Wiki:*\nhttps://stealanegg.fandom.com/wiki/Lab_Tracker",
+      "timestamp": 1790532232537
     }
   ]
 }
