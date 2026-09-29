@@ -1,17 +1,17 @@
 {
-  "updatedAt": 1790543023242,
+  "updatedAt": 1790648142215,
   "eggs": [
     {
-      "name": "Lab Tracker",
-      "moneyText": "",
-      "moneyValue": 0,
-      "location": "",
-      "speed": "",
+      "name": "Pure Jellyfish",
+      "moneyText": "~$225m/s",
+      "moneyValue": 225000000,
+      "location": "Angels",
+      "speed": "20B",
       "join": "https://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f",
-      "wiki": "https://stealanegg.fandom.com/wiki/Lab_Tracker",
-      "imageUrl": "https://cdn.discordapp.com/emojis/1553433753462902844.png?size=128&quality=lossless",
-      "fullText": "Experimental Pets is Active!\n*Changed:* <t:1790542801:t> (hace 3 minutos)\n*Next Change:* <t:1790553601:t> (hace unos segundos)\n🎮 *Join Game:*\nhttps://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f\nSenZ V2 | Steal An Egg Lab Tracker\n🔍 *Wiki:*\nhttps://stealanegg.fandom.com/wiki/Lab_Tracker",
-      "timestamp": 1790543022781
+      "wiki": "https://stealanegg.fandom.com/wiki/Pure_Jellyfish",
+      "imageUrl": "https://cdn.discordapp.com/emojis/1548678024512274564.png?size=128&quality=lossless",
+      "fullText": "-# <@&1553823856815251666> Pure Jellyfish spawned in Angels! <@&1553825227564257470> <@&1553825519085289481>\nSecret Egg Spawned!! - <t:1790648102:t>\n🥚 *Egg:* Pure Jellyfish\n👼*Location:* Angels\n⏱ *Spawned:* hace unos segundos\n💰 *Money:* ~$225m/s\n⚡ *Recommended Speed:* 20B\n🎮 *Join Game:*\nhttps://www.roblox.com/games/start?placeId=107778070777162&gameId=451e1b19-a399-42e2-989a-fcb283d2165f\nSenZ V2 | Steal An Egg Notifier\n🔍 *Wiki:*\nhttps://stealanegg.fandom.com/wiki/Pure_Jellyfish",
+      "timestamp": 1790648141608
     }
   ]
 }
